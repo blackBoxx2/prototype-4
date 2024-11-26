@@ -7,28 +7,23 @@
           .then(data => {
             document.head.innerHTML = data;
 
-            document.title = "QA Dashboard"
+            document.title = "NCR Log"
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = './css/dashboard.css';
+            link.href = './css/ncrlog.css';
             document.head.appendChild(link);
-
-
-            const link2 = document.createElement('link');
-            link2.rel = 'stylesheet';
-            link2.href = './css/modals.css';
-            document.head.appendChild(link2);
+            
           });
       </script>
-      <title>QA Dashboard</title>
+    <title>NCR Log</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div id="header"></div>
     <div id="modal-dialog"></div>
     <div class="grid-12">
       <div class="page-info">
-        <h1 style="text-wrap: nowrap;">Quality Assurance DashBoard</h1>
+        <h1 style="text-wrap: nowrap;">NCR Logs: </h1>
         <h2>NCR Count: 10</h2>
       </div>
         <div class="ncr-list">
@@ -53,61 +48,61 @@
                 <td>Scratched side</td>
                 <td>2000-01-01</td>
                 <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+                <td class="action"><a href="./view-ncrlog.html" class="viewNCR">View</a> | <a href="./edit-ncrlog.html" class="editNCR">Edit</a></td>
               </tr>
               <tr>
                 <td>Missing key</td>
                 <td>2000-01-01</td>
                 <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+                <td class="action"><a href="./view-ncrlog.html" class="viewNCR">View</a> | <a href="/.edit-ncrlog.html" class="editNCR">Edit</a></td>
               </tr>
               <tr>
                 <td>Broken bulb</td>
                 <td>2000-01-01</td>
                 <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+                <td class="action"><a href="./view-ncrlog.html" class="viewNCR">View</a> | <a class="editNCR" href="/.edit-ncrlog.html">Edit</a> </td>
               </tr>
               <tr>
                 <td>Missing screw</td>
                 <td>2000-01-01</td>
                 <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+                <td class="action"><a href="./view-ncrlog.html" class="viewNCR">View</a> | <a class="editNCR" href="/.edit-ncrlog.html">Edit</a></td>
               </tr>
               <tr>
                 <td>Loose connection</td>
                 <td>2000-01-02</td>
                 <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+                <td class="action"><a href="./view-ncrlog.html" class="viewNCR">View</a> | <a href="/.edit-ncrlog.html" class="editNCR">Edit</a></td>
               </tr>
               <tr>
                 <td>Broken key</td>
                 <td>2000-01-02</td>
                 <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+                <td class="action"><a href="./view-ncrlog.html" class="viewNCR">View</a> | <a href="/.edit-ncrlog.html" class="editNCR">Edit</a> </td>
               </tr>
               <tr>
                 <td>Frayed wires</td>
                 <td>2000-01-02</td>
                 <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+                <td class="action"><a class="viewNCR" href="/.view-ncrlog.html">View</a> | <a class="editNCR" href="/.edit-ncrlog.html">Edit</a> </td>
               </tr>
               <tr>
                 <td>Loose screw</td>
                 <td>2000-01-03</td>
                 <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+                <td class="action"><a href="./view-ncrlog.html" class="viewNCR">View</a> | <a class="editNCR" href="/.edit-ncrlog.html">Edit</a> </td>
               </tr>
               <tr>
                 <td>Damaged bottom</td>
                 <td>2000-01-03</td>
                 <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+                <td class="action"><a href="./view-ncrlog.html" class="viewNCR">View</a> | <a href="/.edit-ncrlog.html" class="editNCR">Edit</a> </td>
               </tr>
               <tr>
                 <td>Black mark on side</td>
                 <td>2000-01-04</td>
                 <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+                <td class="action"><a href="./view-ncrlog.html" class="viewNCR">View</a> | <a href="/.edit-ncrlog.html" class="editNCR">Edit</a> </td>
               </tr>
 
             </tbody>
