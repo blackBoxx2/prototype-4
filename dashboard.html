@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        fetch('head.html')
+          .then(response => response.text())
+          .then(data => {
+            document.head.innerHTML = data;
+
+            document.title = "QA Dashboard"
+
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = './css/dashboard.css';
+            document.head.appendChild(link);
+
+
+            const link2 = document.createElement('link');
+            link2.rel = 'stylesheet';
+            link2.href = './css/modals.css';
+            document.head.appendChild(link2);
+          });
+      </script>
+      <title>QA Dashboard</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <div id="header"></div>
+    <div id="modal-dialog"></div>
+    <div class="grid-12">
+      <div class="page-info">
+        <h1 style="text-wrap: nowrap;">Quality Assurance DashBoard</h1>
+        <h2>NCR Count: 10</h2>
+      </div>
+        <div class="ncr-list">
+          <div class="ncr-list-action-section">
+            <input type="search" id="ncr-list-searchbox" placeholder="Search by NCR number, Product Name, or QA Representative Name">
+            <button class="cta-btn-secondary ncr-list-searchbutton">Search</button>
+            <div class="btn-group">
+              <a href="./create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
+            </div>
+          </div>
+          <table id="ncr-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox"></th>
+                <th>NCR Number</th>
+                <th class="name">Created By</th>
+                <th>Created On</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>0000001</td>
+                <td class="name">SpongeBob SquarePants</td>
+                <td>2000-01-01</td>
+                <td>Pending Approval</td>
+                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>0000002</td>
+                <td class="name">SpongeBob SquarePants</td>
+                <td>2000-01-01</td>
+                <td>Denied</td>
+                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>0000003</td>
+                <td class="name">Patrick Star</td>
+                <td>2000-01-01</td>
+                <td>Pending Approval</td>
+                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>0000004</td>
+                <td class="name">Squidward Tentacles</td>
+                <td>2000-01-01</td>
+                <td>Pending Approval</td>
+                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>0000005</td>
+                <td class="name">Mermaid Man</td>
+                <td>2000-01-02</td>
+                <td>Pending Approval</td>
+                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>0000006</td>
+                <td class="name">Barnacle Boy</td>
+                <td>2000-01-02</td>
+                <td>Denied</td>
+                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>0000007</td>
+                <td class="name">Eugene Krabs</td>
+                <td>2000-01-02</td>
+                <td>Pending Approval</td>
+                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>0000008</td>
+                <td class="name">Eugene Krabs</td>
+                <td>2000-01-03</td>
+                <td>Denied</td>
+                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>0000009</td>
+                <td class="name">Barnacle Boy</td>
+                <td>2000-01-03</td>
+                <td>Pending Approval</td>
+                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>0000010</td>
+                <td class="name">Squidward Tentacles</td>
+                <td>2000-01-04</td>
+                <td>Pending Approval</td>
+                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+          <div class="pagination">
+            <a href="#" >&lAarr; Previous</a>
+            <a href="#" id="currPage">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">...</a>
+            <a href="#">6</a>
+            <a href="#">7</a>
+            <a href="#">8</a>
+            <a href="#">Next &rAarr; </a>
+          </div>
+        </div>
+    </div>
+
+    <div id="footer" class="footer mt-auto"></div>
+    <!-- </div> -->
+
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+        fetch("main-header.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("header").innerHTML = data));
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("footer").innerHTML = data));
+         
+    </script>
+    <script src="./scripts/scripts.js"></script>
+</body>
+</html>

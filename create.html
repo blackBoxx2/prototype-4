@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script>
+        fetch('head.html')
+          .then(response => response.text())
+          .then(data => {
+            document.head.innerHTML = data;
+
+            document.title = "Create NCR"
+
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = './css/create.css';
+            document.head.appendChild(link);
+
+            const toasterLink = document.createElement('link');
+            toasterLink.rel= 'stylesheet';
+            toasterLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css'
+            document.head.appendChild(toasterLink);
+          });
+      </script>
+      <title>Create new NCR</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <div id="header" class=""></div>
+
+    <div class="">
+        <div class="title-group">
+            <h1 class="">Create An NCR</h1>
+            <button onclick="window.location.href='dashboard.html'" class="cta-btn-danger btn-Cancel" id="btnCancel">Cancel</button>
+        </div>
+
+        <form action="#" onsubmit="validate()" id="ncr-form">
+
+            <fieldset>
+
+                <div >
+                    <div class="inner-wrapper">
+                        <label for="ncrNumber">NCR Number</label>
+                        <input  aria-label="NCR Number" type="text" name="ncrNumber" id="ncrNumber" disabled value="0000011">
+                    </div>
+                    <div id="ncrNumberValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="product">Product</label>
+                        <input  aria-label="Product name" type="text" name="product" id="product">
+                    </div>
+                    <div id="productValidation" class="text-danger"></div>
+                </div>
+
+                <div class="no-validate">
+                    <div class="inner-wrapper">
+                        <label for="defect">Defect Type</label>
+                        <select  aria-label="Defect type" name="defect" id="defect">
+                            <option value="" disabled selected>Choose defect</option>
+                            <option value="Option1">Option1</option>
+                        </select>
+                    </div>
+                    <div id="defectValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="quantityOrdered">Total Quantity Ordered</label>
+                        <input  aria-label="Order quantity" type="number" name="quantityOrdered" id="quantityOrdered">
+                    </div>
+                    <div id="quantityOrderedValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="quantityDefective">Total Quantity Defective</label>
+                        <input aria-label="Defective quantity" type="number" name="quantityDefective" id="quantityDefective">
+                    </div>
+                    <div id="quantityDefectiveValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="orderNumber">Order Number</label>
+                        <input  aria-label="Order number" type="number" name="orderNumber" id="orderNumber">
+                    </div>
+                    <div id="orderNumberValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label class="custom-file-upload" for="picture">Photo of Defect</label>
+                        <input  aria-label="Defect picture"  type="file" name="picture" id="picture">
+                    </div>
+                    <div id="pictureValidation" class="text-danger"></div>
+                </div>
+
+                <div class="button-group no-validate">
+                    <button type="submit" class="cta-btn-primary" id="btn-submit">Create NCR</button>
+                    <button type="button" class="cta-btn-danger" id="btnClearAll">Clear Form</button>
+                </div>
+
+            </fieldset>
+
+        </form>
+    </div>
+
+
+
+
+    <div id="footer" class="footer mt-auto"></div>
+    <!-- </div> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        fetch("home-header.html")
+            .then((res) => res.text())
+            .then((data) => (document.getElementById("header").innerHTML += data));
+
+        fetch("footer.html")
+            .then((res) => res.text())
+            .then((data) => (document.getElementById("footer").innerHTML = data));
+
+    </script>
+    <script src="scripts/scripts.js"></script>
+    <script src="scripts/validation.js"></script>
+
+
+</body>
+</html>

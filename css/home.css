@@ -1,0 +1,26 @@
+.grid-Large{
+    display: grid;
+    grid-template-columns:var(--grid-L-cols) ;
+}
+
+.hero-section{
+    max-width: 70%;
+    margin: 5rem auto;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.hero-info{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.btn-group{
+    display: flex;
+    gap: 10px;
+}
+

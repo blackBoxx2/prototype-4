@@ -1,0 +1,37 @@
+
+fieldset{
+  padding: 2.5rem; 
+}
+
+div{
+  margin: auto;
+}
+
+input[type=Email], input[type=tel]{
+  font-family: var(--heading-primary-fontFamily);
+  color: var(--body-text-color);
+  border-radius: 5px;
+  border: 2px solid var(--heading-secondary-color);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.form-field {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.75rem;
+}
+
+.form-field input{
+
+  width: 75%;
+
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+}
+
+
+

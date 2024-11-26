@@ -1,0 +1,254 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+}
+
+/* Variables */
+:root {
+  /*  ===========================
+          Color Variables Section
+      =========================== */
+    --heading-primary-color: #274c77;
+    --heading-secondary-color: #a3cef1;
+    --body-text-color: #274c77;
+    --light-grey-background-color: #e7ecef;
+
+  /*  ===========================
+          Font-Families Variables Section
+      =========================== */
+      --heading-primary-fontFamily: "Roboto Mono", sans-serif;
+      --heading-secondary-fontFamily: "Roboto Flex", sans-serif;
+      --body-text-normal-fontFamily: "Outfit", sans-serif;
+      --btn-text-fontFamily: "Inter", sans-serif;
+
+      --heading-fontSize: 2.986rem;
+      --secondary-fontSize:2.088rem;
+      --body-text-fontSize: 1rem;
+      --btn-fontSize:1rem;
+       /*  ===========================
+          12-Grid system Variables Section
+      =========================== */
+      --grid-L-cols: 12;
+      --grid-L-gap: 15px;
+      --grid-L-maxWidth:1100px;
+
+}
+
+       /*  ===========================
+          Generic styles sSection
+      =========================== */
+        h1{
+            font-family: var(--heading-primary-fontFamily);
+            color: var(--heading-primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            margin-bottom: 16px;
+            font-size: var(--heading-fontSize);
+            
+        }
+
+        h2{
+            font-family: var(--heading-secondary-fontFamily);
+            color: var(--heading-secondary-color);
+            font-weight:300;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            margin-bottom: 4px;
+            font-size: var(--secondary-fontSize);
+        }
+
+        h3{
+            font-family: var(--heading-primary-fontFamily);
+            color: var(--heading-primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            margin-bottom: 16px;
+            font-size: var(--secondary-fontSize);
+        }
+
+        h4{
+            font-family: var(--heading-secondary-fontFamily);
+            color: var(--heading-secondary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            margin-bottom: 4px;
+        }
+
+        p{
+            font-family: var(--body-text-normal-fontFamily);
+            color: var(--body-text-color);
+            font-weight: 400;
+            letter-spacing: 0.9px;
+            margin-bottom: 4px;
+            font-size: var(--body-text-fontSize);
+            line-height: 1.5;
+        }
+        a{
+            font-family: var(--body-text-normal-fontFamily);
+            color: var(--body-text-color);
+            font-weight: 400;
+            letter-spacing: 0.9px;
+            margin-bottom: 4px;
+            font-size: 1em; /*match size as all text */
+            line-height: 1.5;
+        }
+
+        button, input[type=submit]{
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: var(--btn-text-fontFamily);
+            font-size: var(--btn-fontSize);
+            background-color: var(--heading-primary-color);
+            color: #fff;
+            border: none;
+        }
+        
+        form{
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+
+        .cta-btn{
+            height: 2.5rem;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            outline: none;
+            border: none;
+
+        }
+       
+        .cta-btn-primary{
+            border: none;
+            color:#fff;
+            background-color: var(--body-text-color);
+        }
+        .cta-btn-secondary{
+            background-color: white;
+            border: 1px solid var(--heading-primary-color);
+            color:var(--heading-primary-color);
+        }
+        .cta-btn-danger{
+            background-color: #C00F0C;
+            color:#fff;
+            border: none;
+        }
+        .text-danger{
+            color: #C00F0C;
+        }
+        .grid-12{
+            max-width: 80%;
+            width: 80%;
+            height: auto;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: auto;
+            column-gap: var(--grid-L-gap);
+            margin: 2rem auto;
+        }
+        body{ /* added for centering */
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* input{
+            border-color: var(--heading-secondary-color);
+            border-style:solid;
+        } */
+       /*  ===========================
+          Header/Navbar sSection
+      =========================== */
+
+#header{
+    background-color: var(--light-grey-background-color);
+    width: 100%;
+    margin:0 auto;
+    height: auto;
+    border-top: 0.2rem solid  var(--heading-primary-color);
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+#footer{
+    width: 100%;
+    margin:0 auto;
+}
+
+#main-navbar{
+display: flex;
+align-items: center;
+justify-content: flex-start;
+}
+
+.page-info{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* MAIN HEADER  */
+#main-navbar a{
+    margin: 0;
+}
+#main-navbar ul{
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    gap: 1.2rem;
+    margin-left: auto;
+    width: auto;
+    justify-content: space-between;
+}
+#active-nav-item{
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid var(--body-text-color);
+}
+#main-navbar ul a{
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-family: var(--body-text-normal-fontFamily);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.profile{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid var(--body-text-color);
+    overflow: hidden;
+}
+#main-navbar img{
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+#home-navbar{
+    height: 2rem;
+    width: 100%;
+    background-color: var(--light-grey-background-color);
+    text-align: center;
+}
+
+.logo{
+    font-family: var(--heading-primary-fontFamily);
+    color: var(--heading-primary-color);
+    font-weight: 700;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+
+

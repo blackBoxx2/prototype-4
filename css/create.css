@@ -1,0 +1,90 @@
+#ncrNumber:hover {
+    cursor: not-allowed;
+}
+
+div{
+    margin: auto;
+}
+
+fieldset{
+    padding: 2.5rem; 
+    border: 2px solid var(--body-text-color);
+}
+
+
+label{   
+    font-family: var(--heading-secondary-fontFamily);
+    color: var(--heading-primary-color);
+    font-weight: 600;
+    display: inline;
+    width: fit-content;
+}
+
+.inner-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+fieldset > div {
+    margin: 1rem;
+}
+
+button {
+    font-family: var(--body-text-normal-fontFamily);
+}
+h1 {
+    margin-left: 0.4em;
+}
+
+input[type=Text], input[type=Number], select, input[type="file"]::file-selector-button{
+    font-family: var(--body-text-normal-fontFamily);
+    color: var(--body-text-color);
+    border-radius: 5px;
+    border: 2px solid var(--heading-secondary-color);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    width: 50%;
+    display: inline;
+}
+
+#orderNumber {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+input[type="file"] {
+    text-align: left;
+    width: 12.5rem;
+}
+
+input[type="file"]::file-selector-button {
+    width: fit-content;
+}
+
+input[type="file"]:hover, input[type="file"]::file-selector-button:hover{ 
+    cursor: pointer;
+}
+
+.btn-Cancel{
+    margin: auto auto 1.25rem auto;
+}
+
+.button-group{
+    padding-top: 2rem;
+    width: fit-content;
+    margin: 0 auto;
+}
+#btn-submit{
+    margin-right: 0.5rem;
+}
+
+.title-group{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    width: 100%;
+    padding-top: 2rem;
+    gap: 10px;
+}
+
+
