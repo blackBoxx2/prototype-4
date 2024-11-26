@@ -1,0 +1,136 @@
+#edit-form{
+    position: fixed;
+    z-index: 99998;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #dadadaee;
+    display: none;
+}
+
+#form-main{
+    position: fixed;
+    z-index: 99999;
+    top: 5%;
+    left: 5%;
+    padding: 1rem 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--heading-secondary-color);
+    width: 90%;    
+    height: auto;
+    margin-top: auto;
+    border-radius: 10px;
+    /* padding-bottom: 6rem; */
+    
+}
+
+form{
+    background-color: #fff;
+}
+
+fieldset{
+    padding: 2.5rem; 
+    padding-bottom: 1rem;
+}
+
+
+label{   
+    font-family: var(--heading-secondary-fontFamily);
+    color: var(--heading-primary-color);
+}
+
+input[type=Text], input[type=Number], select, input[type="file"]::file-selector-button{
+    font-family: var(--heading-primary-fontFamily);
+    color: var(--body-text-color);
+    border-radius: 5px;
+    border: 2px solid var(--heading-secondary-color);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    font-family: var(--body-text-normal-fontFamily)
+
+}
+input[type='file'] {
+    font-size: 0.9em;
+}
+
+#form-main a {
+    font-weight: 550;
+    font-family: var(--heading-secondary-fontFamily)
+}
+
+
+
+#orderNumber {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+input[type="file"]:hover, input[type="file"]::file-selector-button:hover{ 
+    cursor: pointer;
+}
+
+.title-group{
+    margin: 1rem auto;
+    text-align: center;
+}
+
+#close {
+    position: fixed;
+    left: auto;
+    right: 1em;
+}
+
+.btn-groupView{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+div.form-data-field {
+    display: flex; 
+    justify-content: space-between;
+}
+label.form-label {
+    width: fit-content; font-weight: 600;
+}
+p.form-p {
+    display: inline;
+}
+
+#form-main button[type="submit"] {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    font-family: var(--body-text-normal-fontFamily);
+}
+#form-main.edit input:not([type='checkbox']) {
+    width: 90%;
+}
+
+#modalForm {
+    width: 90%;
+}
+
+#cbReplacePhoto {
+    display: inline;
+}
+
+#lbReplacePhoto {
+    margin-top: 0.25em;
+    display: inline-block;
+    text-wrap: nowrap;
+}
+
+#form-main.edit #ncrNumber {
+    background-color: var(--light-grey-background-color);
+}
+#form-main.edit #ncrNumber:hover {
+    cursor: not-allowed;
+}
