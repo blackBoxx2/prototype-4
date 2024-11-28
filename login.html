@@ -1,60 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    fetch('head.html')
-      .then(response => response.text())
-      .then(data => {
-        document.head.innerHTML = data;
-
-        document.title = "Log In Portal";
-        const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = './css/login.css';
-            document.head.appendChild(link);
-      });
-  </script>
-  <title>Log In Portal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./css/login.css">
 </head>
-<body class="d-flex flex-column min-vh-100"> 
-    <div id="header"></div>
-    <div class="grid-12">
-        <h1>Log In</h1>
-        <h2>Don't have an account? <a href="registration.html">Sign Up</a></h2>
-        <form id="log-in-form">
-            <div class="form-field">
-                <label for="loginEmail">Email:</label>
-                <input id="loginEmail" type="email"  name="email" placeholder="janedoe@example.com" required>
+<body class="login-page">
+    <div class="main-div">
+    <div class="container-logo">
+    <img src="./imgs/crossfire_logo.png" alt="crossfire-logo" class="main-logo"> 
+    </div>
+        <div class="form-container">
+        <h1>Login</h1>
+        <form action="/login" method="POST" id="form">
+            <div>
+                <label id="user-email">Email</label>
+                <input type="email" id="email" name="email" required>
             </div>
-            <div class="form-field">
-                <label for="loginPassword">Password:</label>
-                <input id="loginPassword" type="password" name="password" placeholder="●●●●●●●●●●" required>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>    
+            <div>
+                <button  id="logIn" type="submit" disabled>Login</button>
             </div>
-            <div class="form-text">
-                <p>Forgot your password? <a href="recovery-page.html">Click here</a></p>
+            <div class="slc-type-logIn">
+                <select id="options-log" class="options-log">
+                    <option id="default">Select a role</option>
+                    <option id="QA">QA</option>
+                    <option  id="engineer">Engineer</option>
+                    <option id="purchasing">Purchasing</option>
+                    <option id="admin">Admin</option>
+                </select>
             </div>
-            <div class="form-btn">
-                <a class="cta-btn cta-btn-primary" href="dashboard.html" id="btnLogin">Log In</a>
+            <div class="link">
+                <a href="/register">Need an account? Register here</a>
             </div>
         </form>
     </div>
-
-    <div id="footer" class="footer mt-auto"></div>
-    <!-- </div> -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-
-    <script>
-      fetch("home-header.html")
-        .then((res) => res.text())
-        .then((data) => (document.getElementById("header").innerHTML = data));
-
-      fetch("footer.html")
-        .then((res) => res.text())
-        .then((data) => (document.getElementById("footer").innerHTML = data));
-    </script>
+</div>
+    <script src="/scripts/Login.js"></script>
 </body>
 </html>
