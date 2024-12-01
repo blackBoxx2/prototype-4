@@ -32,17 +32,27 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         //validate for the email
-        if (e.target.id === 'email' && !validateEmail(e.target.value)) {
+        else if (e.target.id === 'email' && !validateEmail(e.target.value)) {
             showAlert('The email is not valid', e.target.parentElement);
             email[e.target.name];
             proveEmail();
             return;
+        }
+        else {
+            btnLoginClicked();
         }
         ;
         cleanAlert(e.target.parentElement);
         //assing the values
         email[e.target.name] = e.target.value.trim().toLowerCase();
         //prove the email object
+    }
+    function btnLoginClicked() {
+        if (btnLogIn) {
+            btnLogIn.addEventListener('click', function () {
+                window.location.href = 'dashboard.html';
+            });
+        }
     }
     function showAlert(mensaje, reference) {
         cleanAlert(reference);
@@ -66,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function validateEmail(email) {
         var regex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
         var result = regex.test(email);
-        console.log(result);
         return result;
     }
     function proveEmail() {

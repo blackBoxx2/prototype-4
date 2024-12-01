@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
             email: '',
             password: ''
         }
-    
         //Take the vairables needed for the log in 
         const inputEmail = document.querySelector('#email');
         const inputPass = document.querySelector('#password');
@@ -26,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         inputPhone?.addEventListener('blur', validate);
         inputConfirmPassword?.addEventListener('blur', validate);
         option?.addEventListener('click',selectTypeLogIn);
+        
         //function for the validation 
         let email;
         function validate(e){
@@ -34,11 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
              //validate for the email
-            if(e.target.id === 'email' && !validateEmail(e.target.value)){
+           else if(e.target.id === 'email' && !validateEmail(e.target.value)){
                 showAlert('The email is not valid', e.target.parentElement);
                 email[e.target.name] as HTMLInputElement | null;
                 proveEmail();
                 return;
+            }
+            else{
+                btnLoginClicked();
             };
             
             cleanAlert(e.target.parentElement);
@@ -46,7 +49,13 @@ document.addEventListener('DOMContentLoaded', function() {
             email[e.target.name] = e.target.value.trim().toLowerCase();
             //prove the email object
         }
-        
+        function btnLoginClicked(){
+            if(btnLogIn){
+                btnLogIn.addEventListener('click', () =>{
+                    window.location.href = 'dashboard.html';
+                });
+            }
+        }
         function showAlert(mensaje, reference){
             cleanAlert(reference);
             //If the alert already exist
@@ -71,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
         function validateEmail(email){
             const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
             const result = regex.test(email);
-            console.log(result);
             return result;
         }
         function proveEmail(){
