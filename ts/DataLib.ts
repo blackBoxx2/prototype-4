@@ -39,7 +39,7 @@ export namespace DataLib {
   }
 
   function CheckMissing(): DBPayload {
-    var db = localStorage.getItem("Database");
+    let db = localStorage.getItem("Database");
     if (db == null) {
       return DBPayload.Failure();
     };
@@ -47,7 +47,7 @@ export namespace DataLib {
   }
 
   function SeedQA(): Models.QualityAssurance[] {
-    var defects = [
+    let defects = [
       "Scratched",
       "Dented",
       "Cracked",
@@ -61,7 +61,7 @@ export namespace DataLib {
       "Poor machining quality",
       "Poor casting quality",
     ]
-    var itemDescs  = {
+    let itemDescs  = {
       "1020-1881": "20mm screw",
       "1102-1837":"30mm screw",
       "4842-2582":"10mm nail",
@@ -83,7 +83,7 @@ export namespace DataLib {
       "7562-1826":"particle board"
     }
 
-    var OrderNos = [
+    let OrderNos = [
       "12342817",
       "23455436",
       "34563432",
@@ -112,16 +112,16 @@ export namespace DataLib {
       "31234574",
       "29841621",
     ];
-    var qas: Models.QualityAssurance[] = [];
-    var startDate = new Date("2020-01-01");
-    for (var i = 0; i < OrderNos.length; i++) {
-      var qa = new Models.QualityAssurance();
+    let qas: Models.QualityAssurance[] = [];
+    let startDate = new Date("2020-01-01");
+    for (let i = 0; i < OrderNos.length; i++) {
+      let qa = new Models.QualityAssurance();
       if (Math.random() > 0.50) {
         qa.Process = Models.Process.SupplierOrRecInsp;
       } else {
         qa.Process = Models.Process.WIP;
       }
-      var choice = Math.floor(Math.random() * Object.keys(itemDescs).length);
+      let choice = Math.floor(Math.random() * Object.keys(itemDescs).length);
       qa.ID = i+1;
       qa.ProductNo = Object.keys(itemDescs)[choice];
       qa.OrderNo = OrderNos[i];
@@ -138,16 +138,16 @@ export namespace DataLib {
   }
 
   function SeedEng() : Models.Engineering[] | null {
-    var qas_raw = localStorage.getItem("QA");
+    let qas_raw = localStorage.getItem("QA");
     if (qas_raw == null) { // should never happen
       console.log("WTF!");
       return null;
     }
-    var qas: Models.QualityAssurance[] = JSON.parse(qas_raw);
-    var engs: Models.Engineering[] = [];
-    var eng = new Models.Engineering();
-    for (var i = 0; i < Math.floor(qas.length / 2); i++) {
-      var choice = Math.random();
+    let qas: Models.QualityAssurance[] = JSON.parse(qas_raw);
+    let engs: Models.Engineering[] = [];
+    let eng = new Models.Engineering();
+    for (let i = 0; i < Math.floor(qas.length / 2); i++) {
+      let choice = Math.random();
       if (choice > 0.75) {
         eng.Review = Models.Review.UseAsIs;
 
@@ -161,16 +161,16 @@ export namespace DataLib {
         eng.Review = Models.Review.Scrap;
 
       }
-      var choice2 = Math.random();
+      let choice2 = Math.random();
       if (choice2 > 0.5) {
         eng.NotifyCustomer = false;
       } else {
         eng.NotifyCustomer = true;
       }
-      var lipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-      var choice3 = Math.floor(Math.random() * lipsum.length);
+      let lipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+      let choice3 = Math.floor(Math.random() * lipsum.length);
       eng.Disposition = lipsum.slice(0, choice3);
-      var choice4 = Math.random();
+      let choice4 = Math.random();
       if (choice4 > 0.5) {
         eng.UpdateDrawing = true;
       } else {
@@ -186,17 +186,17 @@ export namespace DataLib {
     return engs;
   }
   function SeedPurch(): Models.Purchasing[] | null {
-    var engs: Models.Engineering[] = JSON.parse(localStorage.getItem("Engineering") || "[]");
+    let engs: Models.Engineering[] = JSON.parse(localStorage.getItem("Engineering") || "[]");
     if (engs.length == 0) {
       console.log("WTF!");
       return null;
     }
-    var purchs: Models.Purchasing[] = [];
-    for (var i = 0; i < Math.floor(engs.length / 2); i++) {
-      var purch = new Models.Purchasing();
+    let purchs: Models.Purchasing[] = [];
+    for (let i = 0; i < Math.floor(engs.length / 2); i++) {
+      let purch = new Models.Purchasing();
       purch.CARNo = "CAR-" + Math.floor(Math.random() * 1000);
       purch.CARRaised = true;
-      var choice = Math.random();
+      let choice = Math.random();
       if (choice > 0.75) {
         purch.Decision = Models.Decision.ReturnToSupplier;
       } else if (choice > 0.5) {
@@ -206,14 +206,14 @@ export namespace DataLib {
       } else {
         purch.Decision = Models.Decision.DeferToEng;
       }
-      var choice2 = Math.random();
+      let choice2 = Math.random();
       if (choice2 > 0.5) {
         purch.FollowUpRequired = false;
       } else {
         purch.FollowUpRequired = true;
       }
       if (purch.FollowUpRequired) {
-        var choice3 = Math.random();
+        let choice3 = Math.random();
         if (choice3 > 0.75) {
           purch.FollowUpType = "Inquiry";
         } else if (choice3 > 0.5) {
@@ -233,16 +233,16 @@ export namespace DataLib {
   }
 
   function SeedNCR() {
-    var qas = JSON.parse(localStorage.getItem("QA") || "[]");
-    var engs = JSON.parse(localStorage.getItem("Engineering") || "[]");
-    var purchs = JSON.parse(localStorage.getItem("Purchasing") || "[]");
-    var ncrs: Models.NCRLog[] = [];
+    let qas = JSON.parse(localStorage.getItem("QA") || "[]");
+    let engs = JSON.parse(localStorage.getItem("Engineering") || "[]");
+    let purchs = JSON.parse(localStorage.getItem("Purchasing") || "[]");
+    let ncrs: Models.NCRLog[] = [];
     if (qas.length == 0 || engs.length == 0 || purchs.length == 0) {
       console.log("WTF!");
       return null;
     }
-    for (var i = 0; i < qas.length; i++) {
-      var ncr = new Models.NCRLog();
+    for (let i = 0; i < qas.length; i++) {
+      let ncr = new Models.NCRLog();
       ncr.NCRNumber = i+1;
       ncr.QualityAssurance = qas[i];
       ncr.Engineering = engs[i] || null;
@@ -261,28 +261,28 @@ export namespace DataLib {
 
   // put seed data into localStorage if not there already
   export function ReadDataFromLocalStorage(): DBPayload {
-    var dbPayload: DBPayload = CheckMissing();
+    let dbPayload: DBPayload = CheckMissing();
     if (dbPayload.Success == false) { // missing DB in LocalStorage 
       console.log("SEEDING DATA. THIS MEANS THE DATABASE HAS BEEN DELETED OR IS MISSING.");
       dbPayload.Data = new TableSet();
-      var qas = SeedQA();
+      let qas = SeedQA();
       localStorage.setItem("QA", JSON.stringify(qas));
       console.log("QA Seeded");
-      var engs = SeedEng();
+      let engs = SeedEng();
       if (engs == null) {
         return DBPayload.Failure();
       }
       localStorage.setItem("Engineering", JSON.stringify(engs));
       console.log("Engineering Seeded");
 
-      var purchs = SeedPurch();
+      let purchs = SeedPurch();
       if (purchs == null) {
         return DBPayload.Failure();
       }
       localStorage.setItem("Purchasing", JSON.stringify(purchs));
       console.log("Purchasing Seeded");
 
-      var ncrs = SeedNCR();
+      let ncrs = SeedNCR();
       if (ncrs == null) {
         return DBPayload.Failure();
       }

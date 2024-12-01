@@ -3,41 +3,25 @@ import {DataLib} from "./DataLib";
 import { Helpers } from "./Helpers";
 
 export namespace DatabaseLib {
-  interface ValidationPayload {
+  class ValidationPayload {
     valid: boolean;
-    validate(): void;
-  }
-  function ValidatePayload(payload: ValidationPayload): boolean {
-    for (var key in payload) {
-      if (Object.prototype.hasOwnProperty.call(payload, key)) {
-        if (payload[key] === true && key !== "valid") {
-          return false;
+    
+    validate(): boolean {
+      for (let key in this) {
+        if (Object.prototype.hasOwnProperty.call(this, key)) {
+          if (this[key] === true && key !== "valid") {
+            this.valid = false;
+          }
         }
       }
+      return true;
     }
-    return true;
-  }
-  class QAValidationPayload implements ValidationPayload {
-    valid: boolean;
-    process: boolean;
-    productNo: boolean;
-    orderNo: boolean;
-    itemDescription: boolean;
-    defectDescription: boolean;
-    quantityReceived: boolean;
-    quantityDefective: boolean;
-    signedBy: boolean;
-    dateSigned: boolean;
-    validate(): void {
-      this.valid = ValidatePayload(this);
-    }
-
     getMessage(): string {
-      var msg = "";
-      for (var key in this) {
+      let msg = "";
+      for (let key in this) {
         if (Object.prototype.hasOwnProperty.call(this, key)) {
           if (this[key] && key != "valid") {
-            msg += `${key} is required\n`;
+            msg += `${key} is missing or invalid\n`;
           }
         }
       }
@@ -48,13 +32,55 @@ export namespace DatabaseLib {
     }
   }
   
+  class QAValidationPayload extends ValidationPayload {
+    public process: boolean;
+    public productNo: boolean;
+    public orderNo: boolean;
+    public itemDescription: boolean;
+    public defectDescription: boolean;
+    public quantityReceived: boolean;
+    public quantityDefective: boolean;
+    public signedBy: boolean;
+    public dateSigned: boolean;
+  }
+
+  class ENGValidationPayload extends ValidationPayload {
+    public review: boolean;
+    public notifyCustomer: boolean;
+    public disposition: boolean;
+    public updateDrawing: boolean;
+    public originalRevNumber: boolean;
+    public signedBy: boolean;
+    public dateSigned: boolean;
+  }
+
+  class PURValidationPayload extends ValidationPayload {
+    public decision: boolean;
+    public carRaised: boolean;
+    public carNo: boolean;
+    public followUpRequired: boolean;
+    public followUpType: boolean;
+    public signedBy: boolean;
+    public dateSigned: boolean;
+  }
+  
+  class NCRValidationPayload extends ValidationPayload {
+    public ncrNumber: boolean;
+    public qualityAssurance: boolean;
+    public status: boolean;
+  }
+  
+  function isNullOrEmpty(v: any): boolean {
+    return v == null || v == "";
+  }
+
   export class Database {
     public tables: Helpers.DatabaseBase;
     private static Instance: Database;
     
     private constructor() {
       // read data into localStorage
-      var dbPayload = DataLib.ReadDataFromLocalStorage(); // seed data occurs in this function if necessary
+      let dbPayload = DataLib.ReadDataFromLocalStorage(); // seed data occurs in this function if necessary
       if (dbPayload.Success) {
         this.tables = dbPayload.Data!;
       } else {
@@ -72,7 +98,7 @@ export namespace DatabaseLib {
 
     public ReSeed(): void {
       localStorage.removeItem("Database");
-      var dbPayload = DataLib.ReadDataFromLocalStorage(); // seed data occurs in this function if necessary
+      let dbPayload = DataLib.ReadDataFromLocalStorage(); // seed data occurs in this function if necessary
       if (dbPayload.Success) {
         this.tables = dbPayload.Data!;
         console.log("DATABASE RESEEDED SUCCESSFULLY");
@@ -82,67 +108,182 @@ export namespace DatabaseLib {
     }
     
 
-    public ValidateQA(qa: Models.QualityAssurance): QAValidationPayload {
-      var payload: QAValidationPayload = new QAValidationPayload();
-      if (qa.Process == null) {
+    private ValidateQA(qa: Models.QualityAssurance): QAValidationPayload {
+      let payload: QAValidationPayload = new QAValidationPayload();
+      if (isNullOrEmpty(qa.Process)) {
         payload.process = true;
       }
-      if (qa.ProductNo == null || qa.ProductNo == "") {
+      if (isNullOrEmpty(qa.ProductNo)) {
         payload.productNo = true;
       }
-      if (qa.OrderNo == null || qa.OrderNo == "") {
+      if (isNullOrEmpty(qa.OrderNo)) {
         payload.orderNo = true;
       }
-      if (qa.ItemDescription == null || qa.ItemDescription == "") {
+      if (isNullOrEmpty(qa.ItemDescription)) {
         payload.itemDescription = true;
       }
-      if (qa.DefectDescription == null || qa.DefectDescription == "") {
+      if (isNullOrEmpty(qa.DefectDescription)) {
         payload.defectDescription = true;
       }
-      if (qa.QuantityReceived == null || qa.QuantityReceived < 0) {
+      if (qa.QuantityReceived == null || qa.QuantityReceived <= 0) {
         payload.quantityReceived = true;
       }
-      if (qa.QuantityDefective == null || qa.QuantityDefective < 0) {
+      if (qa.QuantityDefective == null || qa.QuantityDefective <= 0) {
         payload.quantityDefective = true;
       }
-      if (qa.SignedBy == null || qa.SignedBy == "") {
+      if (isNullOrEmpty(qa.SignedBy)) {
         payload.signedBy = true;
       }
-      if (qa.DateSigned == null) {
+      if (isNullOrEmpty(qa.DateSigned)) {
         payload.dateSigned = true;
       }
       payload.validate();
       return payload;
     }
 
-    public SaveChanges(): void {
-      localStorage.setItem("Database", JSON.stringify(Database.Instance.tables));
+    private ValidateENG(eng: Models.Engineering): ENGValidationPayload {
+      let payload = new ENGValidationPayload();
+      if (isNullOrEmpty(eng.Review)) {
+        payload.review = true;
+      }
+      if (eng.NotifyCustomer == null) {
+        payload.notifyCustomer = true;
+      }
+      if (isNullOrEmpty(eng.Disposition)) {
+        payload.disposition = true;
+      }
+      if (eng.UpdateDrawing == null) {
+        payload.updateDrawing = true;
+      }
+      if (isNullOrEmpty(eng.OriginalRevNumber)) {
+        payload.originalRevNumber = true;
+      }
+      if (isNullOrEmpty(eng.SignedBy)) {
+        payload.signedBy = true;
+      }
+      if (isNullOrEmpty(eng.DateSigned)) {
+        payload.dateSigned = true;
+      }
+      payload.validate();
+      return payload;
     }
 
-    public GetQAByID(ID: number): number {
-      return Database.Instance.tables.QualityAssurances.findIndex((item: Models.QualityAssurance) => {
+    private ValidatePUR(purch: Models.Purchasing): PURValidationPayload {
+      let payload = new PURValidationPayload();
+      if (isNullOrEmpty(purch.Decision)) {
+        payload.decision = true;
+      }
+      if (purch.CARRaised == null) {
+        payload.carRaised = true;
+      }
+      if (purch.CARRaised == true && isNullOrEmpty(purch.CARNo)) {
+        payload.carNo = true;
+      }
+      if (purch.FollowUpRequired == null) {
+        payload.followUpRequired = true;
+      }
+      if (purch.FollowUpRequired == true && isNullOrEmpty(purch.FollowUpType)) {
+        payload.followUpType = true;
+      }
+      if (isNullOrEmpty(purch.SignedBy)) {
+        payload.signedBy = true;
+      }
+      if (isNullOrEmpty(purch.DateSigned)) {
+        payload.dateSigned = true;
+      }
+      payload.validate();
+      return payload;
+    }
+    private ValidateNCR(ncr: Models.NCRLog): NCRValidationPayload {
+      let payload = new NCRValidationPayload();
+      if (ncr.NCRNumber == null || ncr.NCRNumber <= 0) {
+        payload.ncrNumber = true;
+      }
+      if (ncr.QualityAssurance == null) {
+        payload.qualityAssurance = true;
+      }
+      if (ncr.Status == null) {
+        payload.status = true;
+      }
+      payload.validate();
+      return payload;
+    }
+
+    public SaveChanges(): void {
+      localStorage.setItem("Database", JSON.stringify(Database.get().tables));
+    }
+
+    public GetQAByID(ID: number): Models.QualityAssurance {
+      let item = Database.get().tables.QualityAssurances.find((item: Models.QualityAssurance) => {
         if (item.ID == ID) {
           return true;
         }
           return false;
         }
       );
+      if (item == null) {
+        throw "GET ERROR\n\n Item not found";
+      }
+      return item;
+    }
+    public GetENGByID(ID: number): Models.Engineering {
+      let item = Database.get().tables.Engineerings.find((item: Models.Engineering) => {
+        if (item.ID == ID) {
+          return true;
+        }
+          return false;
+        }
+      );
+      if (item == null) {
+        throw "GET ERROR\n\n Item not found";
+      }
+      return item;
+    }
+    public GetPURByID(ID: number): Models.Purchasing {
+      let item = Database.get().tables.Purchasings.find((item: Models.Purchasing) => {
+        if (item.ID == ID) {
+          return true;
+        }
+          return false;
+        }
+      );
+      if (item == null) {
+        throw "GET ERROR\n\n Item not found";
+      }
+      return item;
+    }
+    public GetNCRByID(ID: number): Models.NCRLog {
+      let item = Database.get().tables.NCRLogs.find((item: Models.NCRLog) => {
+        if (item.ID == ID) {
+          return true;
+        }
+          return false;
+        }
+      );
+      if (item == null) {
+        throw "GET ERROR\n\n Item not found";
+      }
+      return item;
+    }
+    public FindRow(obj: Models.ModelBase): number {
+      return obj.ID-1;
     }
 
     public InsertQA(qa: Models.QualityAssurance): void {
-      var validationResult = this.ValidateQA(qa);
+      let validationResult = this.ValidateQA(qa);
       if (!validationResult.valid) {
-        var msg = "VALIDATION ERROR\n\n" + validationResult.getMessage();
+        let msg = "VALIDATION ERROR\n\n" + validationResult.getMessage();
         console.log(validationResult.getMessage());
         throw msg;
       }
-      qa.ID = Database.Instance.tables.QualityAssurances.length + 1;
-      Database.Instance.tables.QualityAssurances.push(qa);
+      qa.ID = Database.get().tables.QualityAssurances.length + 1; // IDs start at 1
+      Database.get().tables.QualityAssurances.push(qa); // does not inherently save changes
+      console.log("INSERT SUCCESSFUL");
     }
 
-    public RemoveQA(ID: number): boolean {
-      var db = Database.Instance;
-      var items = db.tables.QualityAssurances.filter((item: Models.QualityAssurance) => {
+    public RemoveQA(ID: number): void {
+      let db = Database.get();
+      let items = db.tables.QualityAssurances.filter((item: Models.QualityAssurance) => {
         if (item.ID != ID) {
           return true;
         }
@@ -155,41 +296,120 @@ export namespace DatabaseLib {
       if (items.length != db.tables.QualityAssurances.length - 1) { // if there was more than 1 item removed
         throw "DELETE ERROR\n\n Too many matches found";
       }
-      db.tables.QualityAssurances = items;
-      return true;
+      db.tables.QualityAssurances = items; // does not inherently save changes
+      console.log("DELETE SUCCESSFUL");
     }
 
     public UpdateQA(qa: Models.QualityAssurance): void {
-      var db = Database.Instance;
-      var index = this.GetQAByID(qa.ID);
-      db.tables.QualityAssurances[index] = qa;
+      let db = Database.get();
+      db.tables.QualityAssurances[this.FindRow(qa)] = qa; // does not inherently save changes
+      console.log("UPDATE SUCCESSFUL");
     }
 
     public InsertEng(eng: Models.Engineering): void {
-
+      let validationResult = this.ValidateENG(eng);
+      if (!validationResult.valid) {
+        let msg = "VALIDATION ERROR\n\n" + validationResult.getMessage();
+        console.log(validationResult.getMessage());
+        throw msg;
+      }
+      eng.ID = Database.get().tables.QualityAssurances.length + 1; // IDs start at 1
+      Database.get().tables.Engineerings.push(eng); // does not inherently save changes, call SaveChanges()
+      console.log("INSERT SUCCESSFUL");
     }
     public UpdateEng(eng: Models.Engineering): void {
-
+      let db = Database.get();
+      db.tables.Engineerings[this.FindRow(eng)] = eng;
+      console.log("UPDATE SUCCESSFUL");
     }
     public RemoveEng(ID: number): void {
-
+      let db = Database.get();
+      // get every item that does not match the ID
+      let items = db.tables.Engineerings.filter((item: Models.Engineering) => {
+        if (item.ID != ID) {
+          return true;
+        }
+          return false;
+        }
+      );
+      if (items.length == db.tables.Engineerings.length) {
+        throw "DELETE ERROR\n\n Item not found";
+      } // if there was not an item removed
+      if (items.length != db.tables.Engineerings.length - 1) { // if there was more than 1 item removed
+        throw "DELETE ERROR\n\n Too many matches found";
+      }
+      db.tables.Engineerings = items;
+      console.log("DELETE SUCCESSFUL");
     }
     public InsertPurch(purch: Models.Purchasing): void {
-
+      let validationResult = this.ValidatePUR(purch);
+      if (!validationResult.valid) {
+        let msg = "VALIDATION ERROR\n\n" + validationResult.getMessage();
+        console.log(validationResult.getMessage());
+        throw msg;
+      }
+      purch.ID = Database.get().tables.Purchasings.length + 1; // IDs start at 1
+      Database.get().tables.Purchasings.push(purch); // does not inherently save changes, call SaveChanges()
+      console.log("INSERT SUCCESSFUL");
     }
     public UpdatePurch(purch: Models.Purchasing): void {
-
+      let db = Database.get();
+      db.tables.Purchasings[this.FindRow(purch)] = purch;
+      console.log("UPDATE SUCCESSFUL");
     }
     public RemovePurch(ID: number): void {
-
+      let db = Database.get();
+      // get every item that does not match the ID
+      let items = db.tables.Purchasings.filter((item: Models.Purchasing) => {
+        if (item.ID != ID) {
+          return true;
+        }
+          return false;
+        }
+      );
+      if (items.length == db.tables.Purchasings.length) {
+        throw "DELETE ERROR\n\n Item not found";
+      } // if there was not an item removed
+      if (items.length != db.tables.Purchasings.length - 1) { // if there was more than 1 item removed
+        throw "DELETE ERROR\n\n Too many matches found";
+      }
+      db.tables.Purchasings = items;
+      console.log("DELETE SUCCESSFUL");
     }
     public InsertNCR(ncr: Models.NCRLog): void {
-
+      let validationResult = this.ValidateNCR(ncr);
+      if (!validationResult.valid) {
+        let msg = "VALIDATION ERROR\n\n" + validationResult.getMessage();
+        console.log(validationResult.getMessage());
+        throw msg;
+      }
+      ncr.ID = Database.get().tables.NCRLogs.length + 1; // IDs start at 1
+      Database.get().tables.NCRLogs.push(ncr); // does not inherently save changes, call SaveChanges()
+      console.log("INSERT SUCCESSFUL");
     }
     public UpdateNCR(ncr: Models.NCRLog): void {
-
+      let db = Database.get();
+      db.tables.NCRLogs[this.FindRow(ncr)] = ncr;
+      console.log("UPDATE SUCCESSFUL");
     }
     public RemoveNCR(ID: number): void {
+      let db = Database.get();
+      // get every item that does not match the ID
+      let items = db.tables.NCRLogs.filter((item: Models.NCRLog) => {
+        if (item.ID != ID) {
+          return true;
+        }
+          return false;
+        }
+      );
+      if (items.length == db.tables.NCRLogs.length) {
+        throw "DELETE ERROR\n\n Item not found";
+      } // if there was not an item removed
+      if (items.length != db.tables.NCRLogs.length - 1) { // if there was more than 1 item removed
+        throw "DELETE ERROR\n\n Too many matches found";
+      }
+      db.tables.NCRLogs = items;
+      console.log("DELETE SUCCESSFUL");
     }
   }
 }

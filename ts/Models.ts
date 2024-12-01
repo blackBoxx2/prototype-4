@@ -1,11 +1,13 @@
 export namespace Models {
-  
+  export interface ModelBase {
+    ID: number;
+  }
   export enum Process {
     SupplierOrRecInsp = "Supplier / Rec. Insp.",
     WIP = "WIP (Production Order)"
   }
   
-  export class QualityAssurance {
+  export class QualityAssurance implements ModelBase {
     public ID: number;
     public Process: Process;
     public ProductNo: string;
@@ -25,7 +27,7 @@ export namespace Models {
     Scrap = "Scrap"
   }
 
-  export class Engineering {
+  export class Engineering implements ModelBase {
     public ID: number;
     public Review: Review;
     public NotifyCustomer: boolean;
@@ -44,7 +46,7 @@ export namespace Models {
     DeferToEng = "Defer to Engineering"
   }
 
-  export class Purchasing {
+  export class Purchasing implements ModelBase {
     public ID: number;
     public Decision: Decision;
     public CARRaised: boolean;
@@ -61,7 +63,7 @@ export namespace Models {
     Closed
   }
 
-  export class NCRLog {
+  export class NCRLog implements ModelBase {
     public ID: number;
     public NCRNumber: number;
     public QualityAssurance: QualityAssurance;
