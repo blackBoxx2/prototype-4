@@ -17,7 +17,7 @@ $(function () { // $(document).ready shorthand
       Process: "Supplier / Rec. Insp.",
       ProductNo: "91282101",
       OrderNo: "1234-8219",
-      ItemDescription: "Basketball",
+      ItemDescription: "BALLSAKC",
       DefectDescription: "Punctured",
       QuantityReceived: "100",
       QuantityDefective: "10",
@@ -26,11 +26,6 @@ $(function () { // $(document).ready shorthand
     }
     console.log(db.tables);
     var msg = db.UpdateQA(qa);
-    if (msg) {
-      msg = "remove successful";
-    } else {
-      msg = "remove failed";
-    }
     console.log(msg);
     db.SaveChanges();
     console.log(db.tables);
