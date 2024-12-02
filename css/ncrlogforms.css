@@ -10,7 +10,7 @@
 }
 
 #form-main{
-    position: fixed;
+    position: flex;
     z-index: 99999;
     top: 5%;
     left: 5%;
@@ -21,7 +21,6 @@
     align-items: center;
     background-color: var(--heading-secondary-color);
     width: 90%;    
-    height: auto;
     margin-top: auto;
     border-radius: 10px;
     /* padding-bottom: 6rem; */
@@ -33,7 +32,7 @@ form{
 }
 
 fieldset{
-    padding: 2.5rem; 
+    padding: 1.5rem; 
     padding-bottom: 1rem;
 }
 

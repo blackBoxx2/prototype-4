@@ -1,0 +1,16 @@
+Step 1) Compile you typescript file using the following line
+    tsc .\ts\YourFileName.ts
+    
+Step 2) Copy all NEW JAVASCRIPT files over to the src folder. DO NOT copy any typescript files to this folder.
+Remember, we do not need to add these javascript files to our commits since we have to make these new files every
+time we edit a typescript file.
+
+Step 3) Run the following command in powershell and ensure both file names are correct
+
+IF YOU DONT HAVE A DIST FOLDER WITH main.js and 651.js, run "npx webpack" with no other commands.
+
+    npx webpack ./src/YourFileName.js --output-path ./dist --output-filename YourFileName.js
+
+    This command should webpack your files so now in your html you can refer to them as:
+    src="dist/YourFileName.js"
+

@@ -10,9 +10,9 @@ Need to change hard coded data to dynamic
     <body>
         <div id="form-main">
             <h3 class="title-group">Viewing NCR</h3>
-            <form id="view-form" action="#">
+            <form id="view-form" >
         
-                <fieldset style="padding: 1em; margin: 0 auto; ">
+                <fieldset >
         
                     <div class="form-data-field">
                         <label class="form-label">NCR Number </label>
@@ -20,32 +20,118 @@ Need to change hard coded data to dynamic
                     </div>
         
                     <div class="form-data-field">
-                        <label class="form-label">Product </label>
-                        <p class="form-p" id="product">Product Name</p>
+                        <label class="form-label">Process Applicable </label>
+                        <p class="form-p" id="ipa"></p>
                     </div>
         
                     <div class="form-data-field">
-                        <label class="form-label">Defect Type </label>
-                        <p class="form-p" id="defect">Defect Description</p>
+                        <label class="form-label">Description </label>
+                        <p class="form-p" id="descriptionProduct"></p>
                     </div>
         
                     <div class="form-data-field">
-                        <label class="form-label">Total Quantity Ordered </label>
-                        <p class="form-p" id="quantityOrdered">100</p>
+                        <label class="form-label">Supplier </label>
+                        <p class="form-p" id="supplierName"></p>
                     </div>
         
                     <div class="form-data-field">
-                        <label class="form-label">Total Quantity Defective </label>
-                        <p class="form-p" id="quantityDefective">5</p>
+                        <label class="form-label">PO or Prod. No. </label>
+                        <p class="form-p" id="productNum"></p>
                     </div>
         
                     <div class="form-data-field">
                         <label class="form-label">Order Number </label>
-                        <p class="form-p" id="orderNumber">19826319</p>
+                        <p class="form-p" id="salesOrderNum"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Quantity Received </label>
+                        <p class="form-p" id="quantityRec"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Quantity Defective </label>
+                        <p class="form-p" id="quantityDef"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Description of Defect </label>
+                        <p class="form-p" id="descriptionDefect"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Order Number </label>
+                        <p class="form-p" id="salesOrderNum"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Item marked Nonconforming </label>
+                        <p class="form-p" id="chkNonconforming"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Quality Representative's Name</label>
+                        <p class="form-p" id="qaName"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Date </label>
+                        <p class="form-p" id="qaDate"></p>
                     </div>
         
                     <div>
                         <a href="#">View defect picture</a>
+                    </div>
+                    <!-- ENG: -->
+
+                    <div class="form-data-field">
+                        <label class="form-label">Review by CF Engineering </label>
+                        <p class="form-p" id="selReview"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Disposition </label>
+                        <p class="form-p" id="disposition"></p>
+                    </div>
+                    
+                    <div class="form-data-field">
+                        <label class="form-label">Does the Customer Require Notifications </label>
+                        <p class="form-p" id="requireNotification"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Does the Drawing Require Updating </label>
+                        <p class="form-p" id="requireUpdating"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Original Rev. Number </label>
+                        <p class="form-p" id="originalRevNum"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Updated Rev. Number </label>
+                        <p class="form-p" id="updatedRevNum"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Name of Engineer</label>
+                        <p class="form-p" id="nameOfEngineer"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Revision Date </label>
+                        <p class="form-p" id="revisionDate"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Engineering</label>
+                        <p class="form-p" id="engineering"></p>
+                    </div>
+
+                    <div class="form-data-field">
+                        <label class="form-label">Date </label>
+                        <p class="form-p" id="engineeringDate"></p>
                     </div>
         
                 </fieldset>
@@ -55,3 +141,4 @@ Need to change hard coded data to dynamic
     
     </body>
 </html>
+<script type="module" src="./dist/DetailsNCR.js"></script>
