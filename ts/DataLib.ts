@@ -231,8 +231,15 @@ export namespace DataLib {
     }
     let purchs: Models.Purchasing[] = [];
     for (let i = 0; i < Math.floor(engs.length / 2); i++) {
-      let carNo = "CAR-" + Math.floor(Math.random() * 1000);
-      let carRaised = true;
+      let carRaisedChoice = Math.random();
+      let carRaised: boolean = false;
+      if (carRaisedChoice > 0.5) {
+        carRaised = true;
+      }
+      let carNo: string | null = null;
+      if (carRaised) {
+        carNo = "CAR-" + Math.floor(Math.random() * 1000);
+      }
       let choice = Math.random();
       let decision: Models.Decision;
       if (choice > 0.75) {
@@ -264,6 +271,13 @@ export namespace DataLib {
           followUpType = "Other";
         }
       }
+      let reInspectAcceptable = true; // to save us headache of new ncr number
+
+      let newNCRNumber = null;
+      if (!reInspectAcceptable) {
+        newNCRNumber = JSON.parse(sessionStorage.getItem("QA") || "[]").length + 1;
+      }
+      let qualityDept = "Purchasing";
       let signedByUser = (users[Math.floor(Math.random() * users.length)] as Models.User).ID;
       let dateSigned = new Date(engs[i].DateSigned);
       dateSigned.setDate(dateSigned.getDate() + 1);
@@ -273,6 +287,9 @@ export namespace DataLib {
         carNo, 
         followUpRequired, 
         followUpType, 
+        reInspectAcceptable,
+        newNCRNumber,
+        qualityDept,
         signedByUser, 
         dateSigned
       );

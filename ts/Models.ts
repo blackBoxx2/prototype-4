@@ -137,6 +137,9 @@ export namespace Models {
     public CARNo: string | null;
     public FollowUpRequired: boolean;
     public FollowUpType: string | null;
+    public ReInspectAcceptable: boolean;
+    public NewNCRNumber: number | null;
+    public QualityDept: string;
     public SignedByUser: number;
     public DateSigned: Date;
 
@@ -146,6 +149,9 @@ export namespace Models {
       carNo: string | null, 
       followUpRequired: boolean, 
       followUpType: string | null, 
+      reInspectAcceptable: boolean,
+      newNCRNumber: number | null,
+      qualityDept: string,
       signedByUser: number, 
       dateSigned: Date) 
       {
@@ -155,6 +161,9 @@ export namespace Models {
       this.CARNo = carNo;
       this.FollowUpRequired = followUpRequired;
       this.FollowUpType = followUpType;
+      this.ReInspectAcceptable = reInspectAcceptable;
+      this.NewNCRNumber = newNCRNumber;
+      this.QualityDept = qualityDept;
       this.SignedByUser = signedByUser;
       this.DateSigned = dateSigned;
     }
