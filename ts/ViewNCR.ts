@@ -23,7 +23,7 @@ $(document).ready(function() {
             <td>${ncr.QualityAssurance.DefectDescription}</td>
             <td>${ncr.QualityAssurance.DateSigned}</td>
             <td>${ncr.Status}</td>
-            <td class="action"><a data-id="${ncr.NCRNumber}" href="./view-ncrlog.html" class="viewNCR">Details</a> | <a data-id="${ncr.NCRNumber}" id="btnEdit" href="./edit-ncrlog.html" class="editNCR">Edit</a> | <a id="btnDelete" data-id="${ncr.NCRNumber}" href="./delete-ncrlog.html" class="deleteNCR">Remove</a></td>
+            <td class="action"><a data-id="${ncr.NCRNumber}" href="/NCRLog/Details.html" class="viewNCR">Details</a> | <a data-id="${ncr.NCRNumber}" id="btnEdit" href="/NCRLog/Details.html" class="editNCR">Edit</a> | <a id="btnDelete" data-id="${ncr.NCRNumber}" href="/NCRLog/Details.html" class="deleteNCR">Remove</a></td>
 
         </tr>`
         ;
