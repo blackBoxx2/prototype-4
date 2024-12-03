@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/css/navbar.css">
-
-    <script>
+  <script src="/scripts/breadcrumbs.js"></script>
+  <script>
         fetch('/head.html')
           .then(response => response.text())
           .then(data => {
@@ -14,22 +13,30 @@
             const link = document.createElement('link');
             link.rel = 'stylesheet';
             link.href = '/css/dashboard.css';
-            document.head.appendChild(link);
-
-
             const link2 = document.createElement('link');
             link2.rel = 'stylesheet';
             link2.href = '/css/modals.css';
+            const link3 = document.createElement('link');
+            link3.rel = 'stylesheet';
+            link3.href = '/css/navbar.css';
+            const link4 = document.createElement('link');
+            link4.rel = 'stylesheet';
+            link4.href = '/css/breadcrumbs.css';
+
+            document.head.appendChild(link);
             document.head.appendChild(link2);
+            document.head.appendChild(link3);
+            document.head.appendChild(link4);
           });
       </script>
+      
       <title>QA Dashboard</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div id="modal-dialog"></div>
     <div class="grid-12">
       <div class="page-info">
-        <h1 style="text-wrap: nowrap;">Quality Assurance DashBoard</h1>
+        <h1>Quality Assurance DashBoard</h1>
         <h2>NCR Count: 10</h2>
       </div>
         <div class="ncr-list">
