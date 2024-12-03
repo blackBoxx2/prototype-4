@@ -60,6 +60,9 @@ export namespace DatabaseLib {
     public carNo: boolean;
     public followUpRequired: boolean;
     public followUpType: boolean;
+    public reInspectApplicable: boolean;
+    public newNCRNumber: boolean;
+    public qualityDept: boolean;
     public signedBy: boolean;
     public dateSigned: boolean;
   }
@@ -184,6 +187,15 @@ export namespace DatabaseLib {
       }
       if (purch.FollowUpRequired == true && isNullOrEmpty(purch.FollowUpType)) {
         payload.followUpType = true;
+      }
+      if (isNullOrEmpty(purch.ReInspectApplicable)) {
+        payload.reInspectApplicable = true;
+      }
+      if (purch.ReInspectApplicable == false && (purch.NewNCRNumber == null || purch.NewNCRNumber <= 0)) {
+        payload.newNCRNumber = true;
+      }
+      if (isNullOrEmpty(purch.QualityDept)) {
+        payload.qualityDept = true;
       }
       if (isNullOrEmpty(purch.SignedByUser)) {
         payload.signedBy = true;

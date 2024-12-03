@@ -264,6 +264,15 @@ export namespace DataLib {
           followUpType = "Other";
         }
       }
+      let reInspectApplicable = false;
+      if (0.25 < choice2 && choice2 < 0.75) {
+        reInspectApplicable = true;
+      }
+      let newNCRNumber = null;
+      if (!reInspectApplicable) {
+        newNCRNumber = JSON.parse(sessionStorage.getItem("QA") || "[]").length + 1;
+      }
+      let qualityDept = "Purchasing";
       let signedByUser = (users[Math.floor(Math.random() * users.length)] as Models.User).ID;
       let dateSigned = new Date(engs[i].DateSigned);
       dateSigned.setDate(dateSigned.getDate() + 1);
@@ -273,6 +282,9 @@ export namespace DataLib {
         carNo, 
         followUpRequired, 
         followUpType, 
+        reInspectApplicable,
+        newNCRNumber,
+        qualityDept,
         signedByUser, 
         dateSigned
       );
