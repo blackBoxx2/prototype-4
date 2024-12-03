@@ -18,11 +18,13 @@ $(document).ready(function() {
 
     if(tableBody){
     ncrLogs.forEach((ncr) => {
+        const date = new Date(ncr.QualityAssurance.DateSigned).toLocaleDateString();
+        const status = Models.Status[ncr.Status];
         const row = `
         <tr>
             <td>${ncr.QualityAssurance.DefectDescription}</td>
-            <td>${ncr.QualityAssurance.DateSigned}</td>
-            <td>${ncr.Status}</td>
+            <td>${date}</td>
+            <td>${status}</td>
             <td class="action"><a data-id="${ncr.NCRNumber}" href="/NCRLog/Details.html" class="viewNCR">Details</a> | <a data-id="${ncr.NCRNumber}" id="btnEdit" href="/NCRLog/Details.html" class="editNCR">Edit</a> | <a id="btnDelete" data-id="${ncr.NCRNumber}" href="/NCRLog/Details.html" class="deleteNCR">Remove</a></td>
 
         </tr>`
