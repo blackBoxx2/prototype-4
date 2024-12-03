@@ -2,9 +2,46 @@ export namespace Models {
   export interface ModelBase {
     ID: number;
   }
+
   export enum Process {
     SupplierOrRecInsp = "Supplier / Rec. Insp.",
     WIP = "WIP (Production Order)"
+  }
+
+  export class Supplier implements ModelBase {
+    public ID: number;
+    public Name: string;
+  }
+
+  export enum Role {
+    QualityAssurance = 1,
+    Engineer = 2,
+    Purchasing = 3,
+    Admin = 4
+  }
+  export class User implements ModelBase {
+    public ID: number;
+    public DigitalSignature: string;
+    public Email: string;
+    public Roles: RoleClaim;
+  }
+  export class RoleClaim {
+    public QA: boolean;
+    public Engineer: boolean;
+    public Purchasing: boolean;
+    public Admin: boolean;
+
+    constructor(
+      isQA: boolean,
+      isEngineer: boolean,
+      isPurchasing: boolean,
+      isAdmin: boolean
+    ) {
+      this.QA = isQA;
+      this.Engineer = isEngineer;
+      this.Purchasing = isPurchasing;
+      this.Admin = isAdmin;
+    }
   }
   
   export class QualityAssurance implements ModelBase {
@@ -12,12 +49,38 @@ export namespace Models {
     public Process: Process;
     public ProductNo: string;
     public OrderNo: string;
+    public SupplierID: number;
     public ItemDescription: string;
     public DefectDescription: string;
     public QuantityReceived: number;
     public QuantityDefective: number;
-    public SignedBy: string;
+    public SignedByUser: number;
     public DateSigned: Date;
+
+    constructor(
+      process: Process, 
+      productNo: string, 
+      orderNo: string, 
+      supplierID: number, 
+      itemDescription: string, 
+      defectDescription: string, 
+      quantityReceived: number, 
+      quantityDefective: number, 
+      signedByUser: number, 
+      dateSigned: Date
+    ) {
+      this.ID = 0;
+      this.Process = process;
+      this.ProductNo = productNo;
+      this.OrderNo = orderNo;
+      this.SupplierID = supplierID;
+      this.ItemDescription = itemDescription;
+      this.DefectDescription = defectDescription;
+      this.QuantityReceived = quantityReceived;
+      this.QuantityDefective = quantityDefective;
+      this.SignedByUser = signedByUser;
+      this.DateSigned = dateSigned;
+    }
   }
 
   export enum Review {
@@ -35,8 +98,29 @@ export namespace Models {
     public UpdateDrawing: boolean;
     public OriginalRevNumber: string;
     public LatestRevNumber: string | null;
-    public SignedBy: string;
+    public SignedByUser: number;
     public DateSigned: Date;
+
+    constructor(
+      review: Review,
+      notifyCustomer: boolean,
+      disposition: string,
+      updateDrawing: boolean,
+      originalRevNumber: string,
+      latestRevNumber: string | null,
+      signedByUser: number,
+      dateSigned: Date
+    ) {
+      this.ID = 0;
+      this.Review = review;
+      this.NotifyCustomer = notifyCustomer;
+      this.Disposition = disposition;
+      this.UpdateDrawing = updateDrawing;
+      this.OriginalRevNumber = originalRevNumber;
+      this.LatestRevNumber = latestRevNumber;
+      this.SignedByUser = signedByUser;
+      this.DateSigned = dateSigned;
+    }
   }
 
   export enum Decision {
@@ -53,8 +137,27 @@ export namespace Models {
     public CARNo: string | null;
     public FollowUpRequired: boolean;
     public FollowUpType: string | null;
-    public SignedBy: string;
+    public SignedByUser: number;
     public DateSigned: Date;
+
+    constructor(
+      decision: Decision, 
+      carRaised: boolean, 
+      carNo: string | null, 
+      followUpRequired: boolean, 
+      followUpType: string | null, 
+      signedByUser: number, 
+      dateSigned: Date) 
+      {
+      this.ID = 0;
+      this.Decision = decision;
+      this.CARRaised = carRaised;
+      this.CARNo = carNo;
+      this.FollowUpRequired = followUpRequired;
+      this.FollowUpType = followUpType;
+      this.SignedByUser = signedByUser;
+      this.DateSigned = dateSigned;
+    }
   }
 
   export enum Status {
@@ -66,9 +169,24 @@ export namespace Models {
   export class NCRLog implements ModelBase {
     public ID: number;
     public NCRNumber: number;
-    public QualityAssurance: QualityAssurance;
-    public Engineering: Engineering | null;
-    public Purchasing: Purchasing | null;
+    public QualityAssuranceID: number;
+    public EngineeringID: number | null;
+    public PurchasingID: number | null;
     public Status: Status;
+
+    constructor(
+      ncrNumber: number,
+      qualityAssuranceID: number,
+      engineeringID: number | null,
+      purchasingID: number | null,
+      status: Status
+    ) {
+      this.ID = 0;
+      this.NCRNumber = ncrNumber;
+      this.QualityAssuranceID = qualityAssuranceID;
+      this.EngineeringID = engineeringID;
+      this.PurchasingID = purchasingID;
+      this.Status = status;
+    }
   }
 }

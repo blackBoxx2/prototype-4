@@ -2,21 +2,6 @@ import { Helpers } from "./Helpers";
 import {Models} from "./Models";
 
 export namespace DataLib {
-  const signatures = [
-    "John Doe",
-    "Jane Doe",
-    "Frank Smith",
-    "Carl Davis",
-    "Sue Johnson",
-    "Mike Abernacle",
-    "Linda Smith",
-    "Tommy Bobbert",
-    "Sally McNichols",
-    "Jill Hildon",
-    "Bobby Shmurda",
-    "Kurt Kristie",
-    "Cathy Karl"
-  ]
   // identical to the tables present in Database.ts
   class TableSet extends Helpers.DatabaseBase {
     constructor() {
@@ -112,151 +97,357 @@ export namespace DataLib {
       "31234574",
       "29841621",
     ];
+    let users: Models.User[] = JSON.parse(sessionStorage.getItem("UsersTemp") || "[]");
+    if (users.length == 0) {
+      throw ("SEEDING FAILURE\n\nUsers not seeded before QA");
+    }
+    // only allow QA to sign these
+    users = users.filter((user: Models.User) => {
+      return user.Roles.QA;
+    });
+    if (users.length == 0) {
+      throw ("SEEDING FAILURE\n\nNo members of QA");
+    }
+    let suppliers: Models.Supplier[] = JSON.parse(sessionStorage.getItem("SuppliersTemp") || "[]");
     let qas: Models.QualityAssurance[] = [];
     let startDate = new Date("2020-01-01");
     for (let i = 0; i < OrderNos.length; i++) {
-      let qa = new Models.QualityAssurance();
+      let proc;
       if (Math.random() > 0.50) {
-        qa.Process = Models.Process.SupplierOrRecInsp;
+        proc = Models.Process.SupplierOrRecInsp;
       } else {
-        qa.Process = Models.Process.WIP;
+        proc = Models.Process.WIP;
       }
       let choice = Math.floor(Math.random() * Object.keys(itemDescs).length);
-      qa.ID = i+1;
-      qa.ProductNo = Object.keys(itemDescs)[choice];
-      qa.OrderNo = OrderNos[i];
-      qa.ItemDescription = itemDescs[qa.ProductNo];
-      qa.DefectDescription = defects[Math.floor(Math.random() *defects.length)];
-      qa.QuantityReceived = Math.floor(Math.random() * 100);
-      qa.QuantityDefective = Math.floor(Math.random() * qa.QuantityReceived);
-      qa.SignedBy = signatures[Math.floor(Math.random() * signatures.length)];
-      qa.DateSigned = startDate;
-      startDate.setDate(startDate.getDate() + 8);
+      let productNo = Object.keys(itemDescs)[choice];
+      let orderNo = OrderNos[i]; 
+      let supplierID = suppliers[Math.floor(Math.random() * suppliers.length)].ID;
+      let itemDescription = itemDescs[productNo];
+      let defectDescription = defects[Math.floor(Math.random() *defects.length)];
+      let quantityReceived = Math.floor(Math.random() * 100);
+      let quantityDefective = Math.floor(Math.random() * quantityReceived);
+      let signedByUser = (users[Math.floor(Math.random() * users.length)] as Models.User).ID;
+      let dateSigned = startDate;
+      let qa = new Models.QualityAssurance(
+        proc, productNo, orderNo, 
+        supplierID, itemDescription, defectDescription, 
+        quantityReceived, quantityDefective, signedByUser, 
+        dateSigned
+      );
+      qa.ID = i+1; // would be handled by Insert otherwise
+      let newDate = new Date(startDate);
+      newDate.setDate(startDate.getDate() + 8);
+      startDate = newDate;
       qas.push(qa);
     } 
     return qas;
   }
 
   function SeedEng() : Models.Engineering[] | null {
-    let qas_raw = localStorage.getItem("QA");
+    let qas_raw = sessionStorage.getItem("QA");
     if (qas_raw == null) { // should never happen
       console.log("WTF!");
       return null;
     }
+    let users: Models.User[] = JSON.parse(sessionStorage.getItem("UsersTemp") || "[]");
+    if (users.length == 0) {
+      throw ("SEEDING FAILURE\n\nUsers not seeded before ENG");
+    }
+    users = users.filter((user: Models.User) => {
+      return user.Roles.Engineer;
+    });
+    if (users.length == 0) {
+      throw ("SEEDING FAILURE\n\nNo members of ENG");
+    }
     let qas: Models.QualityAssurance[] = JSON.parse(qas_raw);
     let engs: Models.Engineering[] = [];
-    let eng = new Models.Engineering();
     for (let i = 0; i < Math.floor(qas.length / 2); i++) {
+      let review: Models.Review;
       let choice = Math.random();
       if (choice > 0.75) {
-        eng.Review = Models.Review.UseAsIs;
+        review = Models.Review.UseAsIs;
 
       } else if (choice > 0.5) {
-        eng.Review = Models.Review.Repair;
+        review = Models.Review.Repair;
 
       } else if (choice > 0.25) {
-        eng.Review = Models.Review.Rework;
+        review = Models.Review.Rework;
 
       } else {
-        eng.Review = Models.Review.Scrap;
-
+        review = Models.Review.Scrap;
       }
+      let notifyCustomer: boolean;
       let choice2 = Math.random();
       if (choice2 > 0.5) {
-        eng.NotifyCustomer = false;
+        notifyCustomer = false;
       } else {
-        eng.NotifyCustomer = true;
+        notifyCustomer = true;
       }
       let lipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
       let choice3 = Math.floor(Math.random() * lipsum.length);
-      eng.Disposition = lipsum.slice(0, choice3);
+      let disposition = lipsum.slice(0, choice3);
       let choice4 = Math.random();
+      let updateDrawing: boolean;
       if (choice4 > 0.5) {
-        eng.UpdateDrawing = true;
+        updateDrawing = true;
       } else {
-        eng.UpdateDrawing = false;
+        updateDrawing = false;
       }
-      eng.OriginalRevNumber = "1";
-      eng.LatestRevNumber = "1";
-      eng.SignedBy = signatures[Math.floor(Math.random() * signatures.length)];
-      eng.DateSigned = new Date(qas[i].DateSigned);
-      eng.DateSigned.setDate(eng.DateSigned.getDate() + 1);
+      let originalRevNumber = "1";
+      let latestRevNumber = "1";
+      let signedByUser = (users[Math.floor(Math.random() * users.length)] as Models.User).ID;
+      let dateSigned = new Date(qas[i].DateSigned);
+      dateSigned.setDate(dateSigned.getDate() + 1);
+      let eng = new Models.Engineering(
+        review, 
+        notifyCustomer, 
+        disposition, 
+        updateDrawing, 
+        originalRevNumber, 
+        latestRevNumber, 
+        signedByUser, 
+        dateSigned
+      );
+      eng.ID = i+1;
       engs.push(eng);
     }
     return engs;
   }
   function SeedPurch(): Models.Purchasing[] | null {
-    let engs: Models.Engineering[] = JSON.parse(localStorage.getItem("Engineering") || "[]");
+    let engs: Models.Engineering[] = JSON.parse(sessionStorage.getItem("Engineering") || "[]");
     if (engs.length == 0) {
       console.log("WTF!");
       return null;
     }
+    let users: Models.User[] = JSON.parse(sessionStorage.getItem("UsersTemp") || "[]");
+    if (users.length == 0) {
+      throw ("SEEDING FAILURE\n\nUsers not seeded before PUR");
+    }
+    users = users.filter((user: Models.User) => {
+      return user.Roles.Purchasing;
+    });
+    if (users.length == 0) {
+      throw ("SEEDING FAILURE\n\nNo members of PUR");
+    }
     let purchs: Models.Purchasing[] = [];
     for (let i = 0; i < Math.floor(engs.length / 2); i++) {
-      let purch = new Models.Purchasing();
-      purch.CARNo = "CAR-" + Math.floor(Math.random() * 1000);
-      purch.CARRaised = true;
+      let carNo = "CAR-" + Math.floor(Math.random() * 1000);
+      let carRaised = true;
       let choice = Math.random();
+      let decision: Models.Decision;
       if (choice > 0.75) {
-        purch.Decision = Models.Decision.ReturnToSupplier;
+        decision = Models.Decision.ReturnToSupplier;
       } else if (choice > 0.5) {
-        purch.Decision = Models.Decision.ReworkInHouse;
+        decision = Models.Decision.ReworkInHouse;
       } else if (choice > 0.25) {
-        purch.Decision = Models.Decision.ScrapInHouse;
+        decision = Models.Decision.ScrapInHouse;
       } else {
-        purch.Decision = Models.Decision.DeferToEng;
+        decision = Models.Decision.DeferToEng;
       }
       let choice2 = Math.random();
+      let followUpRequired: boolean;
       if (choice2 > 0.5) {
-        purch.FollowUpRequired = false;
+        followUpRequired = false;
       } else {
-        purch.FollowUpRequired = true;
+        followUpRequired = true;
       }
-      if (purch.FollowUpRequired) {
+      let followUpType = "";
+      if (followUpRequired) {
         let choice3 = Math.random();
         if (choice3 > 0.75) {
-          purch.FollowUpType = "Inquiry";
+          followUpType = "Inquiry";
         } else if (choice3 > 0.5) {
-          purch.FollowUpType = "Correction";
+          followUpType = "Correction";
         } else if (choice3 > 0.25) {
-          purch.FollowUpType = "Verification";
+          followUpType = "Verification";
         } else {
-          purch.FollowUpType = "Other";
+          followUpType = "Other";
         }
       }
-      purch.SignedBy = signatures[Math.floor(Math.random() * signatures.length)];
-      purch.DateSigned = new Date(engs[i].DateSigned);
-      purch.DateSigned.setDate(purch.DateSigned.getDate() + 1);
+      let signedByUser = (users[Math.floor(Math.random() * users.length)] as Models.User).ID;
+      let dateSigned = new Date(engs[i].DateSigned);
+      dateSigned.setDate(dateSigned.getDate() + 1);
+      let purch = new Models.Purchasing(
+        decision, 
+        carRaised, 
+        carNo, 
+        followUpRequired, 
+        followUpType, 
+        signedByUser, 
+        dateSigned
+      );
+      purch.ID = i+1;
       purchs.push(purch);
     }
     return purchs;
   }
 
   function SeedNCR() {
-    let qas = JSON.parse(localStorage.getItem("QA") || "[]");
-    let engs = JSON.parse(localStorage.getItem("Engineering") || "[]");
-    let purchs = JSON.parse(localStorage.getItem("Purchasing") || "[]");
+    let qas: Models.QualityAssurance[] = JSON.parse(sessionStorage.getItem("QA") || "[]");
+    let engs: Models.Engineering[] = JSON.parse(sessionStorage.getItem("Engineering") || "[]");
+    let purchs: Models.Purchasing[] = JSON.parse(sessionStorage.getItem("Purchasing") || "[]");
     let ncrs: Models.NCRLog[] = [];
     if (qas.length == 0 || engs.length == 0 || purchs.length == 0) {
       console.log("WTF!");
       return null;
     }
     for (let i = 0; i < qas.length; i++) {
-      let ncr = new Models.NCRLog();
-      ncr.NCRNumber = i+1;
-      ncr.QualityAssurance = qas[i];
-      ncr.Engineering = engs[i] || null;
-      ncr.Purchasing = purchs[i] || null;
-      if (ncr.Engineering == null) {
-        ncr.Status = Models.Status.Engineering;
-      } else if (ncr.Purchasing == null) {
-        ncr.Status = Models.Status.Purchasing;
+      let ncrNumber = i+1;
+      let qualityAssuranceID = qas[i].ID;
+      let engineeringID = engs[i] == null ? null : engs[i].ID;
+      let purchasingID = purchs[i] == null ? null : purchs[i].ID;
+      let status: Models.Status;
+      if (engineeringID == null) {
+        status = Models.Status.Engineering;
+      } else if (purchasingID == null) {
+        status = Models.Status.Purchasing;
       } else {
-        ncr.Status = Models.Status.Closed;
+        status = Models.Status.Closed;
       }
+      let ncr = new Models.NCRLog(
+        ncrNumber, 
+        qualityAssuranceID, 
+        engineeringID, 
+        purchasingID,
+        status);
+      ncr.ID = i+1;
       ncrs.push(ncr);
     }
     return ncrs;
+  }
+
+  function SeedSuppliers() {
+    let names = [
+      "Green Supply Logistics",
+      "Lumberjack Supply Co.",
+      "Metalworks Inc.",
+      "Plastic Parts Co.",
+      "Screws and Bolts Inc.",
+      "Nails and Rivets Co.",
+      "Bolt Makers Ltd.",
+      "John & Dale's Warehouse",
+      "Damien's Hardware"
+    ];
+    let id = 1;
+    let suppliers: Models.Supplier[] = [];
+    names.forEach((name) => {
+      let supplier = new Models.Supplier();
+      supplier.ID = id;
+      supplier.Name = name;
+      id++; 
+      suppliers.push(supplier);
+    });
+    return suppliers;
+  }
+
+  function SeedUsers() {
+    const signatures = [
+      "John Doe",
+      "Jane Doe",
+      "Frank Smith",
+      "Carl Davis",
+      "Sue Johnson",
+      "Mike Abernacle",
+      "Linda Smith",
+      "Tommy Bobbert",
+      "Sally McNichols",
+      "Jill Hildon",
+      "Bobby Shmurda",
+      "Kurt Kristie",
+      "Cathy Karl",
+      "Richard James",
+      "Marty McFly",
+      "Doc Brown",
+      "James Bond",
+      "Jason Bourne",
+      "Clark Kent",
+      "Bruce Wayne",
+      "Peter Parker",
+      "Tony Stark",
+      "Steve Rogers",
+      "Natasha Romanoff",
+      "Bruce Banner",
+      "Fred Flintstone",
+      "Barney Rubble",
+      "George Jetson",
+      "Homer Simpson",
+      "Marge Simpson",
+      "Bart Simpson",
+      "Lisa Simpson",
+      "Peter Griffin",
+      "Lois Griffin",
+      "Meg Griffin",
+      "Chris Griffin"
+    ]
+    let users: Models.User[] = [];
+    let id = 1;
+    signatures.forEach((signature) => {
+      let user = new Models.User();
+      user.ID = id;
+      user.DigitalSignature = signature;
+      user.Email = signature.toLowerCase().replace(" ", "_") + "@email.com";
+      let rolesToAdd: number[] = [];
+      let roles = Math.random();
+      let amtRoles = Math.random();
+
+      // basic role distribution
+      if (roles > 0.66) {
+        rolesToAdd.push(Models.Role.Purchasing);
+      } else if (roles > 0.33) {
+        rolesToAdd.push(Models.Role.Engineer);
+      } else {
+        rolesToAdd.push(Models.Role.QualityAssurance);
+      }
+      // additional roles distribution
+      if (amtRoles > 0.90) {
+        while (rolesToAdd.length < 3) {
+          let role = Math.floor(Math.random() * 3) + 1;
+          if (!rolesToAdd.includes(role)) {
+            rolesToAdd.push(role);
+          }
+        }
+      } else if (amtRoles > 0.80) {
+        while (rolesToAdd.length < 2) {
+          let role = Math.floor(Math.random() * 3) + 1;
+          if (!rolesToAdd.includes(role)) {
+            rolesToAdd.push(role);
+          }
+        }
+      }
+      
+      // admin role distribution
+      if (Math.random() > 0.95 || rolesToAdd.includes(Models.Role.Admin)) {
+        // overwrite other roles if admin
+        rolesToAdd = [
+          Models.Role.Admin, 
+          Models.Role.Engineer, 
+          Models.Role.Purchasing, 
+          Models.Role.QualityAssurance
+        ];
+      }
+      user.Roles = new Models.RoleClaim(
+        rolesToAdd.includes(Models.Role.QualityAssurance),
+        rolesToAdd.includes(Models.Role.Engineer),
+        rolesToAdd.includes(Models.Role.Purchasing),
+        rolesToAdd.includes(Models.Role.Admin)
+      );
+      users.push(user);
+      id++;
+    });
+    // ensure at least one of each role is created
+    if (users.filter((user) => user.Roles.QA).length == 0) {
+      users[Math.floor(users.length * Math.random())].Roles.QA = true;
+    }
+    if (users.filter((user) => user.Roles.Engineer).length == 0) {
+      users[Math.floor(users.length * Math.random())].Roles.Engineer = true;
+    }
+    if (users.filter((user) => user.Roles.Purchasing).length == 0) {
+      users[Math.floor(users.length * Math.random())].Roles.Purchasing = true;
+    }
+    if (users.filter((user) => user.Roles.Admin).length == 0) {
+      users[Math.floor(users.length * Math.random())].Roles.Admin = true;
+    }
+    return users;
   }
 
   // put seed data into localStorage if not there already
@@ -265,21 +456,37 @@ export namespace DataLib {
     if (dbPayload.Success == false) { // missing DB in LocalStorage 
       console.log("SEEDING DATA. THIS MEANS THE DATABASE HAS BEEN DELETED OR IS MISSING.");
       dbPayload.Data = new TableSet();
-      let qas = SeedQA();
-      localStorage.setItem("QA", JSON.stringify(qas));
+
+      let users = SeedUsers(); // must come first as the other tables use the User table
+      if (users == null) {
+        return DBPayload.Failure();
+      }
+      sessionStorage.setItem("UsersTemp", JSON.stringify(users));
+      console.log("Users seeded");
+
+      let suppliers = SeedSuppliers(); // must come before QA because they use suppliers
+      if (suppliers == null) {
+        return DBPayload.Failure();
+      }
+      sessionStorage.setItem("SuppliersTemp", JSON.stringify(suppliers));
+      console.log("Suppliers seeded");
+
+      let qas: Models.QualityAssurance[] = SeedQA();
+      sessionStorage.setItem("QA", JSON.stringify(qas));
       console.log("QA Seeded");
-      let engs = SeedEng();
+
+      let engs: Models.Engineering[] | null = SeedEng();
       if (engs == null) {
         return DBPayload.Failure();
       }
-      localStorage.setItem("Engineering", JSON.stringify(engs));
+      sessionStorage.setItem("Engineering", JSON.stringify(engs));
       console.log("Engineering Seeded");
 
-      let purchs = SeedPurch();
+      let purchs: Models.Purchasing[] | null = SeedPurch();
       if (purchs == null) {
         return DBPayload.Failure();
       }
-      localStorage.setItem("Purchasing", JSON.stringify(purchs));
+      sessionStorage.setItem("Purchasing", JSON.stringify(purchs));
       console.log("Purchasing Seeded");
 
       let ncrs = SeedNCR();
@@ -287,11 +494,12 @@ export namespace DataLib {
         return DBPayload.Failure();
       }
       console.log("NCRLog Seeded");
-
       dbPayload.Data.QualityAssurances = qas;
       dbPayload.Data.Engineerings = engs;
       dbPayload.Data.Purchasings = purchs;
       dbPayload.Data.NCRLogs = ncrs;
+      dbPayload.Data.Users = users;
+      dbPayload.Data.Suppliers = suppliers;
       localStorage.setItem("Database", JSON.stringify(dbPayload.Data)); 
       console.log("Database saved to LocalStorage");
     }
