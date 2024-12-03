@@ -78,29 +78,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     function selectTypeLogIn() {
         var optionsIndex = option.selectedIndex;
-        globalThis.UserRole = optionsIndex;
-        switch (globalThis.UserRole) {
-            case 1:
-                // qa
-                console.log("QA ", globalThis.UserRole);
-                window.location.href = 'Index.html';
-                break;
-            case 2:
-                // eng
-                console.log("ENG ", globalThis.UserRole);
-                break;
-            case 3:
-                // sales
-                console.log("SALES ", globalThis.UserRole);
-                break;
-            case 4:
-                // admin
-                console.log("ADM ", globalThis.UserRole);
-                break;
-            default:
-                console.log("NONE");
-                // if they select outside of bounds
-                break;
+        if (optionsIndex == 0) {
+            return;
         }
+        localStorage.setItem("UserRole", optionsIndex);
+        window.location.href = '/Dashboard';
     }
 });

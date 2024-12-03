@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="/css/navbar.css">
     <script>
-        fetch('head.html')
+        fetch('/head.html')
           .then(response => response.text())
           .then(data => {
             document.head.innerHTML = data;
@@ -12,7 +12,7 @@
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = './css/ncrlog.css';
+            link.href = '/css/ncrlog.css';
             document.head.appendChild(link);
             
           });
@@ -31,7 +31,7 @@
             <input type="search" id="ncr-list-searchbox" placeholder="Search by NCR number, Product Name, or QA Representative Name">
             <button class="cta-btn-secondary ncr-list-searchbutton">Search</button>
             <div class="btn-group">
-              <a href="./create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
+              <a href="/NCRLog/Create" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
             </div>
           </div>
           <table id="ncr-table">
@@ -70,11 +70,8 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    
-
-    <!-- <script src="./scripts/scripts.js"></script> -->
    
     <script src="/scripts/navbar.js"></script>
-    <script src="./dist/ViewNCR.js"></script>
+    <script src="/dist/ViewNCR.js"></script>
 </body>
 </html>

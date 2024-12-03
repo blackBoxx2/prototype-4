@@ -4,7 +4,7 @@ function createNav() {
     nav.classList.add('navbar');
     //Create the logo
     var img = document.createElement('img');
-    img.src = './imgs/crossfire_logo.png';
+    img.src = '/imgs/crossfire_logo.png';
     img.alt = 'Crossfire Logo';
     img.classList.add('logo');
     //Create the link for the logo
@@ -20,8 +20,9 @@ function createNav() {
     ddlMenu.classList.add('dropdown-menu');
     //Create the links container for the elements in the nav
     var links = [
-        { text: 'Index', href: 'index.html' },
-        { text: 'ncr Log', href: 'ncrlog.html' },
+        { text: 'Dashboard', href: '/Dashboard' },
+        { text: 'NCR Log', href: '/NCRLog' },
+        { text: 'Log Out', href: '/Home' },
     ];
     //go trhougth every piece in the array to take the elements
     links.forEach(function (l) {

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/css/navbar.css">
+
     <script>
-        fetch('head.html')
+        fetch('/head.html')
           .then(response => response.text())
           .then(data => {
             document.head.innerHTML = data;
@@ -11,13 +13,13 @@
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = './css/dashboard.css';
+            link.href = '/css/dashboard.css';
             document.head.appendChild(link);
 
 
             const link2 = document.createElement('link');
             link2.rel = 'stylesheet';
-            link2.href = './css/modals.css';
+            link2.href = '/css/modals.css';
             document.head.appendChild(link2);
           });
       </script>
@@ -36,7 +38,7 @@
             <input type="search" id="ncr-list-searchbox" placeholder="Search by NCR number, Product Name, or QA Representative Name">
             <button class="cta-btn-secondary ncr-list-searchbutton">Search</button>
             <div class="btn-group">
-              <a href="./create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
+              <a href="/NCRLog/Create" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
             </div>
           </div>
           <table id="ncr-table">
@@ -137,15 +139,12 @@
     ></script>
 
     <script>
-        fetch("main-header.html")
-        .then((res) => res.text())
-        .then((data) => (document.getElementById("header").innerHTML = data));
-
-      fetch("footer.html")
+      fetch("/footer.html")
         .then((res) => res.text())
         .then((data) => (document.getElementById("footer").innerHTML = data));
          
     </script>
-    <script src="./scripts/scripts.js"></script>
+    <script src="/scripts/navbar.js"></script>
+    <script src="/scripts/scripts.js"></script>
 </body>
 </html>

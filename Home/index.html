@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      fetch('/head.html')
+        .then(response => response.text())
+        .then(data => {
+          document.head.innerHTML = data;
+          document.title = "Home"
+        });
+    </script>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <title>Home</title>
+  </head>
+  <header id="header">
+    <html lang="en">
+        <head>
+            <title>NCR Software</title>
+        </head>
+        <body>
+            <nav id="home-navbar">
+                <a class="logo" href="/Home">NCR SPOTLIGHT</a>
+            </nav>
+        </body>
+    </html>
+  </header>
+  <body class="d-flex flex-column min-vh-100">  <!--Makes sure the footer sticks to the bottom. Do not change-->
+    <div class="top-bar"></div>
+    <div class="grid-Large">
+      <div class="hero-section ">
+        <div class="hero-info">
+          <h1>Non-Conformance Reports</h1>
+          <h2>Efficient Reporting Made easy</h2>
+          <p>Welcome to your new Non-Conformance Report application! It is designed to make your life simple with a user-friendly interface. Making it easy to keep track, manage, and streamline your quality control process well solving any issues.</p>
+          <p>Improve your teams efficiency and simplify your quality assurance process by logging in below!</p>
+          <div class="btn-group">
+            <a href="/Accounts/Login" class="cta-btn cta-btn-primary">Log in</a>
+            <a href="/Accounts/Register" class="cta-btn cta-btn-secondary">Sign up</a>
+          </div>
+        </div>
+        <div class="hero-img">
+          <img src="https://placehold.co/600x400?text=Placeholder" alt="" width="484" height="350">
+        </div>
+      </div>
+
+    </div>
+
+    <div id="footer" class="footer mt-auto"></div>
+    <!-- </div> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
+
+    <script>
+      fetch("/footer.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("footer").innerHTML = data));
+    </script> 
+    <script src="/ts/navbar.js"></script>
+  </body>
+</html>
