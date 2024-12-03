@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="./scripts/createncr.ts"></script>
+    <script src="/scripts/breadcrumbs.js"></script>
     <script>
         fetch('/head.html')
           .then(response => response.text())
@@ -13,25 +13,27 @@
             const link = document.createElement('link');
             link.rel = 'stylesheet';
             link.href = '/css/create.css';
-            document.head.appendChild(link);
-
+            const link2 = document.createElement('link');
+            link2.rel = 'stylesheet';
+            link2.href = '/css/breadcrumbs.css';
             const toasterLink = document.createElement('link');
             toasterLink.rel= 'stylesheet';
             toasterLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css'
+            
+            document.head.appendChild(link);
+            document.head.appendChild(link2);
             document.head.appendChild(toasterLink);
           });
       </script>
-      <link rel="stylesheet" href="css/navbar.css">
       <title>Create new NCR</title>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <div id="header" class=""></div>
 
     <div class="">
         <div class="title-group">
             <h1 class="">Create An NCR</h1>
-            <button onclick="window.location.href='ncrlog.html'" class="cta-btn-danger btn-Cancel" id="btnCancel">Cancel</button>
+            <button onclick="window.location.href='/NCRLog'" class="cta-btn-danger btn-Cancel" id="btnCancel">Cancel</button>
         </div>
 
         <form action="#" onsubmit="validate()" id="ncr-form">

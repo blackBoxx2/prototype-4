@@ -38,6 +38,11 @@ async function initBC() {
   }
   let nav = document.querySelector("nav");
   div.appendChild(el);
-  nav.insertAdjacentElement("afterend", div);
+  if (nav == null) {
+    let next = document.body.querySelector("*");
+    next.insertAdjacentElement("beforebegin", div);
+  } else {
+    nav.insertAdjacentElement("afterend", div);
+  }
   console.log('fired');
 }
