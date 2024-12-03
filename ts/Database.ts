@@ -60,7 +60,7 @@ export namespace DatabaseLib {
     public carNo: boolean;
     public followUpRequired: boolean;
     public followUpType: boolean;
-    public reInspectApplicable: boolean;
+    public reInspectAcceptable: boolean;
     public newNCRNumber: boolean;
     public qualityDept: boolean;
     public signedBy: boolean;
@@ -188,10 +188,10 @@ export namespace DatabaseLib {
       if (purch.FollowUpRequired == true && isNullOrEmpty(purch.FollowUpType)) {
         payload.followUpType = true;
       }
-      if (isNullOrEmpty(purch.ReInspectApplicable)) {
-        payload.reInspectApplicable = true;
+      if (isNullOrEmpty(purch.ReInspectAcceptable)) {
+        payload.reInspectAcceptable = true;
       }
-      if (purch.ReInspectApplicable == false && (purch.NewNCRNumber == null || purch.NewNCRNumber <= 0)) {
+      if (purch.ReInspectAcceptable == false && (purch.NewNCRNumber == null || purch.NewNCRNumber <= 0)) {
         payload.newNCRNumber = true;
       }
       if (isNullOrEmpty(purch.QualityDept)) {
