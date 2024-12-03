@@ -1,4 +1,4 @@
-import { DatabaseLib } from "./Database";
+import { DatabaseLib } from "./database.js";
 import * as $ from "../src/jquery.js";
 import { Models } from "./Models.js";
 
