@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
             email[e.target.name];
             proveEmail();
             return;
-        };
+        }
+        ;
         cleanAlert(e.target.parentElement);
         //assing the values
         email[e.target.name] = e.target.value.trim().toLowerCase();
