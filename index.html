@@ -15,9 +15,20 @@
     <link rel="stylesheet" href="css/navbar.css">
     <title>Home</title>
   </head>
+  <header id="header">
+    <html lang="en">
+        <head>
+            <title>NCR Software</title>
+        </head>
+        <body>
+            <nav id="home-navbar">
+                <a class="logo" href="index.html">NCR SPOTLIGHT</a>
+            </nav>
+        </body>
+    </html>
+  </header>
   <body class="d-flex flex-column min-vh-100">  <!--Makes sure the footer sticks to the bottom. Do not change-->
     <div class="top-bar"></div>
-    <div id="header" class=""></div>
     <div class="grid-Large">
       <div class="hero-section ">
         <div class="hero-info">
@@ -28,7 +39,6 @@
           <div class="btn-group">
             <a href="login.html" class="cta-btn cta-btn-primary">Log in</a>
             <a href="registration.html" class="cta-btn cta-btn-secondary">Sign up</a>
-            <button id="InsertQA" class="cta-btn cta-btn-secondary">InsertQA test</button>
           </div>
         </div>
         <div class="hero-img">
@@ -45,15 +55,10 @@
       crossorigin="anonymous"></script>
 <!--
     <script>
-      fetch("home-header.html")
-        .then((res) => res.text())
-        .then((data) => (document.getElementById("header").innerHTML = data));
-
       fetch("footer.html")
         .then((res) => res.text())
         .then((data) => (document.getElementById("footer").innerHTML = data));
     </script>-->
     <script src="/ts/navbar.js"></script>
   </body>
-
 </html>
