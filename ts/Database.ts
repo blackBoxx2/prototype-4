@@ -265,9 +265,24 @@ export namespace DatabaseLib {
       }
       return item;
     }
+    public GetNCRByNumber(ID: number): Models.NCRLog {
+      let item = Database.get().tables.NCRLogs.find((item: Models.NCRLog) => {
+        if (item.NCRNumber == ID) {
+          return true;
+        }
+          return false;
+        }
+      );
+      if (item == null) {
+        throw "GET ERROR\n\n Item not found";
+      }
+      return item;
+    }
     public FindRow(obj: Models.ModelBase): number {
       return obj.ID-1;
     }
+
+   
 
     public InsertQA(qa: Models.QualityAssurance): void {
       let validationResult = this.ValidateQA(qa);

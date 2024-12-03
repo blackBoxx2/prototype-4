@@ -86,9 +86,7 @@ body {
     height: auto;
 }
 .container-logo{
-    position: absolute; 
-    top: -4.375rem; 
-    left: -0.313rem; 
+    text-align: start;
 }
 .main-div{
     position: relative; 

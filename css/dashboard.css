@@ -1,6 +1,12 @@
 .ncr-list{
     grid-column: 1/13;
 }
+.page-info {
+    margin: 0 auto;
+    justify-self: center;
+    text-align: center;
+    width: max-content;
+}
 
 .ncr-list-action-section {
     background-color: var(--light-grey-background-color);

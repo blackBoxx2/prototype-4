@@ -1,4 +1,3 @@
-/*
 //Load the page
 document.addEventListener('DOMContentLoaded', function () {
     //create an object 
@@ -25,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     inputPhone === null || inputPhone === void 0 ? void 0 : inputPhone.addEventListener('blur', validate);
     inputConfirmPassword === null || inputConfirmPassword === void 0 ? void 0 : inputConfirmPassword.addEventListener('blur', validate);
     option === null || option === void 0 ? void 0 : option.addEventListener('click', selectTypeLogIn);
+    option === null || option === void 0 ? void 0 : option.addEventListener('change', selectTypeLogIn);
     //function for the validation 
     var email;
     function validate(e) {
@@ -78,12 +78,12 @@ document.addEventListener('DOMContentLoaded', function () {
         btnLogIn.disabled = false;
     }
     function selectTypeLogIn() {
+        var option = document.querySelector('#options-log');
         var optionsIndex = option.selectedIndex;
-        if (optionsIndex == 0) {
+        if (optionsIndex === 0) {
             return;
         }
-        localStorage.setItem("UserRole", optionsIndex);
+        localStorage.setItem('userRole', option.value);
         window.location.href = '/Dashboard';
     }
 });
-*/

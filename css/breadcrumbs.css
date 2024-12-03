@@ -1,0 +1,46 @@
+div#bc-container {
+  width: fit-content;
+  border-radius: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding: 0.2em;
+}
+
+span#bc-title {
+  font-size: 1em;
+  font-weight: 400;
+  margin-left: 1.25em;
+  margin-top: 0.5em;
+}
+
+ul#breadcrumbs {
+  border-radius: 1em;
+  display: flex; 
+  flex-direction: row;
+  margin-right: 2.5em;
+  margin-bottom: 0.2em;
+}
+li.crumb {
+  background-color: #edeef0;
+  padding-top: 0.1em;
+  padding-bottom: 0.2em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  border-radius: 1em;
+}
+li.crumb + li.crumb {
+  margin-left: 1.75em;
+}
+li.crumb::marker {
+  color: #000000;
+  content: " ";
+  font-size: 1.25em;
+}
+li.crumb + li.crumb::marker {
+  content: "> " !important;
+}
+
+li.crumb > a {
+  margin: auto;
+  text-decoration: none;
+}

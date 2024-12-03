@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="/css/navbar.css">
-    <script>
-        fetch('/head.html')
-          .then(response => response.text())
-          .then(data => {
-            document.head.innerHTML = data;
+  <script src="/scripts/breadcrumbs.js"></script>
+  <script>
+      fetch('/head.html')
+        .then(response => response.text())
+        .then(data => {
+          document.head.innerHTML = data;
 
-            document.title = "NCR Log"
+          document.title = "NCR Log"
 
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = '/css/ncrlog.css';
-            document.head.appendChild(link);
-            
-          });
-      </script>
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = '/css/ncrlog.css';
+          const link2 = document.createElement('link');
+          link2.rel = 'stylesheet';
+          link2.href = '/css/breadcrumbs.css';
+          document.head.appendChild(link);
+          document.head.appendChild(link2);
+          
+        });
+    </script>
     <title>NCR Log</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -30,7 +34,7 @@
             <input type="search" id="ncr-list-searchbox" placeholder="Search by NCR number, Product Name, or QA Representative Name">
             <button class="cta-btn-secondary ncr-list-searchbutton">Search</button>
             <div class="btn-group">
-              <a href="/NCRLog/Create" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
+              <a href="/NCRLog/create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
             </div>
           </div>
           <table id="ncr-table">
@@ -43,7 +47,7 @@
               </tr>
             </thead>
             <tbody>
-
+              <!-- Set in script -->
             </tbody>
           </table>
           <div class="pagination">
@@ -71,6 +75,6 @@
     ></script>
    
     <script src="/scripts/navbar.js"></script>
-    <script src="/dist/ViewNCR.js"></script>
+    <script src="/scripts/ViewNCR.js"></script>
 </body>
 </html>
