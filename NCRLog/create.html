@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="./scripts/createncr.ts"></script>
     <script>
         fetch('/head.html')
           .then(response => response.text())
@@ -34,7 +33,7 @@
             <button onclick="window.location.href='ncrlog.html'" class="cta-btn-danger btn-Cancel" id="btnCancel">Cancel</button>
         </div>
 
-        <form action="#" onsubmit="validate()" id="ncr-form">
+        <form action="#" id="ncr-form">
 
             <div class="ncrNumber"> <!-- NCR Number above feildset since it is the same for all 3 portions-->
                 <div class="inner-wrapper">
@@ -285,10 +284,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="scripts/scripts.js"></script>
-    <script src="scripts/validation.js"></script>
+    <!-- <script src="scripts/validation.js"></script> -->
     <script src="/scripts/navbar.js"></script>
-
+    <script src="/scripts/CreateNCR.js"></script>
 
 </body>
 </html>
