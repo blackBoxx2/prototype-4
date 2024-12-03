@@ -32,7 +32,9 @@ async function initBC() {
       li.classList.add("crumb");
       let a = document.createElement("a");
       a.href = breadcrumbPath;
-      a.innerHTML = pathArray[i] + "⏎";
+      let innerText = pathArray[i].replace(".html", "");
+      let caps = innerText.charAt(0).toUpperCase() + innerText.slice(1);
+      a.innerHTML = caps + "⏎";
       li.appendChild(a);
       el.appendChild(li);
   }

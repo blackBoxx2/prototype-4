@@ -1,6 +1,6 @@
-import { DatabaseLib } from "./Database";
-import * as $ from "../src/jquery.js";
-import { Models } from "./Models.js";
+import { DatabaseLib } from "./database";
+import * as $ from "jquery";
+import { Models } from "./Models";
 
 $(document).ready(function() {
     const selected = localStorage.getItem('selectedNcrId');
