@@ -1,8 +1,13 @@
 import { DatabaseLib } from "./database";
+<<<<<<< HEAD
 import * as $ from "../src/jquery.js";
 import { Models } from "./Models.js";
+=======
+import * as $ from "jquery";
+import { Models } from "./Models";
+>>>>>>> 7100feb83d9543cdea859f4eef1f95c483375d54
 
-$(document).ready(function() {
+$(function() {
     //reset selected ncr to 0
     localStorage.setItem('selectedNcrId', "0");
     const tableBody = document.querySelector("#ncr-table") as HTMLTableSectionElement;

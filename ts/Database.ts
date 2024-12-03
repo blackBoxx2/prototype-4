@@ -71,7 +71,7 @@ export namespace DatabaseLib {
   }
   
   function isNullOrEmpty(v: any): boolean {
-    return v == null || v == "";
+    return v == null || v == undefined || v == "";
   }
 
   export class Database {
@@ -131,7 +131,7 @@ export namespace DatabaseLib {
       if (qa.QuantityDefective == null || qa.QuantityDefective <= 0) {
         payload.quantityDefective = true;
       }
-      if (isNullOrEmpty(qa.SignedBy)) {
+      if (isNullOrEmpty(qa.SignedByUser)) {
         payload.signedBy = true;
       }
       if (isNullOrEmpty(qa.DateSigned)) {
@@ -158,7 +158,7 @@ export namespace DatabaseLib {
       if (isNullOrEmpty(eng.OriginalRevNumber)) {
         payload.originalRevNumber = true;
       }
-      if (isNullOrEmpty(eng.SignedBy)) {
+      if (isNullOrEmpty(eng.SignedByUser)) {
         payload.signedBy = true;
       }
       if (isNullOrEmpty(eng.DateSigned)) {
@@ -185,7 +185,7 @@ export namespace DatabaseLib {
       if (purch.FollowUpRequired == true && isNullOrEmpty(purch.FollowUpType)) {
         payload.followUpType = true;
       }
-      if (isNullOrEmpty(purch.SignedBy)) {
+      if (isNullOrEmpty(purch.SignedByUser)) {
         payload.signedBy = true;
       }
       if (isNullOrEmpty(purch.DateSigned)) {
@@ -199,7 +199,7 @@ export namespace DatabaseLib {
       if (ncr.NCRNumber == null || ncr.NCRNumber <= 0) {
         payload.ncrNumber = true;
       }
-      if (ncr.QualityAssurance == null) {
+      if (ncr.QualityAssuranceID == null) {
         payload.qualityAssurance = true;
       }
       if (ncr.Status == null) {
@@ -221,8 +221,8 @@ export namespace DatabaseLib {
           return false;
         }
       );
-      if (item == null) {
-        throw "GET ERROR\n\n Item not found";
+      if (!item) {
+        throw "GET ERROR\n\nQA not found";
       }
       return item;
     }
@@ -234,8 +234,8 @@ export namespace DatabaseLib {
           return false;
         }
       );
-      if (item == null) {
-        throw "GET ERROR\n\n Item not found";
+      if (!item) {
+        throw "GET ERROR\n\nENG not found";
       }
       return item;
     }
@@ -247,8 +247,8 @@ export namespace DatabaseLib {
           return false;
         }
       );
-      if (item == null) {
-        throw "GET ERROR\n\n Item not found";
+      if (!item) {
+        throw "GET ERROR\n\nPUR not found";
       }
       return item;
     }
@@ -260,8 +260,8 @@ export namespace DatabaseLib {
           return false;
         }
       );
-      if (item == null) {
-        throw "GET ERROR\n\n Item not found";
+      if (!item) {
+        throw "GET ERROR\n\nNCR not found";
       }
       return item;
     }
@@ -273,7 +273,7 @@ export namespace DatabaseLib {
           return false;
         }
       );
-      if (item == null) {
+      if (!item) {
         throw "GET ERROR\n\n Item not found";
       }
       return item;
@@ -426,6 +426,51 @@ export namespace DatabaseLib {
       db.tables.NCRLogs = items;
       console.log("DELETE SUCCESSFUL");
     }
+    public GetUsersInQA(): Models.User[] {
+      return Database.get().tables.Users.filter((user: Models.User) => {
+        return user.Roles.QA;
+      });
+    }
+    public GetUsersInENG(): Models.User[] {
+      return Database.get().tables.Users.filter((user: Models.User) => {
+        return user.Roles.Engineer;
+      });
+    }
+    public GetUsersInPUR(): Models.User[] {
+      return Database.get().tables.Users.filter((user: Models.User) => {
+        return user.Roles.Purchasing;
+      });
+    }
+    public GetUsersInAdmin(): Models.User[] {
+      return Database.get().tables.Users.filter((user: Models.User) => {
+        return user.Roles.Admin;
+      });
+    }
+    public GetSupplierByID(ID: number): Models.Supplier {
+      let found = Database.get().tables.Suppliers.find((supplier: Models.Supplier) => {
+        if (supplier.ID == ID) {
+          return true;
+        }
+        return false;
+      });
+      if (!found) {
+        throw ("GET ERROR\n\n Supplier not found");
+      }
+      return found;
+    }
+    public GetUserByID(ID: number): Models.User {
+      let found = Database.get().tables.Users.find((user: Models.User) => {
+        if (user.ID == ID) {
+          return true;
+        }
+        return false;
+      });
+      if (!found) {
+        throw ("GET ERROR\n\n User not found");
+      }
+      return found;
+    }
+
   }
 }
 

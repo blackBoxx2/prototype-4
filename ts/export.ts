@@ -158,7 +158,9 @@ if(selected){
                         pdf.rect(35, 50, 8, 8);
                         pdf.rect(55, 50, 12, 12);
                 }
-                
+                switch(r.Models.){
+                    
+                }
 
             
             if(table === "NCRLogs"){

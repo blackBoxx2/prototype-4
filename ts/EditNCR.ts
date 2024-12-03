@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import { DatabaseLib } from "./database.js";
 import * as $ from "../src/jquery.js";
 import { Models } from "./Models.js";
+=======
+import { DatabaseLib } from "./database";
+import * as $ from "jquery";
+import { Models } from "./Models";
+>>>>>>> 7100feb83d9543cdea859f4eef1f95c483375d54
 
 $(document).ready(function() {
     const selected = localStorage.getItem('selectedNcrId');

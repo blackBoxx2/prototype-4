@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="/scripts/test1.js"></script>
     <script>
       fetch('/head.html')
         .then(response => response.text())
@@ -9,7 +10,6 @@
           document.title = "Home"
         });
     </script>
-    <link rel="stylesheet" href="/css/navbar.css">
     <title>Home</title>
   </head>
   <header id="header">
@@ -55,6 +55,10 @@
       fetch("/footer.html")
         .then((res) => res.text())
         .then((data) => (document.getElementById("footer").innerHTML = data));
+<<<<<<< HEAD
     </script> 
+=======
+    </script>
+>>>>>>> 7100feb83d9543cdea859f4eef1f95c483375d54
   </body>
 </html>
