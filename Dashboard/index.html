@@ -30,21 +30,20 @@
           });
       </script>
       
-      <title>QA Dashboard</title>
+      <title>Dashboard</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div id="modal-dialog"></div>
     <div class="grid-12">
       <div class="page-info">
-        <h1>Quality Assurance DashBoard</h1>
-        <h2>NCR Count: 10</h2>
+        <h1>DashBoard</h1>
       </div>
+      <div id="role-buttons" class="btn-group"></div>
         <div class="ncr-list">
           <div class="ncr-list-action-section">
-            <input type="search" id="ncr-list-searchbox" placeholder="Search by NCR number, Product Name, or QA Representative Name">
-            <button class="cta-btn-secondary ncr-list-searchbutton">Search</button>
+            <h2>Most Recent NCR's</h2>
             <div class="btn-group">
-              <a href="/NCRLog/Create" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
+              <a href="/NCRLog/create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
             </div>
           </div>
           <table id="ncr-table">
@@ -57,85 +56,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Scratched side</td>
-                <td>2000-01-01</td>
-                <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Missing key</td>
-                <td>2000-01-01</td>
-                <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Broken bulb</td>
-                <td>2000-01-01</td>
-                <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Missing screw</td>
-                <td>2000-01-01</td>
-                <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Loose connection</td>
-                <td>2000-01-02</td>
-                <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Broken key</td>
-                <td>2000-01-02</td>
-                <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Frayed wires</td>
-                <td>2000-01-02</td>
-                <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Loose screw</td>
-                <td>2000-01-03</td>
-                <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Damaged bottom</td>
-                <td>2000-01-03</td>
-                <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Black mark on side</td>
-                <td>2000-01-04</td>
-                <td>Active</td>
-                <td class="action"><a class="viewNCR">View</a> <a class="editNCR">Edit</a> <a class="deleteNCR">Delete</a></td>
-              </tr>
-
+                  <!-- most recent ncrs load here -->
             </tbody>
           </table>
-          <div class="pagination">
-            <a href="#" >&lAarr; Previous</a>
-            <a href="#" id="currPage">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">...</a>
-            <a href="#">6</a>
-            <a href="#">7</a>
-            <a href="#">8</a>
-            <a href="#">Next &rAarr; </a>
-          </div>
         </div>
     </div>
 
     <div id="footer" class="footer mt-auto"></div>
-    <!-- </div> -->
 
 
     <script
@@ -152,5 +79,6 @@
     </script>
     <script src="/scripts/navbar.js"></script>
     <script src="/scripts/scripts.js"></script>
+    <script src="/scripts/dashboard.js"></script>
 </body>
 </html>
