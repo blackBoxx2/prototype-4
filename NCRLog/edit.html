@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="./css/ncrlogforms.css">
+        <link rel="stylesheet" href="../css/ncrlogforms.css">
         <script src="/scripts/breadcrumbs.js"></script>
         <link rel="stylesheet" href="/css/breadcrumbs.css">
         <title>Edit NCR Log</title>
@@ -19,8 +19,12 @@
                 <div>
                     <div class="inner-wrapper">
                         <label for="ipa">Identify Process Applicable:</label> <!-- ipa stands for Identify Process Applicable -->
-                        <input  aria-label="Identify Process Applicable" type="text" name="ipa" id="ipa">
-                    </div>
+                        <select  aria-label="Identify Process Applicable" type="text" name="ipa" id="ipa">
+                            <option value="-1" disabled selected>Select a Process</option>
+                            <option value="0">Supplier / Rec. Insp.</option>
+                            <option value="1">WIP (Production Order)</option>
+                        </select>
+                                        </div>
                     <div id="ipaValidation" class="text-danger"></div>
                 </div>
 
@@ -59,17 +63,15 @@
                         <label for="supplierName">Supplier Name:</label>
                         <select  aria-label="Supplier Name" name="supplierName" id="supplierName">
                             <!-- Documented in AI use, prompt for chatgpt was "Create 10 select options with fake supplier names for html"-->
-                            <option value="0" disabled selected>Select a supplier</option>
-                            <option value="1">Alpha Supplies</option>
-                            <option value="2">Beta Distributors</option>
-                            <option value="3">Gamma Wholesalers</option>
-                            <option value="4">Delta Resources</option>
-                            <option value="5">Epsilon Partners</option>
-                            <option value="6">Zeta Industries</option>
-                            <option value="7">Eta Logistics</option>
-                            <option value="8">Theta Merchandise</option>
-                            <option value="9">Iota Goods Co.</option>
-                            <option value="10">Kappa Importers</option>
+                            <option value="1">Green Supply Logistics</option>
+                            <option value="2">Lumberjack Supply Co.</option>
+                            <option value="3">Metalworks Inc.</option>
+                            <option value="4">Plastic Parts Co.</option>
+                            <option value="5">Screws and Bolts Inc.</option>
+                            <option value="6">Nails and Rivets Co.</option>
+                            <option value="7">Bolt Makers Ltd.</option>
+                            <option value="8">John & Dale's Warehouse</option>
+                            <option value="9">Damien's Hardware</option>
                         </select> 
                     </div>
                     <div id="supplierNameValidation" class="text-danger"></div>
@@ -342,7 +344,7 @@
                 </div>                
 
                 </fieldset>
-                <button class="cta-btn cta-btn-primary ncr-list-createhbutton" type="submit">Submit</button>
+                <button class="cta-btn cta-btn-primary ncr-list-createhbutton" id="btnSubmit" type="submit">Submit</button>
             </form>
         </div>
     </body>

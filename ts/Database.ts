@@ -7,17 +7,20 @@ export namespace DatabaseLib {
     valid: boolean;
     
     validate(): boolean {
+      this.valid = true;
       for (let key in this) {
         if (Object.prototype.hasOwnProperty.call(this, key)) {
-          if (this[key] === true && key !== "valid") {
-            this.valid = false;
-          }
+            if (key !== "valid" && this[key] === true) {
+                this.valid = false; 
+                break; 
+            }
         }
       }
-      return true;
+      return this.valid;
     }
     getMessage(): string {
       let msg = "";
+      
       for (let key in this) {
         if (Object.prototype.hasOwnProperty.call(this, key)) {
           if (this[key] && key != "valid") {
@@ -36,6 +39,7 @@ export namespace DatabaseLib {
     public process: boolean;
     public productNo: boolean;
     public orderNo: boolean;
+    public supplierID: boolean;
     public itemDescription: boolean;
     public defectDescription: boolean;
     public quantityReceived: boolean;
@@ -121,6 +125,9 @@ export namespace DatabaseLib {
       }
       if (isNullOrEmpty(qa.OrderNo)) {
         payload.orderNo = true;
+      }
+      if(isNullOrEmpty(qa.SupplierID)){
+        payload.supplierID = true;
       }
       if (isNullOrEmpty(qa.ItemDescription)) {
         payload.itemDescription = true;
@@ -300,9 +307,15 @@ export namespace DatabaseLib {
       let validationResult = this.ValidateQA(qa);
       if (!validationResult.valid) {
         let msg = "VALIDATION ERROR\n\n" + validationResult.getMessage();
-        console.log(validationResult.getMessage());
-        throw msg;
-      }
+        console.error("Validation failed:", msg);
+        throw msg; 
+    }
+      qa.ID = Database.get().tables.QualityAssurances.length + 1; // IDs start at 1
+      Database.get().tables.QualityAssurances.push(qa); // does not inherently save changes
+      console.log("INSERT SUCCESSFUL");
+    }
+
+    public SaveQA(qa: Models.QualityAssurance): void{ //save method without validation
       qa.ID = Database.get().tables.QualityAssurances.length + 1; // IDs start at 1
       Database.get().tables.QualityAssurances.push(qa); // does not inherently save changes
       console.log("INSERT SUCCESSFUL");
@@ -344,6 +357,13 @@ export namespace DatabaseLib {
       Database.get().tables.Engineerings.push(eng); // does not inherently save changes, call SaveChanges()
       console.log("INSERT SUCCESSFUL");
     }
+
+    public SaveEng(eng: Models.Engineering): void { //save without validating
+     
+      eng.ID = Database.get().tables.QualityAssurances.length + 1; // IDs start at 1
+      Database.get().tables.Engineerings.push(eng); // does not inherently save changes, call SaveChanges()
+      console.log("INSERT SUCCESSFUL");
+    }
     public UpdateEng(eng: Models.Engineering): void {
       let db = Database.get();
       db.tables.Engineerings[this.FindRow(eng)] = eng;
@@ -379,6 +399,12 @@ export namespace DatabaseLib {
       Database.get().tables.Purchasings.push(purch); // does not inherently save changes, call SaveChanges()
       console.log("INSERT SUCCESSFUL");
     }
+
+    public SavePurch(purch: Models.Purchasing): void { //save purch without validating
+      purch.ID = Database.get().tables.Purchasings.length + 1; // IDs start at 1
+      Database.get().tables.Purchasings.push(purch); // does not inherently save changes, call SaveChanges()
+      console.log("INSERT SUCCESSFUL");
+    }
     public UpdatePurch(purch: Models.Purchasing): void {
       let db = Database.get();
       db.tables.Purchasings[this.FindRow(purch)] = purch;
@@ -410,6 +436,11 @@ export namespace DatabaseLib {
         console.log(validationResult.getMessage());
         throw msg;
       }
+      ncr.ID = Database.get().tables.NCRLogs.length + 1; // IDs start at 1
+      Database.get().tables.NCRLogs.push(ncr); // does not inherently save changes, call SaveChanges()
+      console.log("INSERT SUCCESSFUL");
+    }
+    public SaveNCR(ncr: Models.NCRLog): void { //save without validating
       ncr.ID = Database.get().tables.NCRLogs.length + 1; // IDs start at 1
       Database.get().tables.NCRLogs.push(ncr); // does not inherently save changes, call SaveChanges()
       console.log("INSERT SUCCESSFUL");

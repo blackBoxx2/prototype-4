@@ -13,8 +13,6 @@ $(function() {
     const tableBody = document.querySelector("#ncr-table") as HTMLTableSectionElement;
     var db = DatabaseLib.Database.get();
 
-    db.ReSeed();
-
     const allQa = db.tables.QualityAssurances;
     const ncrLogs = db.tables.NCRLogs;
     if(allQa.length == 0){
@@ -22,21 +20,20 @@ $(function() {
     }
 
     if(tableBody){
-    ncrLogs.forEach((ncr) => {
-        const date = new Date(ncr.QualityAssurance.DateSigned).toLocaleDateString();
-        const status = Models.Status[ncr.Status];
-        const row = `
-        <tr>
-            <td>${ncr.QualityAssurance.DefectDescription}</td>
-            <td>${date}</td>
-            <td>${status}</td>
-            <td class="action"><a data-id="${ncr.NCRNumber}" href="/NCRLog/Details.html" class="viewNCR">Details</a> | <a data-id="${ncr.NCRNumber}" id="btnEdit" href="/NCRLog/Details.html" class="editNCR">Edit</a> | <a id="btnDelete" data-id="${ncr.NCRNumber}" href="/NCRLog/Details.html" class="deleteNCR">Remove</a></td>
+        ncrLogs.forEach((ncr: any) => {
+            const selQA = db.GetQAByID(ncr.QualityAssuranceID);
+            console.log(selQA.DateSigned)
+            const date = new Date(selQA.DateSigned).toLocaleDateString();
+            const status = Models.Status[ncr.Status];
+            const row = `
+            <tr>
+                <td>${selQA.DefectDescription}</td>
+                <td>${date}</td>
+                <td>${status}</td>
+                <td class="action"><a data-id="${ncr.NCRNumber}" href="/NCRLog/Details.html" class="viewNCR">Details</a> | <a data-id="${ncr.NCRNumber}" id="btnEdit" href="/NCRLog/edit.html" class="editNCR">Edit</a></td>
 
-        </tr>`
-        ;
-
-        tableBody.innerHTML += row;
-
+            </tr>`;
+            tableBody.innerHTML += row;
     });
     }
     tableBody.addEventListener('click', function(n) {
