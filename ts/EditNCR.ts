@@ -4,6 +4,7 @@ import { Models } from "./Models";
 
 $(function() {
     const selected = localStorage.getItem('selectedNcrId');
+    const btnSubmit = document.querySelector("#btnSubmit");
     //Setup dropdown lists:
     const descProductOptions = document.querySelector("descriptionProduct") as HTMLSelectElement;
     var db = DatabaseLib.Database.get();
@@ -110,10 +111,70 @@ $(function() {
                 fields.qualityDept.value = String(selectedPurch.QualityDept);
                 fields.signedByUser.value = String(selectedPurch.SignedByUser);
             }
+            if(btnSubmit){
+                btnSubmit.addEventListener('click', function(e) {
+                    //get updated fields
+
+                    const updatedQA: Models.QualityAssurance = {
+                        ID: selectedQA.ID,
+                        Process: Models.Process[fields.processApplicable.selectedIndex],
+                        ItemDescription: fields.descriptionProduct.value,
+                        SupplierID: Number(fields.supplierName.options[fields.supplierName.selectedIndex]),
+                        ProductNo: String(fields.productNum.value),
+                        OrderNo: fields.salesOrderNum.value,
+                        QuantityReceived: Number(fields.quantityRec.value),
+                        QuantityDefective: Number(fields.quantityDef.value),
+                        DefectDescription: fields.descriptionDefect.value,
+                        // Nonconforming: fields.chkNonconforming.value === "True",
+                        SignedByUser: Models.User[fields.qaName.value],
+                        DateSigned: new Date(fields.qaDate.value)
+                    };
+                    const updatedEng: Models.Engineering = {
+                        ID: selectedEng.ID,
+                        Review: Models.Review[fields.selReview.selectedIndex],
+                        Disposition: fields.disposition.value,
+                        NotifyCustomer: fields.requireNotification.value === "True",
+                        UpdateDrawing: fields.requireUpdating.value === "True",
+                        OriginalRevNumber: fields.originalRevNum.value,
+                        LatestRevNumber: fields.updatedRevNum.value,
+                        SignedByUser: Models.User[fields.nameOfEngineer.value],
+                        DateSigned: new Date(fields.revisionDate.value),
+                    };
             
+                    const updatedPurch: Models.Purchasing ={
+                        ID: selectedPurch.ID,
+                        Decision: Models.Decision[fields.decision.selectedIndex],
+                        CARRaised: Boolean(fields.carRaised.checked),
+                        CARNo: fields.carNo.value,
+                        FollowUpRequired: fields.followUpRequired.checked,
+                        FollowUpType: fields.followUpType.value,
+                        SignedByUser: Models.User[fields.signedBy.value],
+                        DateSigned: new Date(fields.dateSigned.value),
+                        ReInspectAcceptable: fields.reInspectAcceptable.checked,
+                        NewNCRNumber: Number(fields.newNCRNumber.value),
+                        QualityDept: fields.qualityDept.value,
+                    };
+                    //Update each department
+                    var msg = db.UpdateQA(updatedQA);
+                    console.log("QA: " + msg);
+                    msg = db.UpdateEng(updatedEng);
+                    console.log("ENG: " + msg);
+                    msg = db.UpdatePurch(updatedPurch);
+                    console.log("PURCH: " + msg);
+
+                    db.SaveChanges();
+                    console.log(selectedQA);
+                    console.log(selectedEng);
+                    console.log(selectedPurch);
+                    
+                })
+            }
         } 
+        
     }
     else{
         console.log("Error: no selected ncr id")
     }
+
+    
 })
