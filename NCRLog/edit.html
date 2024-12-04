@@ -238,7 +238,108 @@
                         <input aria-label="Engineering Date" type="date" id="engineeringDate" name="engineeringDate">
                     </div>
                     <div id="engineeringDateValidation" class="text-danger"></div>
-                </div>                    
+                </div>   
+                
+                <!-- Purchasing Portion -->
+                <br/>
+                <hr/>
+                <br/>
+                <h2>Purchasing Portion</h2>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="decision"><span class="text-danger">*</span> Decision:</label>
+                        <select aria-label="Decision" name="decision" id="decision">
+                            <option value="0" disabled selected>Select a decision</option>
+                            <option value="ReturnForRework">Return For Rework</option>
+                            <option value="ReturnForReplacement">Return For Replacement</option>
+                            <option value="ReworkInHouse">Rework In-House</option>
+                            <option value="ScrapInHouse">Scrap In-House</option>
+                            <option value="DeferToEng">Defer to Engineering</option>
+                        </select>
+                    </div>
+                    <div id="decisionValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="carRaised"><span class="text-danger">*</span> CAR Raised:</label>
+                        <input type="checkbox" id="carRaised" name="carRaised" value="true">
+                    </div>
+                    <div id="carRaisedValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="carNo"><span class="text-danger">*</span> CAR No.:</label>
+                        <input aria-label="CAR No." type="text" name="carNo" id="carNo">
+                    </div>
+                    <div id="carNoValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="followUpRequired"><span class="text-danger">*</span> Follow-Up Required:</label>
+                        <input type="checkbox" id="followUpRequired" name="followUpRequired" value="true">
+                    </div>
+                    <div id="followUpRequiredValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="followUpType"><span class="text-danger">*</span> Follow-Up Type:</label>
+                        <input type="text" aria-label="Follow-Up Type" name="followUpType" id="followUpType">
+                    </div>
+                    <div id="followUpTypeValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="signedBy"><span class="text-danger">*</span> Signed By:</label>
+                        <input type="text" aria-label="Signed By" name="signedBy" id="signedBy">
+                    </div>
+                    <div id="signedByValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="dateSigned"><span class="text-danger">*</span> Date Signed:</label>
+                        <input type="date" aria-label="Date Signed" name="dateSigned" id="dateSigned">
+                    </div>
+                    <div id="dateSignedValidation" class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="reInspectAcceptable"><span class="text-danger">*</span> Re-Inspect Acceptable:</label>
+                        <input type="checkbox" aria-label="Re-Inspect Acceptable" name="reInspectAcceptable" id="reInspectAcceptable">
+                    </div>
+                    <div id="reInspectAcceptableValidation" class="text-danger"></div>
+                </div>
+                
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="newNCRNumber"><span class="text-danger">*</span> New NCR Number:</label>
+                        <input type="number" aria-label="New NCR Number" name="newNCRNumber" id="newNCRNumber">
+                    </div>
+                    <div id="newNCRNumberValidation" class="text-danger"></div>
+                </div>
+                
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="qualityDept"><span class="text-danger">*</span> Quality Department:</label>
+                        <input type="text" aria-label="Quality Department" name="qualityDept" id="qualityDept">
+                    </div>
+                    <div id="qualityDeptValidation" class="text-danger"></div>
+                </div>
+                
+                <div>
+                    <div class="inner-wrapper">
+                        <label for="signedByUser"><span class="text-danger">*</span> Signed By User:</label>
+                        <input type="number" aria-label="Signed By User" name="signedByUser" id="signedByUser">
+                    </div>
+                    <div id="signedByUserValidation" class="text-danger"></div>
+                </div>                
 
                 </fieldset>
                 <button class="cta-btn cta-btn-primary ncr-list-createhbutton" type="submit">Submit</button>
