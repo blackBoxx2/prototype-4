@@ -33,193 +33,231 @@ Need to change hard coded data to dynamic
             <button class="btn-export">Export To PDF</button>
             <form id="view-form" >
                 <fieldset>
-                    <div class="form-data-field">
-                        <label class="form-label">NCR Number </label>
-                        <p class="form-p" id="ncrNumber">0000001</p>
-                    </div>
-        
-                    <div class="form-data-field">
-                        <label class="form-label">Process Applicable </label>
-                        <p class="form-p" id="ipa"></p>
-                    </div>
-        
-                    <div class="form-data-field">
-                        <label class="form-label">Description </label>
-                        <p class="form-p" id="descriptionProduct"></p>
-                    </div>
-        
-                    <div class="form-data-field">
-                        <label class="form-label">Supplier </label>
-                        <p class="form-p" id="supplierName"></p>
-                    </div>
-        
-                    <div class="form-data-field">
-                        <label class="form-label">PO or Prod. No. </label>
-                        <p class="form-p" id="productNum"></p>
-                    </div>
-        
-                    <div class="form-data-field">
-                        <label class="form-label">Order Number </label>
-                        <p class="form-p" id="salesOrderNum"></p>
-                    </div>
+                                    <!-- Quality Portion -->
+                <div class="accordion" id="qaAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="qaHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#qaCollapse" aria-expanded="false" aria-controls="qaCollapse">
+                                Quality Portion
+                            </button>
+                        </h2>
+                        <div id="qaCollapse" class="accordion-collapse collapse" aria-labelledby="qaHeading" data-bs-parent="#qaAccordion">
+                            <div class="accordion-body">                
 
-                    <div class="form-data-field">
-                        <label class="form-label">Quantity Received </label>
-                        <p class="form-p" id="quantityRec"></p>
-                    </div>
-
-                    <div class="form-data-field">
-                        <label class="form-label">Quantity Defective </label>
-                        <p class="form-p" id="quantityDef"></p>
-                    </div>
-
-                    <div class="form-data-field">
-                        <label class="form-label">Description of Defect </label>
-                        <p class="form-p" id="descriptionDefect"></p>
-                    </div>
-
-                    <div class="form-data-field">
-                        <label class="form-label">Order Number </label>
-                        <p class="form-p" id="salesOrderNum"></p>
-                    </div>
-
-                    <div class="form-data-field">
-                        <label class="form-label">Item marked Nonconforming </label>
-                        <p class="form-p" id="chkNonconforming"></p>
-                    </div>
-
-                    <div class="form-data-field">
-                        <label class="form-label">Quality Representative's Name</label>
-                        <p class="form-p" id="qaName"></p>
-                    </div>
-
-                    <div class="form-data-field">
-                        <label class="form-label">Date </label>
-                        <p class="form-p" id="qaDate"></p>
-                    </div>
-        
-                    <div>
-                        <a href="#">View defect picture</a>
-                    </div>
-                    <!-- ENG: -->
-                    <br/>
-                    <hr/>
-                    <br/>
-
-                    <div class="form-data-field">
-                        <label class="form-label">Review by CF Engineering </label>
-                        <p class="form-p" id="selReview"></p>
-                    </div>
-
-                    <div class="form-data-field">
-                        <label class="form-label">Disposition </label>
-                        <p class="form-p" id="disposition"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">NCR Number </label>
+                                    <p class="form-p" id="ncrNumber">0000001</p>
+                                </div>
                     
-                    <div class="form-data-field">
-                        <label class="form-label">Does the Customer Require Notifications </label>
-                        <p class="form-p" id="requireNotification"></p>
+                                <div class="form-data-field">
+                                    <label class="form-label">Process Applicable </label>
+                                    <p class="form-p" id="ipa"></p>
+                                </div>
+                    
+                                <div class="form-data-field">
+                                    <label class="form-label">Description </label>
+                                    <p class="form-p" id="descriptionProduct"></p>
+                                </div>
+                    
+                                <div class="form-data-field">
+                                    <label class="form-label">Supplier </label>
+                                    <p class="form-p" id="supplierName"></p>
+                                </div>
+                    
+                                <div class="form-data-field">
+                                    <label class="form-label">PO or Prod. No. </label>
+                                    <p class="form-p" id="productNum"></p>
+                                </div>
+                    
+                                <div class="form-data-field">
+                                    <label class="form-label">Order Number </label>
+                                    <p class="form-p" id="salesOrderNum"></p>
+                                </div>
+
+                                <div class="form-data-field">
+                                    <label class="form-label">Quantity Received </label>
+                                    <p class="form-p" id="quantityRec"></p>
+                                </div>
+
+                                <div class="form-data-field">
+                                    <label class="form-label">Quantity Defective </label>
+                                    <p class="form-p" id="quantityDef"></p>
+                                </div>
+
+                                <div class="form-data-field">
+                                    <label class="form-label">Description of Defect </label>
+                                    <p class="form-p" id="descriptionDefect"></p>
+                                </div>
+
+                                <div class="form-data-field">
+                                    <label class="form-label">Order Number </label>
+                                    <p class="form-p" id="salesOrderNum"></p>
+                                </div>
+
+                                <div class="form-data-field">
+                                    <label class="form-label">Item marked Nonconforming </label>
+                                    <p class="form-p" id="chkNonconforming"></p>
+                                </div>
+
+                                <div class="form-data-field">
+                                    <label class="form-label">Quality Representative's Name</label>
+                                    <p class="form-p" id="qaName"></p>
+                                </div>
+
+                                <div class="form-data-field">
+                                    <label class="form-label">Date </label>
+                                    <p class="form-p" id="qaDate"></p>
+                                </div>
+                    
+                                <div>
+                                    <a href="#">View defect picture</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Does the Drawing Require Updating </label>
-                        <p class="form-p" id="requireUpdating"></p>
-                    </div>
+                    <!-- ENG: -->
+                    <br> 
+                    <div class="accordion" id="engineeringAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingEngineering">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEngineering" aria-expanded="false" aria-controls="collapseEngineering">
+                                    Engineering Portion
+                                </button>
+                            </h2>
+                            <div id="collapseEngineering" class="accordion-collapse collapse" aria-labelledby="headingEngineering" data-bs-parent="#engineeringAccordion">
+                                <div class="accordion-body">
 
-                    <div class="form-data-field">
-                        <label class="form-label">Original Rev. Number </label>
-                        <p class="form-p" id="originalRevNum"></p>
-                    </div>
+                                    <div class="form-data-field">
+                                        <label class="form-label">Review by CF Engineering </label>
+                                        <p class="form-p" id="selReview"></p>
+                                    </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Updated Rev. Number </label>
-                        <p class="form-p" id="updatedRevNum"></p>
-                    </div>
+                                    <div class="form-data-field">
+                                        <label class="form-label">Disposition </label>
+                                        <p class="form-p" id="disposition"></p>
+                                    </div>
+                                    
+                                    <div class="form-data-field">
+                                        <label class="form-label">Does the Customer Require Notifications </label>
+                                        <p class="form-p" id="requireNotification"></p>
+                                    </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Name of Engineer</label>
-                        <p class="form-p" id="nameOfEngineer"></p>
-                    </div>
+                                    <div class="form-data-field">
+                                        <label class="form-label">Does the Drawing Require Updating </label>
+                                        <p class="form-p" id="requireUpdating"></p>
+                                    </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Revision Date </label>
-                        <p class="form-p" id="revisionDate"></p>
-                    </div>
+                                    <div class="form-data-field">
+                                        <label class="form-label">Original Rev. Number </label>
+                                        <p class="form-p" id="originalRevNum"></p>
+                                    </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Engineering</label>
-                        <p class="form-p" id="engineering"></p>
-                    </div>
+                                    <div class="form-data-field">
+                                        <label class="form-label">Updated Rev. Number </label>
+                                        <p class="form-p" id="updatedRevNum"></p>
+                                    </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Date </label>
-                        <p class="form-p" id="engineeringDate"></p>
-                    </div>
+                                    <div class="form-data-field">
+                                        <label class="form-label">Name of Engineer</label>
+                                        <p class="form-p" id="nameOfEngineer"></p>
+                                    </div>
+
+                                    <div class="form-data-field">
+                                        <label class="form-label">Revision Date </label>
+                                        <p class="form-p" id="revisionDate"></p>
+                                    </div>
+
+                                    <div class="form-data-field">
+                                        <label class="form-label">Engineering</label>
+                                        <p class="form-p" id="engineering"></p>
+                                    </div>
+
+                                    <div class="form-data-field">
+                                        <label class="form-label">Date </label>
+                                        <p class="form-p" id="engineeringDate"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                                         
                     <!-- Purchasing Portion -->
                     <br/>
-                    <hr/>
-                    <br/>
+                    <div class="accordion" id="purchasingAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingPurchasing">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePurchasing" aria-expanded="false" aria-controls="collapsePurchasing">
+                                    Purchasing Portion
+                                </button>
+                            </h2>
+                        <div id="collapsePurchasing" class="accordion-collapse collapse" aria-labelledby="headingPurchasing" data-bs-parent="#purchasingAccordion">
+                            <div class="accordion-body">                    
 
-                    <div class="form-data-field">
-                        <label class="form-label">Decision</label>
-                        <p class="form-p" id="decision"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">Decision</label>
+                                    <p class="form-p" id="decision"></p>
+                                </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">CAR Raised</label>
-                        <p class="form-p" id="carRaised"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">CAR Raised</label>
+                                    <p class="form-p" id="carRaised"></p>
+                                </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">CAR Number</label>
-                        <p class="form-p" id="carNo"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">CAR Number</label>
+                                    <p class="form-p" id="carNo"></p>
+                                </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Follow-Up Required</label>
-                        <p class="form-p" id="followUpRequired"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">Follow-Up Required</label>
+                                    <p class="form-p" id="followUpRequired"></p>
+                                </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Follow-Up Type</label>
-                        <p class="form-p" id="followUpType"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">Follow-Up Type</label>
+                                    <p class="form-p" id="followUpType"></p>
+                                </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Signed By</label>
-                        <p class="form-p" id="signedBy"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">Signed By</label>
+                                    <p class="form-p" id="signedBy"></p>
+                                </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Date Signed</label>
-                        <p class="form-p" id="dateSigned"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">Date Signed</label>
+                                    <p class="form-p" id="dateSigned"></p>
+                                </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Re-Inspect Acceptable</label>
-                        <p class="form-p" id="reInspectAcceptable"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">Re-Inspect Acceptable</label>
+                                    <p class="form-p" id="reInspectAcceptable"></p>
+                                </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">New NCR Number</label>
-                        <p class="form-p" id="newNCRNumber"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">New NCR Number</label>
+                                    <p class="form-p" id="newNCRNumber"></p>
+                                </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Quality Department</label>
-                        <p class="form-p" id="qualityDept"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">Quality Department</label>
+                                    <p class="form-p" id="qualityDept"></p>
+                                </div>
 
-                    <div class="form-data-field">
-                        <label class="form-label">Signed By User</label>
-                        <p class="form-p" id="signedByUser"></p>
-                    </div>
+                                <div class="form-data-field">
+                                    <label class="form-label">Signed By User</label>
+                                    <p class="form-p" id="signedByUser"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
 
                 </fieldset>
         
             </form>
-        </div>    
+        </div> 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>   
     
     </body>
 </html>
