@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="../css/ncrlogforms.css">
         <script src="/scripts/breadcrumbs.js"></script>
-        <link rel="stylesheet" href="/css/breadcrumbs.css">
+        <script>
+            fetch('/head.html')
+              .then(response => response.text())
+              .then(data => {
+                document.head.innerHTML = data;
+    
+                document.title = "Edit NCR"
+    
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = '/css/editncr.css';
+                const link2 = document.createElement('link');
+                link2.rel = 'stylesheet';
+                link2.href = '/css/breadcrumbs.css';
+                
+                document.head.appendChild(link);
+                document.head.appendChild(link2);
+              });
+          </script>
         <title>Edit NCR Log</title>
     </head>
     <body>
-        <div id="form-main" class="edit">
+        <div id="edit-form" class="edit">
             <h3 id="edit-title" class="title-group">Editing NCR:</h3>
             <button onclick="window.location.href='/NCRLog'" class="cta-btn-danger btn-Cancel" id="btnCancel">Cancel</button>
             <form >

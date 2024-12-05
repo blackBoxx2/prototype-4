@@ -3,15 +3,32 @@ Need to change hard coded data to dynamic
 -->
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="/css/ncrlogforms.css">
     <head>
-        <script src="/scripts/breadcrumbs.js"></script>
-        <link rel="stylesheet" href="/css/breadcrumbs.css">
+    <script src="/scripts/breadcrumbs.js"></script>
+    <script>
+        fetch('/head.html')
+          .then(response => response.text())
+          .then(data => {
+            document.head.innerHTML = data;
+
+            document.title = "Details"
+
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '/css/detailsncr.css';
+            const link2 = document.createElement('link');
+            link2.rel = 'stylesheet';
+            link2.href = '/css/breadcrumbs.css';
+            
+            document.head.appendChild(link);
+            document.head.appendChild(link2);
+          });
+      </script>
         
         <title>View NCR Log</title>
     </head>
     <body>
-        <div id="form-main">
+        <div id="details-form">
             <h3 class="title-group">Viewing NCR</h3>
             <button class="btn-export">Export To PDF</button>
             <form id="view-form" >

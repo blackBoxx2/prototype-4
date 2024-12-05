@@ -1,0 +1,65 @@
+#details-form{
+    width: 80%;
+}
+div{
+    margin: auto;
+}
+
+fieldset{
+    padding: 2.5rem; 
+    border: 2px solid var(--body-text-color);
+}
+
+
+label{   
+    font-family: var(--heading-secondary-fontFamily);
+    color: var(--heading-primary-color);
+    font-weight: 800;
+    display: inline;
+    width: fit-content;
+}
+#form-p{
+    margin-top: 0.5rem;
+}
+.inner-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+fieldset > div {
+    margin: 1rem;
+}
+
+button {
+    font-family: var(--body-text-normal-fontFamily);
+}
+h1 {
+    margin-left: 0.4em;
+}
+
+p::file-selector-button{
+    font-family: var(--body-text-normal-fontFamily);
+    color: var(--body-text-color);
+    border-radius: 5px;
+    border: 2px solid var(--heading-secondary-color);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    width: 50%;
+    display: inline;
+}
+
+.button-group{
+    padding-top: 2rem;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.title-group{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    width: 90%;
+    padding-top: 2rem;
+    gap: 10px;
+}
+
+
