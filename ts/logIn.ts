@@ -37,15 +37,12 @@ document.addEventListener('DOMContentLoaded', function() {
              //validate for the email
             if(e.target.id === 'email' && !validateEmail(e.target.value)){
                 showAlert('The email is not valid', e.target.parentElement);
-                email[e.target.name] as HTMLInputElement | null;
+                
                 proveEmail();
                 return;
             };
             
             cleanAlert(e.target.parentElement);
-            //assing the values
-            email[e.target.name] = e.target.value.trim().toLowerCase();
-            //prove the email object
         }
         
         function showAlert(mensaje, reference){
