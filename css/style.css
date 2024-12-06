@@ -95,7 +95,7 @@
             font-size: 1em; 
             line-height: 1.5;
         }
-
+        
         button, input[type=submit]{
             padding: 0.813rem 1.85rem;
             border-radius: 0.313rem;
@@ -116,29 +116,29 @@
             padding: 0;
             width: 100%;
         }
+        
         .dropdown-button {
+            background-color: #fff !important;
             border-radius: 0.313rem;
             font-family: var(--btn-text-fontFamily);
             font-size: var(--btn-fontSize);
-            background-color: var(--heading-primary-color);
-            color: #fff;
             border: none;
             margin-bottom: 0.313rem;
             margin-right: 1rem;
             margin-top: 1em;
         }
+            
         .dropdown-menu {
             background-color: #fff;
             list-style: none;
             padding: 0;
-            display: none; /* Por defecto, oculto */
+            display: none; 
             right: 1rem;
-            margin-top: 14rem;
-            
+            margin-top: 10.813rem;
         }
         
         .dropdown-menu.show {
-            display: block; /* Visible cuando tiene la clase 'show' */
+            display: block; 
         }
         .dropdown-menu li{
             margin: 0.313rem 0;
@@ -154,13 +154,14 @@
             background-color: #555;
             color: white;
         }
-        
+        .hamburguer-menu{
+            width: 2.813rem;
+        }
         .logo{
-            width: 10.25rem;
+            width: 9rem;
             margin-bottom: 0;
             margin-left: 1rem;
         }
-
 
         .cta-btn{
             height: 2.5rem;

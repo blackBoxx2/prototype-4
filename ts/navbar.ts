@@ -1,11 +1,11 @@
 //Create the nav
-function createNav() : void {
+function NavCreate() : void {
     const nav = document.createElement('nav');
     nav.classList.add('navbar')
 
     //Create the logo
     const img  =  document.createElement('img');
-    img.src = './imgs/crossfire_logo.png';
+    img.src = '/imgs/crossfire_logo.png';
     img.alt = 'Crossfire Logo';
     img.classList.add('logo');
     //Create the link for the logo
@@ -13,13 +13,12 @@ function createNav() : void {
     imgLink.href = 'index.html';
     imgLink.appendChild(img);
 
-    const ddlButton = document.createElement('button');
-    //add the class for the button
-    ddlButton.classList.add('dropdown-button');
-    ddlButton.textContent = 'Menu';
-
+    const imgMenu = document.createElement('img');
+    imgMenu.src = "/imgs/hamburguer_menu.png";
+    imgMenu.classList.add('dropdown-button');
+    imgMenu.classList.add('hamburguer-menu');
     //create the container 
-    const ddlMenu = document.createElement('div');
+    const ddlMenu = document.createElement('ul');
     ddlMenu.classList.add('dropdown-menu');
 
     //Create the links container for the elements in the nav
@@ -38,13 +37,13 @@ function createNav() : void {
         ddlMenu.appendChild(li); 
     });
     nav.appendChild(imgLink);
-    nav.appendChild(ddlButton);
+    nav.appendChild(imgMenu);
     nav.appendChild(ddlMenu);
     
     //insert the nav bar
     document.body.insertBefore(nav, document.body.firstChild);
 
-    ddlButton.addEventListener('click', () =>{
+    imgMenu.addEventListener('click', () =>{
         ddlMenu.classList.toggle('show');
     })
     //If the user click in somewhere else close the nav 
@@ -61,8 +60,4 @@ function createNav() : void {
     });
 } 
 
-document.addEventListener('DOMContentLoaded', createNav);
-
-//encontrar la manera de hacer que el nav bar pueda usar links y eso 
-//crear las clases en el html
-//crear el css 
+document.addEventListener('DOMContentLoaded', NavCreate);
