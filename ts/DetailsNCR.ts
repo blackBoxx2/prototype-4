@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-import { DatabaseLib } from "./database.js";
-import * as $ from "../src/jquery.js";
-import { Models } from "./Models.js";
-=======
+
 import { DatabaseLib } from "./database";
 import * as $ from "jquery";
 import { Models } from "./Models";
->>>>>>> 7100feb83d9543cdea859f4eef1f95c483375d54
 
 $(function() {
     const selected = localStorage.getItem('selectedNcrId');
@@ -18,7 +13,7 @@ $(function() {
         const selectedQA = db.GetQAByID(Number(selectedNCR.QualityAssuranceID));
         const selectedEng = db.GetENGByID(Number(selectedNCR.EngineeringID));
         const selectedPurch = db.GetPURByID(Number(selectedNCR.PurchasingID));
-
+        const supplierName = db.GetSupplierByID(Number(selectedQA.SupplierID));
         console.log(selectedNCR);
         //get all fields
         const fields = { 
@@ -64,7 +59,7 @@ $(function() {
             fields.ncrNumberField.innerHTML = String(selectedNCR.NCRNumber);
             fields.processApplicable.innerHTML = String(selectedQA.Process);
             fields.descriptionProduct.innerHTML = String(selectedQA.ItemDescription);
-            fields.supplierName.innerHTML = String(selectedQA.Process);
+            fields.supplierName.innerHTML = supplierName.Name;
             fields.productNum.innerHTML = String(selectedQA.ProductNo);
             fields.salesOrderNum.innerHTML = String(selectedQA.OrderNo);
             fields.quantityRec.innerHTML = String(selectedQA.QuantityReceived);

@@ -1,11 +1,8 @@
 import { DatabaseLib } from "./database";
-<<<<<<< HEAD
-import * as $ from "../src/jquery.js";
-import { Models } from "./Models.js";
-=======
 import * as $ from "jquery";
 import { Models } from "./Models";
->>>>>>> 7100feb83d9543cdea859f4eef1f95c483375d54
+
+
 
 $(function() {
     //reset selected ncr to 0
@@ -22,12 +19,13 @@ $(function() {
     if(tableBody){
         ncrLogs.forEach((ncr: any) => {
             const selQA = db.GetQAByID(ncr.QualityAssuranceID);
-            console.log(selQA.DateSigned)
+            const supplierName = db.GetSupplierByID(selQA.SupplierID);
             const date = new Date(selQA.DateSigned).toLocaleDateString();
             const status = Models.Status[ncr.Status];
             const row = `
             <tr>
-                <td>${selQA.DefectDescription}</td>
+                <td>${ncr.NCRNumber}</td>
+                <td>${supplierName.Name}</td>
                 <td>${date}</td>
                 <td>${status}</td>
                 <td class="action"><a data-id="${ncr.NCRNumber}" href="/NCRLog/Details.html" class="viewNCR">Details</a> | <a data-id="${ncr.NCRNumber}" id="btnEdit" href="/NCRLog/edit.html" class="editNCR">Edit</a></td>

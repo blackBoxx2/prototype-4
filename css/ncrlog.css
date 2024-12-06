@@ -17,6 +17,8 @@ and the ncrlog to how we had it in our other project. Feel free to delete what i
 
 .btn-group{
     margin-left: auto;
+    align-items: right;
+    justify-content: right;
 }
 #ncr-list-searchbox
 {

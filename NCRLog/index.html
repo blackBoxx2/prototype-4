@@ -29,18 +29,54 @@
         <h1 style="text-wrap: nowrap;">NCR Log</h1>
         <h2>NCR Count: 10</h2>
       </div>
-        <div class="ncr-list">
+        <div class="ncr-list"> 
           <div class="ncr-list-action-section">
-            <input type="search" id="ncr-list-searchbox" placeholder="Search by NCR number, Product Name, or QA Representative Name">
-            <button class="cta-btn-secondary ncr-list-searchbutton">Search</button>
-            <div class="btn-group">
-              <a href="/NCRLog/create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
-            </div>
+
+            <div id="filter-container">
+
+              <label for="ncr-number">NCR Number:</label>
+              <input type="number" id="ncr-number" placeholder="Enter NCR Number" />
+          
+              <label for="supplier">Supplier:</label>
+              <select id="supplier">
+                <option value="">-- Select Supplier --</option>
+                <option value="green-supply">Green Supply Logistics</option>
+                <option value="lumberjack">Lumberjack Supply Co.</option>
+                <option value="metalworks">Metalworks Inc.</option>
+                <option value="plastic-parts">Plastic Parts Co.</option>
+                <option value="screws-bolts">Screws and Bolts Inc.</option>
+                <option value="nails-rivets">Nails and Rivets Co.</option>
+                <option value="bolt-makers">Bolt Makers Ltd.</option>
+                <option value="john-dale">John & Dale's Warehouse</option>
+                <option value="damiens-hardware">Damien's Hardware</option>              
+              </select>
+          
+              <label for="from-date">From Date:</label>
+              <input type="date" id="from-date" />
+              <label for="to-date">To Date:</label>
+              <input type="date" id="to-date" />
+          
+              <label for="status">Status:</label>
+              <select id="status">
+                  <option value="">-- Select Status --</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Purchasing">Purchasing</option>
+                  <option value="Closed">Closed</option>
+              </select>
+          
+              <button class="cta-btn-secondary ncr-list-searchbutton" onclick="applyFilter()">Filter</button>
+          </div>
+          <br/>
+          
+          </div>
+          <div class="btn-group">
+            <a href="/NCRLog/create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
           </div>
           <table id="ncr-table">
             <thead>
               <tr>
-                <th>Quality Description</th>
+                <th>Number</th>
+                <th>Supplier</th>
                 <th>Created On</th>
                 <th>Status</th>
                 <th>Action</th>
