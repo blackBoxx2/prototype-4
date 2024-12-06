@@ -9,10 +9,14 @@ $(function() {
         var db = DatabaseLib.Database.get();
         const selectedID = Number(selected)
         //only show selected ncrlog
+        var selectedEng: Models.Engineering | null = null;
+        var selectedPurch: Models.Purchasing | null = null;
         const selectedNCR = db.GetNCRByNumber(selectedID);
         const selectedQA = db.GetQAByID(Number(selectedNCR.QualityAssuranceID));
-        const selectedEng = db.GetENGByID(Number(selectedNCR.EngineeringID));
-        const selectedPurch = db.GetPURByID(Number(selectedNCR.PurchasingID));
+        if(selectedNCR.EngineeringID != undefined && selectedNCR.EngineeringID != null)
+            selectedEng = db.GetENGByID(Number(selectedNCR.EngineeringID));
+        if(selectedNCR.PurchasingID != undefined && selectedNCR.PurchasingID != null)
+            selectedPurch = db.GetPURByID(Number(selectedNCR.PurchasingID));
         const supplierName = db.GetSupplierByID(Number(selectedQA.SupplierID));
         console.log(selectedNCR);
         //get all fields
@@ -69,28 +73,33 @@ $(function() {
             fields.qaName.innerHTML = String(selectedQA.SignedByUser);
             fields.qaDate.innerHTML = String(selectedQA.DateSigned);
             // fields.qaPhoto?.innerHTML = String(selectedQA.);
-            fields.selReview.innerHTML = String(selectedEng.Review);
-            fields.disposition.innerHTML = String(selectedEng.Disposition);
-            fields.requireNotification.innerHTML = String(selectedEng.NotifyCustomer);
-            fields.requireUpdating.innerHTML = String(selectedEng.UpdateDrawing);
-            fields.originalRevNum.innerHTML = String(selectedEng.OriginalRevNumber);
-            fields.updatedRevNum.innerHTML = String(selectedEng.LatestRevNumber);
-            fields.nameOfEngineer.innerHTML = String(selectedEng.SignedByUser);
-            fields.revisionDate.innerHTML = String(selectedEng.DateSigned);
-            fields.engineering.innerHTML = String(selectedEng.ID); //???
-            fields.engineeringDate.innerHTML = String(selectedEng.DateSigned);
+            if(selectedEng != null){
+                fields.selReview.innerHTML = String(selectedEng.Review);
+                fields.disposition.innerHTML = String(selectedEng.Disposition);
+                fields.requireNotification.innerHTML = String(selectedEng.NotifyCustomer);
+                fields.requireUpdating.innerHTML = String(selectedEng.UpdateDrawing);
+                fields.originalRevNum.innerHTML = String(selectedEng.OriginalRevNumber);
+                fields.updatedRevNum.innerHTML = String(selectedEng.LatestRevNumber);
+                fields.nameOfEngineer.innerHTML = String(selectedEng.SignedByUser);
+                fields.revisionDate.innerHTML = String(selectedEng.DateSigned);
+                fields.engineering.innerHTML = String(selectedEng.ID); //???
+                fields.engineeringDate.innerHTML = String(selectedEng.DateSigned);
+            }
+            if(selectedPurch != null){
+                fields.decision.innerHTML = String(selectedPurch.Decision);
+                fields.carRaised.innerHTML = String(selectedPurch.CARRaised);
+                fields.carNo.innerHTML = String(selectedPurch.CARNo);
+                fields.followUpRequired.innerHTML = String(selectedPurch.FollowUpRequired);
+                fields.followUpType.innerHTML = String(selectedPurch.FollowUpType);
+                fields.signedBy.innerHTML = String(selectedPurch.SignedByUser);
+                fields.dateSigned.innerHTML = String(selectedPurch.DateSigned);
+                fields.reInspectAcceptable.innerHTML = String(selectedPurch.ReInspectAcceptable);
+                fields.newNCRNumber.innerHTML = String(selectedPurch.NewNCRNumber);
+                fields.qualityDept.innerHTML = String(selectedPurch.QualityDept);
+                fields.signedByUser.innerHTML = String(selectedPurch.SignedByUser);
+                
+            }
 
-            fields.decision.innerHTML = String(selectedPurch.Decision);
-            fields.carRaised.innerHTML = String(selectedPurch.CARRaised);
-            fields.carNo.innerHTML = String(selectedPurch.CARNo);
-            fields.followUpRequired.innerHTML = String(selectedPurch.FollowUpRequired);
-            fields.followUpType.innerHTML = String(selectedPurch.FollowUpType);
-            fields.signedBy.innerHTML = String(selectedPurch.SignedByUser);
-            fields.dateSigned.innerHTML = String(selectedPurch.DateSigned);
-            fields.reInspectAcceptable.innerHTML = String(selectedPurch.ReInspectAcceptable);
-            fields.newNCRNumber.innerHTML = String(selectedPurch.NewNCRNumber);
-            fields.qualityDept.innerHTML = String(selectedPurch.QualityDept);
-            fields.signedByUser.innerHTML = String(selectedPurch.SignedByUser);
         } 
     }
     else{
