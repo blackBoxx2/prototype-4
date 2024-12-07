@@ -1,10 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 //Load the page
+var database_1 = require("./database");
 document.addEventListener('DOMContentLoaded', function () {
     //create an object 
     var account = {
         email: '',
         password: ''
     };
+    var selected = localStorage.getItem('selectedNcrId');
+    var db = database_1.DatabaseLib.Database.get();
+    var users = db.tables.Users;
     //Take the vairables needed for the log in 
     var inputEmail = document.querySelector('#email');
     var inputPass = document.querySelector('#password');
@@ -25,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     inputConfirmPassword === null || inputConfirmPassword === void 0 ? void 0 : inputConfirmPassword.addEventListener('blur', validate);
     option === null || option === void 0 ? void 0 : option.addEventListener('click', selectTypeLogIn);
     option === null || option === void 0 ? void 0 : option.addEventListener('change', selectTypeLogIn);
+    console.log(users);
     //function for the validation 
     var email;
     function validate(e) {
@@ -35,11 +42,30 @@ document.addEventListener('DOMContentLoaded', function () {
         //validate for the email
         if (e.target.id === 'email' && !validateEmail(e.target.value)) {
             showAlert('The email is not valid', e.target.parentElement);
+            email[e.target.name];
             proveEmail();
             return;
         }
         ;
         cleanAlert(e.target.parentElement);
+        btnLogIn.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (selected) {
+                var inputEmailValue_1 = inputEmail.value.trim().toLocaleLowerCase();
+                var isUser = users.some(function (user) {
+                    var userEmail = user.Email;
+                    return userEmail === inputEmailValue_1;
+                });
+                console.log(isUser);
+                if (isUser) {
+                    console.log('User Found in the database');
+                    window.location.href = '/Dashboard/index.html';
+                }
+                else {
+                    console.log('user Not Found in the database');
+                }
+            }
+        });
     }
     function showAlert(mensaje, reference) {
         cleanAlert(reference);

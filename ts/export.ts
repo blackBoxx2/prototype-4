@@ -5,192 +5,105 @@ import { DatabaseLib } from "./database";
 import * as $ from "../src/jquery.js";
 import { Models } from "./Models.js";
 import jsPDF from "jspdf";
+import { error } from "jquery";
 const selected = localStorage.getItem('selectedNcrId');
-if(selected){
-    async function fetchData(table: string) : Promise<any[]>{
-        try{
-            
-          const db = DatabaseLib.Database.get();
-          db.ReSeed();
-            
-          const ncr = db.tables.NCRLogs;
-          const selectedID = Number(selected)
-          const selectedNCR = db.GetNCRByNumber(selectedID);
-          } 
-        catch(e){
-            console.error('Error loading the data from the database', e)
-            throw new Error('Failed to load data')
-        }
-    }           
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btnDownload = document.querySelector('.btn-download');
+    if (btnDownload) {
+        //Download the pdf
+        btnDownload.addEventListener('click', () => {
+            console.log('Button encontrado');
+            createPDF();      
+        });
+    } else {
+        console.error('El botón de descarga no se encuentra');
+    };
+    //To Fix: Probablemente el numero de documento ya que quiero que cada que sea descargado ssea el mismo numero
+    //Las paginas es importante cambiarlas para que cuente las paginas bien y que de todo caso sea posible que las paginas se agreguen perfectamente
+   const usedNumbers = new Set<number>();
+   function randomNumber(min: number, max: number): number {
     
-    function createPDF(data: any[], table: string) : void{
-        try{
-            const pdf = new jsPDF('p', 'mm', 'a4');;
+    if(usedNumbers.size >= max - min + 1){
+        throw new Error('No more unique numbers avaliable');
+    }
+    let num;
+    do{
+        num = Math.floor(Math.random() * (max - min + 1)) + min;
+    }while(usedNumbers.has(num));
+
+    usedNumbers.add(num);
+    return num;
+    
+   }
+   
+    const generateDocNumber = randomNumber(1,100);
+     //create the pdf
+    function createPDF() {
+        if (selected) {
+            var db = DatabaseLib.Database.get();
+            const selectedID = Number(selected);
+            const selectedNCR = db.GetNCRByNumber(selectedID);
+            const selectedQA = db.GetQAByID(Number(selectedNCR.QualityAssuranceID));
+            const selectedEng = db.GetENGByID(Number(selectedNCR.EngineeringID));
+            const selectedPur = db.GetPURByID(Number(selectedNCR.PurchasingID));
+           // const selectedSupp = db.GetSupplierByID((Number(selectedNCR.EngineeringID)))
+            const Status = db.GetSupplierByID(Number(selectedNCR.Status));
+            //create a textbox
+            function checkbox(value, x, y, length, width) {
+                pdf.text(value, x, y);
+                pdf.rect(x, y, length, width);
+                pdf.line(x, y, x + length, y + width);
+                pdf.line(x, y + length, x + width, y);
+            }
+    
+            if (!selectedNCR || !selectedQA) {
+                console.error('No se pudo obtener datos para el NCR o QA');
+                return;
+            }
+            const pdf = new jsPDF('p', 'mm', 'a4');
+
+            let pages = pdf.getNumberOfPages();
             
+            for(let i = 1; i <= 5; i++){
+                pdf.text(`${i}`, 10,10);
+                //pdf.text(`Page: ${i} of ${pages}`,10,280)
+                if(i< 5) pdf.addPage();
+            }
+            for(let numberPage = 1; numberPage <= pages; numberPage++){
+                pdf.setPage(numberPage);
+                const lastText = `Page ${numberPage} of ${pages}`
+                pdf.text(lastText, 10, 280)
+            }
+            let finalPages;
+            pages = finalPages;
+             // Estilo del encabezado
+            pdf.setFillColor(192, 192, 192); // Color de fondo gris
+            pdf.rect(10, 10, 190, 20, "F"); // Rectángulo del encabezado
+            pdf.setFontSize(12);
+            pdf.setTextColor(0, 0, 0); // Color negro para el texto
             pdf.setFontSize(14);
-            pdf.text('CrossFire Canada', 12, 12);
-            pdf.text('Internal process document', 12, 12);
-            var doc = new jsPDF('p', 'mm', 'a4');
-
-            function checkbox(x, y, length, width) {
-            pdf.rect(x, y, length, width);
-            pdf.line(x, y, x + length, y + width);
-            pdf.line(x, y + length, x + width, y);
-            }
-            
-            let y = 30;
-            data.forEach((r, i) => {
-                pdf.setFontSize(10);
-                pdf.text('Document No.', 14, y);
-                pdf.text(`${r.NCRNumber}`, 14, y);
-                pdf.text('Document Title', 14, y);
-                pdf.text('Page:',14, y);
-                pdf.text('1 of 2:',14, y);
-                pdf.text('Identify Process Applicable', 14, y);
-                checkbox(10, 30, 2, 2);
-                pdf.text('Supplier or Rec-Insp',28,10);
-                pdf.text('WIP (Production Order)',28,10);
-                if(r.productNo.isNullOrEmpty()){
-                    pdf.text('Unchecked', 48, 10 )
-                    pdf.rect(10, 50, 2, 2);
-                    pdf.rect(20, 50, 4, 4);
-                    pdf.rect(35, 50, 8, 8);
-                    pdf.rect(55, 50, 12, 12);
-                }else {
-                    pdf.text('Checked', 48, 10 )
-                    pdf.rect(10, 50, 2, 2);
-                    pdf.rect(20, 50, 4, 4);
-                    pdf.rect(35, 50, 8, 8);
-                    pdf.rect(55, 50, 12, 12);
-                }
-                pdf.text('Supplier Name', 14, y);
-                pdf.text(`${r.supplierName}`,14, y);
-                pdf.text(`${i + 1}. NCR Number: ${r.ncrNumber || "N/A"}`, 14, y);
-                pdf.text(`PO or Prod No. ${r.productNum}`, 14, y);
-                pdf.text(`Sales Order No. ${r.salesOrderNum}`, 14, y);
-                pdf.text(`Quantity recived ${r.QuantityReceived}`, 14, y);
-                pdf.text(`Quantity Defective ${r.QuantityDefective}`, 14, y);
-                pdf.text(`Description defect ${r.descriptionDefect}`, 14, y);
-                pdf.text(`Item Marked Nonconforming`,14, y);
-                if(r.Nonconforming.isNullOrEmpty()){
-                    pdf.text('Unchecked', 48, 10 )
-                    pdf.rect(10, 50, 2, 2);
-                    pdf.rect(20, 50, 4, 4);
-                    pdf.rect(35, 50, 8, 8);
-                    pdf.rect(55, 50, 12, 12);
-                }else{
-                    pdf.text('Checked', 48, 10 )
-                    pdf.rect(10, 50, 2, 2);
-                    pdf.rect(20, 50, 4, 4);
-                    pdf.rect(35, 50, 8, 8);
-                    pdf.rect(55, 50, 12, 12);
-                }
-                pdf.text(`Quality Representatives Name: ${r.qaName} || "N/A"`, 14, y + 3);
-                pdf.text(`Date: ${r.DateSigned} || "N/A"`, 14, y + 3);
-                pdf.text('Review by CF  Enginiring', 14, y + 3);
-                switch(r.Models.Review){
-                    case 1:
-                        r.Models.Review[0]
-                        pdf.text('Checked', 48, 10 )
-                        pdf.rect(10, 50, 2, 2);
-                        pdf.rect(20, 50, 4, 4);
-                        pdf.rect(35, 50, 8, 8);
-                        pdf.rect(55, 50, 12, 12);
-                    case 2: 
-                        r.Models.Review[1]
-                        pdf.text('Checked', 48, 10 )
-                        pdf.rect(10, 50, 2, 2);
-                        pdf.rect(20, 50, 4, 4);
-                        pdf.rect(35, 50, 8, 8);
-                        pdf.rect(55, 50, 12, 12);
-                    case 3:
-                        r.Models.Review[3]
-                        pdf.text('Checked', 48, 10 )
-                        pdf.rect(10, 50, 2, 2);
-                        pdf.rect(20, 50, 4, 4);
-                        pdf.rect(35, 50, 8, 8);
-                        pdf.rect(55, 50, 12, 12);
-                    case 4: 
-                        r.Models.Review[4]
-                        pdf.text('Checked', 48, 10 )
-                        pdf.rect(10, 50, 2, 2);
-                        pdf.rect(20, 50, 4, 4);
-                        pdf.rect(35, 50, 8, 8);
-                        pdf.rect(55, 50, 12, 12);
-                }
-                pdf.text('Does customer Require Notification of NCR', 14, y + 3);
-                switch(r.Models.NotifyCustomer){
-                    case 1: 
-                        r.Models.NotifyCustomer[0];
-                        pdf.text('Checked', 48, 10 )
-                        pdf.rect(10, 50, 2, 2);
-                        pdf.rect(20, 50, 4, 4);
-                        pdf.rect(35, 50, 8, 8);
-                        pdf.rect(55, 50, 12, 12);
-                    case 2:
-                        r.Models.NotifyCustomer[1];
-                        pdf.text('Checked', 48, 10 )
-                        pdf.rect(10, 50, 2, 2);
-                        pdf.rect(20, 50, 4, 4);
-                        pdf.rect(35, 50, 8, 8);
-                        pdf.rect(55, 50, 12, 12);
-                }
-                pdf.text(`Name Of Enginering: ${r.nameOfEngineer}`, 14, y + 3);
-                pdf.text(`Original Rev.Number: ${r.revisionDate} || "N/A"`, 14, y + 3);
-                pdf.text(`Updated Rev: ${r.updatedRevNum} || "N/A"`, 14, y + 3);
-                pdf.text(`Revision Date: ${r.LatestRevNumber} || "N/A"`, 14, y + 3);
-                pdf.text(`Engineering: ${r.Engineering} || "N/A"`, 14, y + 3);
-                pdf.text(`Date: ${r.Date} || "N/A"`, 14, y + 3);
-                pdf.text(`Purcharsing Prelimenar Decision`, 14, y + 3);
-                switch(r.Models.Prelimenar){
-                    case 1: 
-                        r.Models.Prelimenar[0];
-                        pdf.text('Unchecked', 48, 10 )
-                        pdf.rect(10, 50, 2, 2);
-                        pdf.rect(20, 50, 4, 4);
-                        pdf.rect(35, 50, 8, 8);
-                        pdf.rect(55, 50, 12, 12);
-                    case 2:
-                        r.Models.Prelimenar[1];
-                        pdf.text('Checked', 48, 10 )
-                        pdf.rect(10, 50, 2, 2);
-                        pdf.rect(20, 50, 4, 4);
-                        pdf.rect(35, 50, 8, 8);
-                        pdf.rect(55, 50, 12, 12);
-                }
-                switch(r.Models.){
-                    
-                }
 
             
-            if(table === "NCRLogs"){
-                pdf.text(`${i + 1}. NCR Number: ${r.NCRNumber || "N/A"}`, 14 , y);
-            }else if(table === "Engineerings"){
-                pdf.text(`${i + 1}. NCR Number: ${r.NCRNumber || "N/A"}`, 14, y);
-            }
+            pdf.text('CrossFire Canada', 12, 18);
+            pdf.text('Internal process document', 130, 18);
+            pdf.setFontSize(10);
+            pdf.text(`Doocument No. ${generateDocNumber}`, 12, 25);
+            pdf.text('Document Title: Non-Conformance Report', 70,25)
+            pdf.text(`Pages:${finalPages}`,170,25);
+            pdf.text('Identify Process Applicable:',12, 32)
+            pdf.text(`Supplier Name: ${Status.Name}`,70, 32)
+            pdf.text(`NCR Number: $selectedNCR.NCRNumber`, 170, 32);
+            pdf.text('Description: ' + selectedQA.DefectDescription, 10, 40);
+
+            // Agrega más campos de la misma manera según tus necesidades
     
-            y + 20;
-            if(y > 280){
-                pdf.addPage();
-                y = 30;
-            }
-            });
-            pdf.save(`${table}_Report.pdf`)
-        }catch(e){
-            console.error('Error in the creation of the pdf', e);
+            pdf.save(`ncr_report${generateDocNumber}.pdf`); // Guarda el archivo PDF con el nombre que prefieras
+        } else {
+            console.error('No hay un NCR seleccionado');
         }
     }
-    async function GeneratePDF(table:string): Promise<void> {
-        try{
-            const loadData = await fetchData(table);
-            createPDF(loadData, table);
-        }catch(e){
-            console.error('Error in the creation of the pdf', e);
-        }
-    }
-    GeneratePDF("");
-}
-const btnDownload = document.querySelector('#btn-download');
-btnDownload?.addEventListener('click', () =>{
 
-});
+ })
+ 
+  
