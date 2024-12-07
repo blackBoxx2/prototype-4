@@ -29,9 +29,10 @@ Need to change hard coded data to dynamic
     </head>
     <body>
         <div id="details-form">
-            <h3 class="title-group">Viewing NCR</h3>
+            <h3 class="title-group" id="ncrNumber">Viewing NCR</h3>
             <button class="btn-download">Export To PDF</button>
             <form id="view-form" >
+                
                 <fieldset>
                                     <!-- Quality Portion -->
                 <div class="accordion" id="qaAccordion">
@@ -42,13 +43,7 @@ Need to change hard coded data to dynamic
                             </button>
                         </h2>
                         <div id="qaCollapse" class="accordion-collapse collapse" aria-labelledby="qaHeading" data-bs-parent="#qaAccordion">
-                            <div class="accordion-body">                
-
-                                <div class="form-data-field">
-                                    <label class="form-label">NCR Number </label>
-                                    <p class="form-p" id="ncrNumber">0000001</p>
-                                </div>
-                    
+                            <div class="accordion-body">                                   
                                 <div class="form-data-field">
                                     <label class="form-label">Process Applicable </label>
                                     <p class="form-p" id="ipa"></p>

@@ -1,6 +1,6 @@
-import { DatabaseLib } from "./database.js";
-import * as $ from "../src/jquery.js";
-import { Models } from "./Models.js";
+import { DatabaseLib } from "./database";
+import * as $ from "jquery";
+import { Models } from "./Models";
 
 $(function() {
     const selected = localStorage.getItem('selectedNcrId');
@@ -15,10 +15,14 @@ $(function() {
     if(selected){
         const selectedID = Number(selected)
         //only show selected ncrlog
+        var selectedEng: Models.Engineering | null = null;
+        var selectedPurch: Models.Purchasing | null = null;
         const selectedNCR = db.GetNCRByNumber(selectedID);
         const selectedQA = db.GetQAByID(Number(selectedNCR.QualityAssuranceID));
-        const selectedEng = db.GetENGByID(Number(selectedNCR.EngineeringID));
-        const selectedPurch = db.GetPURByID(Number(selectedNCR.PurchasingID));
+        if(selectedNCR.EngineeringID != undefined && selectedNCR.EngineeringID != null)
+            selectedEng = db.GetENGByID(Number(selectedNCR.EngineeringID));
+        if(selectedNCR.PurchasingID != undefined && selectedNCR.PurchasingID != null)
+            selectedPurch = db.GetPURByID(Number(selectedNCR.PurchasingID));
         //get all fields
         const fields = { 
             ncrNumberField: document.getElementById("edit-title") as HTMLHeadingElement,
@@ -60,25 +64,12 @@ $(function() {
         };
         //set all fields
         if(selectedNCR){
-            //Helper method to format the dates the way html wants it
-            const selectedProcessText = fields.processApplicable.options[fields.processApplicable.selectedIndex].text;
-
-            let selectedProcessValue = fields.processApplicable;
-            let optionValue: number = -1; //default "select" index
-            if (selectedProcessText === "Supplier / Rec. Insp.") {
-                optionValue = 0;
-            } else if (selectedProcessText === "WIP (Production Order)") {
-                optionValue = 1;
-            }
-            
-            
-
             //set fields
-            fields.ncrNumberField.innerHTML = String(selectedNCR.NCRNumber);
-            fields.processApplicable.selectedIndex = optionValue;
+            fields.ncrNumberField.innerHTML = "Editing NCR #" + String(selectedNCR.NCRNumber);
+            fields.processApplicable.value = selectedQA.Process;
             fields.descriptionProduct.value = selectedQA.ItemDescription;
             fields.supplierName.selectedIndex = Number(selectedQA.SupplierID);
-            fields.productNum.value = String(Number(selectedQA.ProductNo));
+            fields.productNum.value = selectedQA.ProductNo;
             fields.salesOrderNum.value = String(selectedQA.OrderNo);
             fields.quantityRec.value = String(selectedQA.QuantityReceived);
             fields.quantityDef.value = String(selectedQA.QuantityDefective);
@@ -87,19 +78,20 @@ $(function() {
             fields.qaName.value = String(selectedQA.SignedByUser);
             fields.qaDate.value = formatDateString(String(selectedQA.DateSigned));
             // fields.qaPhoto?.value = String(selectedQA.);
-
-            fields.selReview.selectedIndex = Models.Review[selectedEng.Review];
-            fields.disposition.value = String(selectedEng.Disposition);
-            fields.requireNotification.value = String(selectedEng.NotifyCustomer);
-            fields.requireUpdating.value = String(selectedEng.UpdateDrawing);
-            fields.originalRevNum.value = String(selectedEng.OriginalRevNumber);
-            fields.updatedRevNum.value = String(selectedEng.LatestRevNumber);
-            fields.nameOfEngineer.value = String(selectedEng.SignedByUser);
-            fields.revisionDate.value = formatDateString(String(selectedEng.DateSigned));
-            fields.engineering.value = String(selectedEng.ID); //???
-            fields.engineeringDate.value = formatDateString(String(selectedEng.DateSigned));
+            if(selectedEng){
+                fields.selReview.value = Models.Review[selectedEng.Review];
+                fields.disposition.value = String(selectedEng.Disposition);
+                fields.requireNotification.value = String(selectedEng.NotifyCustomer);
+                fields.requireUpdating.value = String(selectedEng.UpdateDrawing);
+                fields.originalRevNum.value = String(selectedEng.OriginalRevNumber);
+                fields.updatedRevNum.value = String(selectedEng.LatestRevNumber);
+                fields.nameOfEngineer.value = String(selectedEng.SignedByUser);
+                fields.revisionDate.value = formatDateString(String(selectedEng.DateSigned));
+                fields.engineering.value = String(selectedEng.ID); //???
+                fields.engineeringDate.value = formatDateString(String(selectedEng.DateSigned));
+            }
             if(selectedPurch){
-                fields.decision.selectedIndex = Models.Decision[selectedPurch.Decision];
+                fields.decision.value = selectedPurch.Decision;
                 fields.carRaised.value = String(selectedPurch.CARRaised);
                 fields.carNo.value = String(selectedPurch.CARNo);
                 fields.followUpRequired.value = String(selectedPurch.FollowUpRequired);
@@ -107,7 +99,7 @@ $(function() {
                 fields.signedBy.value = String(selectedPurch.SignedByUser);
                 fields.dateSigned.value = formatDateString(String(selectedPurch.DateSigned));
                 fields.reInspectAcceptable.value = String(selectedPurch.ReInspectAcceptable);
-                fields.newNCRNumber.value = String(selectedPurch.NewNCRNumber);
+                fields.newNCRNumber.value = "Update NCR Number?";
                 fields.qualityDept.value = String(selectedPurch.QualityDept);
                 fields.signedByUser.value = String(selectedPurch.SignedByUser);
             }
@@ -125,47 +117,85 @@ $(function() {
                         QuantityReceived: Number(fields.quantityRec.value),
                         QuantityDefective: Number(fields.quantityDef.value),
                         DefectDescription: fields.descriptionDefect.value,
-                        // Nonconforming: fields.chkNonconforming.value === "True",
+                        //Nonconforming: fields.chkNonconforming.value === "True",
                         SignedByUser: Models.User[fields.qaName.value],
                         DateSigned: new Date(fields.qaDate.value)
                     };
-                    const updatedEng: Models.Engineering = {
-                        ID: selectedEng.ID,
-                        Review: Models.Review[fields.selReview.selectedIndex],
-                        Disposition: fields.disposition.value,
-                        NotifyCustomer: fields.requireNotification.value === "True",
-                        UpdateDrawing: fields.requireUpdating.value === "True",
-                        OriginalRevNumber: fields.originalRevNum.value,
-                        LatestRevNumber: fields.updatedRevNum.value,
-                        SignedByUser: Models.User[fields.nameOfEngineer.value],
-                        DateSigned: new Date(fields.revisionDate.value),
-                    };
-            
-                    const updatedPurch: Models.Purchasing ={
-                        ID: selectedPurch.ID,
-                        Decision: Models.Decision[fields.decision.selectedIndex],
-                        CARRaised: Boolean(fields.carRaised.checked),
-                        CARNo: fields.carNo.value,
-                        FollowUpRequired: fields.followUpRequired.checked,
-                        FollowUpType: fields.followUpType.value,
-                        SignedByUser: Models.User[fields.signedBy.value],
-                        DateSigned: new Date(fields.dateSigned.value),
-                        ReInspectAcceptable: fields.reInspectAcceptable.checked,
-                        NewNCRNumber: Number(fields.newNCRNumber.value),
-                        QualityDept: fields.qualityDept.value,
-                    };
-                    //Update each department
-                    var msg = db.UpdateQA(updatedQA);
-                    console.log("QA: " + msg);
-                    msg = db.UpdateEng(updatedEng);
-                    console.log("ENG: " + msg);
-                    msg = db.UpdatePurch(updatedPurch);
-                    console.log("PURCH: " + msg);
-
+                    if(selectedEng){ //if they are editing the engineering portion (eng already exists)
+                        const updatedEng: Models.Engineering = {
+                            ID: selectedEng.ID,
+                            Review: Models.Review[fields.selReview.selectedIndex],
+                            Disposition: fields.disposition.value,
+                            NotifyCustomer: fields.requireNotification.value === "True",
+                            UpdateDrawing: fields.requireUpdating.value === "True",
+                            OriginalRevNumber: fields.originalRevNum.value,
+                            LatestRevNumber: fields.updatedRevNum.value,
+                            SignedByUser: Models.User[fields.nameOfEngineer.value],
+                            DateSigned: new Date(fields.revisionDate.value),
+                        }
+                        const msg = db.UpdateEng(updatedEng);
+                        console.log("ENG: " + msg);
+                    }
+                    else{ //if they are editing an uncompleted ncr (eng adding their portion, purch ect)
+                        const newEng: Models.Engineering = {
+                            ID: (db.tables.Engineerings.length + 1),
+                            Review: Models.Review[fields.selReview.selectedIndex],
+                            Disposition: fields.disposition.value,
+                            NotifyCustomer: fields.requireNotification.value === "True",
+                            UpdateDrawing: fields.requireUpdating.value === "True",
+                            OriginalRevNumber: fields.originalRevNum.value,
+                            LatestRevNumber: fields.updatedRevNum.value,
+                            SignedByUser: Models.User[fields.nameOfEngineer.value],
+                            DateSigned: new Date(fields.revisionDate.value),
+                        }
+                        const msg = db.InsertEng(newEng);
+                        console.log("NEW ENG: " + msg);
+                    }
+                    if(selectedPurch){
+                        const updatedPurch: Models.Purchasing ={
+                            ID: selectedPurch.ID,
+                            Decision: Models.Decision[fields.decision.selectedIndex],
+                            CARRaised: Boolean(fields.carRaised.checked),
+                            CARNo: fields.carNo.value,
+                            FollowUpRequired: fields.followUpRequired.checked,
+                            FollowUpType: fields.followUpType.value,
+                            SignedByUser: Models.User[fields.signedBy.value],
+                            DateSigned: new Date(fields.dateSigned.value),
+                            ReInspectAcceptable: fields.reInspectAcceptable.checked,
+                            NewNCRNumber: Number(fields.newNCRNumber.value),
+                            QualityDept: fields.qualityDept.value,
+                        };
+                        const msg = db.UpdatePurch(updatedPurch);
+                        console.log("PURCH: " + msg);
+                    }
+                    else{
+                        //are the fields null?
+                        if(fields.decision.selectedIndex == 0 || fields.signedBy.value == null || fields.newNCRNumber.value == null || fields.newNCRNumber.value == ""){
+                            return; //then they dont want to add purchasing
+                        }
+                        else{ //if fields are filled, add a new purch
+                            const newPurch: Models.Purchasing ={
+                                ID: (db.tables.Purchasings.length + 1),
+                                Decision: Models.Decision[fields.decision.selectedIndex],
+                                CARRaised: Boolean(fields.carRaised.checked),
+                                CARNo: fields.carNo.value,
+                                FollowUpRequired: fields.followUpRequired.checked,
+                                FollowUpType: fields.followUpType.value,
+                                SignedByUser: Models.User[fields.signedBy.value],
+                                DateSigned: new Date(fields.dateSigned.value),
+                                ReInspectAcceptable: fields.reInspectAcceptable.checked,
+                                NewNCRNumber: Number(fields.newNCRNumber.value),
+                                QualityDept: fields.qualityDept.value,
+                            };
+                            const msg = db.InsertPurch(newPurch);
+                            console.log("NEW PURCH: " + msg);
+                        }
+                    }
+                    //update qa
+                    const msg = db.UpdateQA(updatedQA);
+                    console.log(msg);
+                    
                     db.SaveChanges();
-                    console.log(selectedQA);
-                    console.log(selectedEng);
-                    console.log(selectedPurch);
                     
                 })
             }
