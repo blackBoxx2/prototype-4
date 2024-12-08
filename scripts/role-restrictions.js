@@ -20,6 +20,17 @@ function setAccordionAccess() {
             accordion.querySelectorAll('input, textarea, select').forEach((element) => {
                 element.disabled = !isEnabled; 
             });
+
+            if (userRole === role || userRole === 'Admin') {
+                const button = accordion.querySelector('.accordion-button');
+                const collapse = accordion.querySelector('.accordion-collapse');
+
+                if (button && collapse) {
+                    button.classList.remove('collapsed'); 
+                    collapse.classList.add('show'); 
+                    collapse.style.display = 'block'; 
+                }
+            }           
         }
     });
 }
