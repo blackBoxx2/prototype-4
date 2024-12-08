@@ -1,5 +1,5 @@
 //Create the nav
-function createNav() {
+function NavCreate() {
     var nav = document.createElement('nav');
     nav.classList.add('navbar');
     //Create the logo
@@ -52,4 +52,4 @@ function createNav() {
         }
     });
 }
-document.addEventListener('DOMContentLoaded', createNav);
+document.addEventListener('DOMContentLoaded', NavCreate);

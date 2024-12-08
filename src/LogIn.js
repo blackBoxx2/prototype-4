@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     var userEmail = user.Email;
                     return userEmail === inputEmailValue_1;
                 });
-                console.log(isUser);
                 if (isUser) {
                     console.log('User Found in the database');
                     window.location.href = '/Dashboard/index.html';
