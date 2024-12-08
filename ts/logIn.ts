@@ -1,11 +1,13 @@
 //Load the page
 import { DatabaseLib } from "./database";
-import * as $ from "../src/jquery.js";
-import { Models } from "./Models.js";
+import * as $ from "jquery";
+import { Models } from "./Models";
 import jsPDF from "jspdf";
 import { error } from "jquery";
 document.addEventListener('DOMContentLoaded', function() {
     //create an object 
+    localStorage.setItem("userID", 'null');
+    localStorage.setItem("logInDate", 'null');
         const account ={
             email: '',
             password: ''
@@ -50,17 +52,40 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             
             cleanAlert(e.target.parentElement);
+
+            //Login click event
             btnLogIn.addEventListener('click', (e) =>{
                 e.preventDefault();
+                //setup/reset values
+                var userid: String | null = null;
+                var userLogInDate: String | null = null;
+                var userRole: String = "n/a";
                 if (selected) {
                     const inputEmailValue = inputEmail.value.trim().toLocaleLowerCase(); 
                     const isUser: boolean = users.some((user: any) => {
-                        const userEmail = user.Email
+                        const userEmail = user.Email;
                         return userEmail === inputEmailValue;
                     });
                     console.log(isUser);
                     if(isUser){
+                        //find the user that strictly equals the 
+                        const user = users.find((user: any) => user.Email === inputEmailValue);
+                        userid = String(user?.ID);
+                        userLogInDate = String(user?.LastLoggedIn);
+                        if(user?.Roles.Admin)
+                            userRole = "Admin";
+                        if(user?.Roles.Engineer)
+                            userRole = "Engineer";
+                        if(user?.Roles.Purchasing)
+                            userRole = "Purchasing";
+                        if(user?.Roles.QA)
+                            userRole = "QA";
+                        //set local storage properties
+                        localStorage.setItem("userID", userid as string);
+                        localStorage.setItem("logInDate", userLogInDate as string);
+                        localStorage.setItem("userRole", userRole as string);
                         console.log('User Found in the database');
+                        //return them to dashboard to view notifcations
                         window.location.href = '/Dashboard/index.html';
                     }else{
                         console.log('user Not Found in the database');

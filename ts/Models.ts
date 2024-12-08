@@ -24,6 +24,7 @@ export namespace Models {
     public DigitalSignature: string;
     public Email: string;
     public Roles: RoleClaim;
+    public LastLoggedIn: Date;
   }
   export class RoleClaim {
     public QA: boolean;

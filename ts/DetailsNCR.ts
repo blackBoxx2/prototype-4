@@ -7,6 +7,8 @@ $(function() {
     const selected = localStorage.getItem('selectedNcrId');
     if(selected){
         var db = DatabaseLib.Database.get();
+        db.ReSeed();
+        console.log(db.tables.Users);
         const selectedID = Number(selected)
         //only show selected ncrlog
         var selectedEng: Models.Engineering | null = null;
