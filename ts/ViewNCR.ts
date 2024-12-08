@@ -28,9 +28,19 @@ $(function() {
                 <td>${supplierName.Name}</td>
                 <td>${date}</td>
                 <td>${status}</td>
-                <td class="action"><a data-id="${ncr.NCRNumber}" href="/NCRLog/Details.html" class="viewNCR">Details</a> | <a data-id="${ncr.NCRNumber}" id="btnEdit" href="/NCRLog/edit.html" class="editNCR">Edit</a></td>
-
-            </tr>`;
+                 <td class="action"><button data-id="${ncr.NCRNumber}" 
+                    onclick="location.href='/NCRLog/Details.html'" 
+                    class="viewNCR">
+                    Details
+                    </button>
+                    |
+                    <button 
+                        data-id="${ncr.NCRNumber}" 
+                        onclick="location.href='/NCRLog/edit.html'" 
+                        class="editNCR">
+                        Edit
+                    </button></td>
+                                <tr>`;
             tableBody.innerHTML += row;
     });
     }

@@ -406,7 +406,20 @@ export namespace DataLib {
       let rolesToAdd: number[] = [];
       let roles = Math.random();
       let amtRoles = Math.random();
-
+      let rndDate = Math.random();
+      //add login dates
+      if(rndDate >= 0.75){
+        user.LastLoggedIn = new Date("2015-12-05T08:00:00");
+      }
+      else if(rndDate >= 0.50){
+        user.LastLoggedIn = new Date("2019-02-09T12:30:00");
+      }
+      else if(rndDate >= 0.25){
+        user.LastLoggedIn = new Date("2022-12-23T15:30:00");
+      }
+      else{
+        user.LastLoggedIn = new Date("2024-12-05T13:45:00");
+      }
       // basic role distribution
       if (roles > 0.66) {
         rolesToAdd.push(Models.Role.Purchasing);
@@ -448,6 +461,7 @@ export namespace DataLib {
         rolesToAdd.includes(Models.Role.Purchasing),
         rolesToAdd.includes(Models.Role.Admin)
       );
+      
       users.push(user);
       id++;
     });

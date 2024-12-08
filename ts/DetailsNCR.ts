@@ -7,6 +7,8 @@ $(function() {
     const selected = localStorage.getItem('selectedNcrId');
     if(selected){
         var db = DatabaseLib.Database.get();
+        db.ReSeed();
+        console.log(db.tables.Users);
         const selectedID = Number(selected)
         //only show selected ncrlog
         var selectedEng: Models.Engineering | null = null;
@@ -21,7 +23,7 @@ $(function() {
         console.log(selectedNCR);
         //get all fields
         const fields = { 
-            ncrNumberField: document.getElementById("ncrNumber") as HTMLParagraphElement,
+            ncrNumberField: document.getElementById("ncrNumber") as HTMLTitleElement,
             processApplicable: document.getElementById("ipa") as HTMLParagraphElement,
             descriptionProduct: document.getElementById("descriptionProduct") as HTMLParagraphElement,
             supplierName: document.getElementById("supplierName") as HTMLParagraphElement,
@@ -60,7 +62,7 @@ $(function() {
         };
         //set all fields
         if(selectedNCR){
-            fields.ncrNumberField.innerHTML = String(selectedNCR.NCRNumber);
+            fields.ncrNumberField.innerHTML = "Viewing NCR #" + String(selectedNCR.NCRNumber);
             fields.processApplicable.innerHTML = String(selectedQA.Process);
             fields.descriptionProduct.innerHTML = String(selectedQA.ItemDescription);
             fields.supplierName.innerHTML = supplierName.Name;

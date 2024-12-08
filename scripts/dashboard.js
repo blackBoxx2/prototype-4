@@ -65,15 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         roleButtons.textContent = "No actions available for your role.";
     }
-
-    // mock data, to be replaced with ts file and data from database
-    const recentNCRs = [
-        { id: 1, description: 'Defective Iteams Received', createdOn: '2024-12-01', status: 'Open' },
-        { id: 2, description: 'Quality Problem With Load', createdOn: '2024-11-28', status: 'Closed' },
-        { id: 3, description: 'Damaged Units/ Products', createdOn: '2024-11-20', status: 'Open' },
-        { id: 4, description: 'Tempature Issue', createdOn: '2024-11-18', status: 'Closed' },
-        { id: 5, description: 'Incorrect Iteams Recieved', createdOn: '2024-11-15', status: 'Open' }
-    ];
     
     const tableBody = document.querySelector('#ncr-table tbody');
     recentNCRs.forEach(ncr => {
