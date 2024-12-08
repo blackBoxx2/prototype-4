@@ -64,14 +64,16 @@
                   <option value="Closed">Closed</option>
               </select>
           
-              <button class="cta-btn-secondary ncr-list-searchbutton" onclick="applyFilter()">Filter</button>
+              <button id="filter-button" class="cta-btn-secondary ncr-list-searchbutton" onclick="applyFilter()">Filter</button>
+            </div>
+
+            <div class="btn-group">
+              <a href="/NCRLog/create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
+            </div>
+  
           </div>
           <br/>
           
-          </div>
-          <div class="btn-group">
-            <a href="/NCRLog/create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
-          </div>
           <table id="ncr-table">
             <thead>
               <tr>
