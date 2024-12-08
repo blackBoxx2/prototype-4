@@ -20,8 +20,8 @@ function NavCreate() {
     ddlMenu.classList.add('dropdown-menu');
     //Create the links container for the elements in the nav
     var links = [
-        { text: 'Index', href: 'index.html' },
-        { text: 'ncr Log', href: 'ncrlog.html' },
+        { text: 'Dashboard', href: 'index.html' },
+        { text: 'NCR Log', href: '/Dashboard/index.html' },
     ];
     //go trhougth every piece in the array to take the elements
     links.forEach(function (l) {
