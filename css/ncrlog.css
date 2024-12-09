@@ -6,12 +6,98 @@ and the ncrlog to how we had it in our other project. Feel free to delete what i
     grid-column: 1/16;
 }
 
+#filter-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+#filter-container > div > div:not([id='statusDiv']) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5em 0;
+}
+
+select, input {
+    width: 12.5em;
+    padding: 0.33em;
+    border-radius: 0.2em;
+}
+
+select#status {
+    margin-left: 2em;
+}
+
+label {
+    margin-left: 0.5em;    
+}
+
+#filter-button, #clear-button {
+    grid-column: 2/2;
+}
+
+#ncrNumSupplierDiv {
+    grid-row: 1/1;
+    grid-column: 1/3;
+    justify-content: initial;
+}
+#ncrNumSupplierDiv > div + div {
+    margin-top: 1.15em !important;
+}
+
+#statusDiv {
+    margin: 0 auto;
+    justify-content: center;
+    width: fit-content;
+    margin-top: 1em !important;
+}
+
+#dateStatusDiv {
+    grid-row: 1/1;
+    grid-column: 4/-1;
+    justify-content: space-between;
+    margin-left: 4em;
+}
+
+#buttonsDiv {
+    display: flex;
+    flex-direction: row;
+    grid-row: 2/2;
+    width: fit-content;
+    height: fit-content;
+    margin-top: 1em;
+}
+
+#dateDiv {
+    justify-content: space-between;
+}
+
+#infoDiv {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+}
+#createNewBtn {
+    display: block;
+    width: 75%;
+    font-size: 12pt;
+    text-wrap: nowrap;
+    margin-top: 1.25em;
+}
+#createDiv {
+    grid-column: -1;
+}
 .ncr-list-action-section {
     background-color: var(--light-grey-background-color);
     display: flex;
+    width: 95%;
     padding: 2rem 2rem;
     border-radius: 2.5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    padding-bottom: 1.33rem !important;
 }
 
 .btn-group{
