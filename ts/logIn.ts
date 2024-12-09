@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
         }
+
         
         function showAlert(mensaje, reference){
             cleanAlert(reference);
