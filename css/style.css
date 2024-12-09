@@ -269,6 +269,9 @@
             text-align: center;
             width: 18.75rem;
         }
+        .accordion-header {
+            margin-left: auto;
+        }
         .main-div button {
             margin: 0.625rem;
             padding: 0.625rem 1.25rem;

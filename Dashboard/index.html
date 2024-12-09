@@ -30,9 +30,6 @@
       <title>Dashboard</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
-  <div class="page-info">
-    <h1>Dashboard</h1>
-  </div>
   <div class="accordion" id="notifAccordion">
     <div class="accordion-item">
       <h2 class="accordion-header" id="notifHeading">
@@ -65,33 +62,37 @@
       </div>
     </div>
   </div>
-      
+  
+  <div class="page-info">
+    <h1>Dashboard</h1>
+  </div>
+    
 
-      <div class="grid-12">
-      <div id="role-buttons" class="btn-group"></div>
-        <div class="ncr-list">
-          <div class="ncr-list-action-section">
-            <h2>Most Recent NCR's</h2>
-            <div class="btn-group">
-              <a href="/NCRLog/create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
-            </div>
+  <div class="grid-12">
+    <div id="role-buttons" class="btn-group"></div>
+      <div class="ncr-list">
+        <div class="ncr-list-action-section">
+          <h2>Most Recent NCR's</h2>
+          <div class="btn-group">
+            <a href="/NCRLog/create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
           </div>
-          <table id="ncr-table">
-            <thead>
-              <tr>
-                <th>Number</th>
-                <th>Supplier</th>
-                <th>Created On</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-                  <!-- most recent ncrs load here -->
-            </tbody>
-          </table>
         </div>
-    </div>
+        <table id="ncr-table">
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Supplier</th>
+              <th>Created On</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+                <!-- most recent ncrs load here -->
+          </tbody>
+        </table>
+      </div>
+  </div>
 
     <div id="footer" class="footer mt-auto"></div>
 

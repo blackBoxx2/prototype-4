@@ -153,17 +153,21 @@ h2 {
 }
 
 #notifAccordion {
-    display: block;
-    margin: auto;
+    width: fit-content;
+    margin: 0 0 0 auto;
     text-align: center;
+    margin-right: 3em;
+    position: relative;
+    height: 3em;
+    bottom: 3em;    
 }
 
 #notifAccordion .accordion-header .accordion-button {
-    background-color: yellow;
+    background-color: #ffff009c;
     color: black;
     text-align: left;
 }
 #notifAccordion .accordion-header .accordion-button.collapsed {
-    background-color: yellow;
+    background-color: #ffff009c;
     color: black;
 }

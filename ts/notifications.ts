@@ -13,10 +13,14 @@ $(function() {
     const logInDate: Date = new Date(String(localStorage.getItem('logInDate')));
     //what role are they
     const loggedInRole = localStorage.getItem('userRole');    
+    const tableWrapper = document.querySelector("#notifcations-table") as HTMLTableElement;
     const tableBody = document.querySelector("#lst-notifs") as HTMLTableSectionElement;
     const numberOfNotifs = document.querySelector('#numberOfNotifs') as HTMLParagraphElement;
     const notifsDiv = document.querySelector('#div-notif') as HTMLDivElement;
 
+    notifsDiv.style.display = "block";
+    numberOfNotifs.innerHTML = "There are no new NCRs to view. You're all caught up! 😊";
+    tableWrapper.style.display = "none";
     var newNCRs: Models.NCRLog[] = [];
     if(loggedInRole == "Engineer") {
         //find the most recent ncrs 
@@ -38,6 +42,8 @@ $(function() {
         if(newNCRs.length > 0){
             notifsDiv.style.display = "block";
             numberOfNotifs.innerHTML = "You have " + newNCRs.length + " new NCRs to complete";
+            tableWrapper.style.display = "initial";
+
             newNCRs.forEach((ncr: any) =>{
                 const selQA = db.GetQAByID(ncr.QualityAssuranceID);
                 const supplierName = db.GetSupplierByID(selQA.SupplierID);
@@ -91,6 +97,8 @@ $(function() {
         if(newNCRs.length > 0){
             notifsDiv.style.display = "block";
             numberOfNotifs.innerHTML = "You have " + newNCRs.length + " new NCRs to complete";
+            tableWrapper.style.display = "initial";
+
             newNCRs.forEach((ncr: any) =>{
                 const selQA = db.GetQAByID(ncr.QualityAssuranceID);
                 const selEng = db.GetENGByID(ncr.EngineeringID);
