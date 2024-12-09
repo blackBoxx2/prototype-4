@@ -9,6 +9,7 @@ div{
 fieldset{
     padding: 2.5rem; 
     border: 2px solid var(--body-text-color);
+    margin-bottom: 20px;
 }
 
 
@@ -33,7 +34,7 @@ button {
     font-family: var(--body-text-normal-fontFamily);
 }
 h1 {
-    margin-left: 0.4em;
+    margin-left: 0;
 }
 
 input[type=Text], input[type=Number], select, input[type="file"]::file-selector-button{
@@ -78,7 +79,11 @@ input[type="file"]:hover, input[type="file"]::file-selector-button:hover{
 #btn-submit{
     margin-right: 0.5rem;
 }
-
+#btn-save{
+    background-color: #05d17e;
+    color: #fff;
+    border: 0.063rem ;
+}
 .title-group{
     display: grid;
     grid-template-columns: 3fr 1fr;
@@ -88,3 +93,6 @@ input[type="file"]:hover, input[type="file"]::file-selector-button:hover{
 }
 
 
+.inner-wrapper{
+    margin-bottom: 0.938rem;
+}

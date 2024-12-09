@@ -26,9 +26,7 @@ select, input {
     border-radius: 0.2em;
 }
 
-select#status {
-    margin-left: 2em;
-}
+
 
 label {
     margin-left: 0.5em;    
@@ -52,6 +50,7 @@ label {
     justify-content: center;
     width: fit-content;
     margin-top: 1em !important;
+    margin-left: 0;
 }
 
 #dateStatusDiv {
@@ -85,6 +84,61 @@ label {
     font-size: 12pt;
     text-wrap: nowrap;
     margin-top: 1.25em;
+ 
+}
+
+.a-btn-createNew{
+    padding: 1.063rem;
+    background-color: #05d17e;
+    text-decoration: none;
+    color: #fff;
+    border-radius:  var(--bs-border-radius);
+    margin-right: 1.688rem;
+}
+/*Filtering section*/
+input#ncr-number{
+    position: relative;
+    right: 6.25rem;
+}
+
+label[for="status"]{
+    position: relative;
+    left: 220px;
+}
+
+label[for="supplier"]{
+    position: static;
+}
+label[for="from-date"]{
+    display: inline-block;
+    position: relative;
+    right: 7.5rem;
+}
+label[for="to-date"]{
+    display: inline-block;
+    position: relative;
+    right: 4.375rem;
+}
+select#status {
+    position: relative;
+    margin-left: 0;
+    left: 260px;
+}
+select#supplier{
+    position: relative;
+    right: 100px;
+}
+
+#date-div{
+    display: inline-block;
+}
+#from-date{
+    position: relative;
+    right: 6.25rem;
+}
+#to-date{
+    position: relative;
+    right: 2.5rem;
 }
 #createDiv {
     grid-column: -1;
@@ -94,24 +148,33 @@ label {
     display: flex;
     width: 95%;
     padding: 2rem 2rem;
-    border-radius: 2.5px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
+    border-radius: 0.156rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
     padding-bottom: 1.33rem !important;
 }
 
 .btn-group{
     display: inline-flex;
-    margin: 5px;
+    margin: 0.313rem;
     align-items: right;
     justify-content: right;
 }
+.viewNCR{
+    position: relative;
+    width: 30%;
+}
+.editNCR{
+    position: relative;
+    width: 30%;
+}
+
+
 #ncr-list-searchbox
 {
-    max-width: 520px;
+    max-width: 32.5rem;
     width: 40%;
-    border-radius: 5px;
-    padding: 5px ;
+    border-radius: 0.313rem;
+    padding: 0.313rem ;
     font-family: var(--body-text-normal-fontFamily);
     font-size: 1rem;
     height: 2.5rem;
@@ -140,8 +203,12 @@ label {
     display:flex;
     justify-content: center;
     align-items: center;
-    background-color: red;
+    background-color: #AF3939 !important;
     color: #fff;
+}
+
+#clear-button.btn-group{
+    background-color: #AF3939 !important;
 }
 
 .cta-btn{
@@ -228,4 +295,212 @@ h2 {
     font-size: 1.5rem;
     width: fit-content;
     padding: 0.5rem;
+}
+@media (max-width: 1024px) {
+    input#ncr-number{
+        position: relative;
+        left: 0;
+        width: 70%;
+        margin: 0;
+    }
+    label[for="ncr-number"]{
+        display: none;
+    }
+    label[for="status"]{
+        position: static;
+        left: 220px;
+        display: none;
+    }
+    
+    label[for="supplier"]{
+        position: static;
+        display: none;
+    }
+    label[for="from-date"]{
+        display: inline-block;
+        position: relative;
+        right: 80px;
+        bottom: 30px;
+        
+    }
+    label[for="to-date"]{
+        display: inline-block;
+        position: relative;
+        right: 80px;
+        bottom: 30px;
+        margin-left: 15px;
+    }
+    select#status {
+        position: relative;
+        left: -75px;
+        bottom: 22px;
+        width: 124%;
+    }
+    select#supplier{
+        position: static;
+        width: 70%;
+    }
+    
+    #date-div{
+        display: inline-block;
+    }
+    #from-date{
+        position: relative;
+        width: 100%;
+        left: -75px;
+        bottom: 25px;
+    }
+    #to-date{
+        position: relative;
+        width: 100%;
+        left: -75px;
+        bottom: 25px;
+        margin-left: 15px;
+    }
+    .viewNCR{
+        position: relative;
+        margin-bottom: 10px;
+        width: 80%;
+        margin-left: 10px;
+    }
+    .editNCR{
+        position: relative;
+        width: 80%;
+        margin-right: 10px;
+    }
+    .a-btn-createNew{
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 769px) {
+    input#ncr-number{
+        position: relative;
+        left: 0;
+        width: 70%;
+        margin: 0;
+    }
+    label[for="ncr-number"]{
+        display: none;
+    }
+    label[for="status"]{
+        position: static;
+        left: 220px;
+        display: none;
+    }
+    
+    label[for="supplier"]{
+        position: static;
+        display: none;
+    }
+    label[for="from-date"]{
+        display: inline-block;
+        position: relative;
+        right: 80px;
+        bottom: 30px;
+        
+    }
+    label[for="to-date"]{
+        display: inline-block;
+        position: relative;
+        right: 80px;
+        bottom: 30px;
+        margin-left: 15px;
+    }
+    select#status {
+        position: relative;
+        left: -75px;
+        bottom: 22px;
+        width: 124%;
+    }
+    select#supplier{
+        position: static;
+        width: 70%;
+    }
+    
+    #date-div{
+        display: inline-block;
+    }
+    #from-date{
+        position: relative;
+        width: 100%;
+        left: -75px;
+        bottom: 25px;
+    }
+    #to-date{
+        position: relative;
+        width: 100%;
+        left: -75px;
+        bottom: 25px;
+        margin-left: 15px;
+    }
+    .viewNCR{
+        position: relative;
+        margin-bottom: 10px;
+        width: 80%;
+        margin-left: 10px;
+    }
+    .editNCR{
+        position: relative;
+        width: 80%;
+        margin-right: 10px;
+    }
+    .a-btn-createNew{
+        margin-right: 0;
+    }
+    .ncr-list{
+        align-items: center;
+    }
+}
+@media (max-width: 769px) 
+{
+    label[for="from-date"]{
+        display: inline-block;
+        position: relative;
+        right: 115px;
+        bottom: 30px;
+    }
+    label[for="to-date"]{
+        display: inline-block;
+        position: relative;
+        right: 130px;
+        bottom: 30px;
+        margin-left: 15px;
+    }
+
+    #from-date{
+        position: relative;
+        width: 80%;
+        left: -110px;
+        bottom: 25px;
+    }
+    #to-date{
+        position: relative;
+        width: 80%;
+        left: -130px;
+        bottom: 25px;
+        margin-left: 15px;
+    }
+    select#status {
+        position: relative;
+        left: -110px;
+        bottom: 22px;
+        width: 100%;
+    }
+    .viewNCR{
+        position: relative;
+        width: 90%;
+        margin-left: 0;
+        margin-bottom: 0;
+    }
+    .editNCR{
+        position: relative;
+        margin-right: 10px;
+        margin-left: 5px;
+        width: 90%;
+       
+    }
+    .ncr-list{
+        align-items: center;
+    }
 }
