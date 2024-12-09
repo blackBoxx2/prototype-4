@@ -1,5 +1,5 @@
 .ncr-list{
-    grid-column: 1/13;
+    grid-column: 1/5;
 }
 .page-info {
     margin: 0 auto;
@@ -51,7 +51,8 @@
 }
 #ncr-table{
     padding: 1rem 0.5rem;
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 2.5px;
 }
@@ -137,9 +138,12 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: nowrap; 
+    flex-wrap: wrap; 
     gap: 1.5rem; 
-    margin: 2rem 0; 
+    margin: 0 auto; 
+    width: 90%;
+    max-width: 100%;
+    text-align: center;
 }
 
 #role-buttons .cta-btn {
@@ -150,22 +154,50 @@ h2 {
     text-align: center;
     min-width: 400px; 
     min-height: 100px; 
+    flex: 1 1 auto;
+    display: inline-block;
+}
+#role-buttons .cta-btn img.button-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+#role-buttons .role-action-btn img.button-icon{
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.action{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.action .button-icon{ /* Little smaller icons for smaller buttons*/
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
 }
 
 #notifAccordion {
+    display: flex;
+    justify-content: center;   
+    align-items: center;       
     width: fit-content;
-    margin: 0 0 0 auto;
+    margin: 0 auto;            
     text-align: center;
-    margin-right: 3em;
-    position: relative;
-    height: 3em;
-    bottom: 3em;    
+    height: auto;
+    transition: height 0.3s ease;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
 }
-
 #notifAccordion .accordion-header .accordion-button {
     background-color: #ffff009c;
     color: black;
-    text-align: left;
+    /* text-align: left; */
 }
 #notifAccordion .accordion-header .accordion-button.collapsed {
     background-color: #ffff009c;

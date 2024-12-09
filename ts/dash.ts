@@ -14,22 +14,22 @@ $(function() {
         return;
     }
 
-    const roleActions: { [key: string]: { name: string; link: string }[] } = {
+    const roleActions: { [key: string]: { name: string; link: string, img: string}[] } = {
         QA: [
-            { name: 'Create New', link: '/NCRLog/create.html' },
-            { name: 'View Logs', link: '/NCRLog/index.html' }
+            { name: 'Create New', link: '/NCRLog/create.html', img: '/imgs/create-icon.png' },
+            { name: 'View Logs', link: '/NCRLog/index.html', img: '/imgs/view-icon.png' }
         ],
         Engineer: [
-            { name: 'Filtered Logs', link: 'no-filtered-logs' },
-            { name: 'View Logs', link: '/NCRLog/index.html' }
+            { name: 'Filtered Logs', link: 'no-filtered-logs', img: '/imgs/filter-icon.png' },
+            { name: 'View Logs', link: '/NCRLog/index.html', img: '/imgs/view-icon.png' }
         ],
         Purchasing: [
-            { name: 'View Reports', link: 'no-reports-page' },
-            { name: 'View Logs', link: '/NCRLog/index.html' }
+            { name: 'View Reports', link: 'no-reports-page', img: '/imgs/view-icon.png' },
+            { name: 'View Logs', link: '/NCRLog/index.html', img: '/imgs/view-icon.png' }
         ],
         Admin: [
-            { name: 'View Reports', link: 'no-reports-page' },
-            { name: 'View Logs', link: '/NCRLog/index.html' }
+            { name: 'View Reports', link: 'no-reports-page', img: '/imgs/view-icon.png' },
+            { name: 'View Logs', link: '/NCRLog/index.html', img: '/imgs/view-icon.png' }
         ]
     };
 
@@ -39,8 +39,11 @@ $(function() {
         roleActions[userRole].forEach(action => {
             const button = document.createElement('button');
             button.className = 'cta-btn role-action-btn';
-            button.textContent = action.name;
-            button.addEventListener('click', () => {
+
+            button.innerHTML = `
+                        <img src="${action.img}" alt="${action.name}" class="button-icon"> ${action.name}
+                    `;      
+              button.addEventListener('click', () => {
                 window.location.href = action.link;
             });
             roleButtons?.appendChild(button);
@@ -82,8 +85,13 @@ $(function() {
             <td>${date}</td>
             <td>${status}</td>
             <td class="action">
-                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/Details.html'" class="viewNCR">Details</button> |
-                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/edit.html'" class="editNCR">Edit</button>
+                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/Details.html'" class="viewNCR">
+                    <img src="/imgs/details-icon.png" alt="Details" class="button-icon"> Details
+                </button> 
+                <span class="separator">|</span>
+                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/edit.html'" class="editNCR">
+                    <img src="/imgs/edit-icon.png" alt="Edit" class="button-icon"> Edit
+                </button>
             </td>
         </tr>`;
         
