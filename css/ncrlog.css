@@ -1,7 +1,4 @@
-/* README:
-I copied the css from dashboard.css, as we are basically changing the dashboard to an actual dashboard,
-and the ncrlog to how we had it in our other project. Feel free to delete what isn't needed and add what is needed.
-*/
+
 .ncr-list{
     grid-column: 1/16;
 }
@@ -296,6 +293,48 @@ h2 {
     width: fit-content;
     padding: 0.5rem;
 }
+#createDiv{
+    display: flex;
+}
+#createDiv .button-icon{
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+}
+#buttonsDiv{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    padding-right: 2rem;
+}
+#buttonsDiv .btn-group{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 2rem, 2.5rem;
+
+}
+#buttonsDiv .button-icon{
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+    display: inline-block;
+}
+.action{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.action .button-icon{ /* Little smaller icons for smaller buttons*/
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
 @media (max-width: 1024px) {
     input#ncr-number{
         position: relative;

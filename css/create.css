@@ -96,3 +96,15 @@ input[type="file"]:hover, input[type="file"]::file-selector-button:hover{
 .inner-wrapper{
     margin-bottom: 0.938rem;
 }
+
+#button-group{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+.button-icon{
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}

@@ -48,18 +48,14 @@ $(function() {
                 <td>${supplierName.Name}</td>
                 <td>${date}</td>
                 <td>${status}</td>
-                 <td class="action"><button data-id="${ncr.NCRNumber}" 
-                    onclick="location.href='/NCRLog/Details.html'" 
-                    class="viewNCR">
-                    Details
-                    </button>
-                    |
-                    <button 
-                        data-id="${ncr.NCRNumber}" 
-                        onclick="location.href='/NCRLog/edit.html'" 
-                        class="editNCR">
-                        Edit
-                    </button></td>
+                 <td class="action"><button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/Details.html'" class="viewNCR">
+                    <img src="/imgs/details-icon.png" alt="Details" class="button-icon"> Details
+                </button> 
+                <span class="separator">|</span>
+                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/edit.html'" class="editNCR">
+                    <img src="/imgs/edit-icon.png" alt="Edit" class="button-icon"> Edit
+                </button>
+            </td>
                                 <tr>`;
             arrayNCRs.push({
                 NCRNumber: ncr.NCRNumber,

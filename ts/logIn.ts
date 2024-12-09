@@ -8,12 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
     //create an object 
     localStorage.setItem("userID", 'null');
     localStorage.setItem("logInDate", 'null');
+    
         const account ={
             email: '',
             password: ''
         }
         const selected = localStorage.getItem('selectedNcrId');
         var db = DatabaseLib.Database.get();
+        db.ReSeed();
         const users = db.tables.Users;
         //Take the vairables needed for the log in 
         const inputEmail = document.querySelector('#email') as HTMLInputElement;
