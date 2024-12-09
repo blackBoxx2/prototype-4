@@ -246,7 +246,7 @@
             display: block;
         }
         .dropdown-link:last-child{
-            margin-top: 38rem;
+            margin-top: auto;
         }
 
         .main-div{
@@ -273,7 +273,7 @@
             margin: 0.625rem;
             padding: 0.625rem 1.25rem;
             border: none;
-            background-color: #05d17e;  
+            background-color: var(--heading-primary-color);  
             color: white;
             cursor: pointer;
             border-radius: 0.313rem;
