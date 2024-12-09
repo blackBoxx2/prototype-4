@@ -13,16 +13,21 @@ $(function() {
     const logInDate: Date = new Date(String(localStorage.getItem('logInDate')));
     //what role are they
     const loggedInRole = localStorage.getItem('userRole');    
+    const accordItem = document.querySelector('div.accordion-item') as HTMLDivElement;
     const tableWrapper = document.querySelector("#notifcations-table") as HTMLTableElement;
     const tableBody = document.querySelector("#lst-notifs") as HTMLTableSectionElement;
     const numberOfNotifs = document.querySelector('#numberOfNotifs') as HTMLParagraphElement;
     const notifsDiv = document.querySelector('#div-notif') as HTMLDivElement;
 
+    accordItem.style.border = "0";
+    accordItem.style.display = "none";
     notifsDiv.style.display = "block";
     numberOfNotifs.innerHTML = "There are no new NCRs to view. You're all caught up! 😊";
     tableWrapper.style.display = "none";
     var newNCRs: Models.NCRLog[] = [];
+    console.log(loggedInRole);
     if(loggedInRole == "Engineer") {
+        accordItem.style.display = "";
         //find the most recent ncrs 
         recentNCR.forEach((ncr: any) =>{
             //get qa portion for all ncrs
@@ -74,6 +79,7 @@ $(function() {
         };
     }
     else if(loggedInRole == "Purchasing"){
+        accordItem.style.display = "";
         recentNCR.forEach((ncr: any) => {
             var selEng: Models.Engineering | null = null;
             //if the engineering portion was completed
