@@ -1,3 +1,37 @@
+//Create the footer
+function createFooter() : void{
+    const footer = document.createElement('footer');
+    footer.classList.add('footer');
+
+    const conteiner = document.createElement('div');
+    conteiner.classList.add('footer-conteiner');
+
+    const copyRight = document.createElement('p');
+    copyRight.textContent = '© 2024 BlackBox2Inc. All rights reserved'
+
+    const links: {text: string; href: string}[] =[
+        {text: 'Policy of privacy', href:'#' },
+        {text: 'Terms of services', href: '#'},
+        {text: 'contact us', href: '#'}
+    ];
+
+    const divLinks = document.createElement('div');
+    divLinks.classList.add('links-footer');
+
+    links.forEach((l) => {
+        const a = document.createElement('a');
+        a.textContent = l.text;
+        a.href = l.href;
+        divLinks.appendChild(a);
+    })
+        
+    conteiner.appendChild(copyRight);
+    conteiner.appendChild(divLinks);
+    footer.appendChild(conteiner);
+    document.body.appendChild(footer);
+}
+
+
 //Create log out pop up
 function LogOutCreate() {
     const mainDiv = document.createElement('Div');
@@ -137,4 +171,7 @@ function NavCreate() : void {
     })
 } 
 
-document.addEventListener('DOMContentLoaded', NavCreate);
+document.addEventListener('DOMContentLoaded', () =>{
+    NavCreate();
+    createFooter();
+});
