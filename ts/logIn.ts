@@ -134,8 +134,35 @@ document.addEventListener('DOMContentLoaded', function() {
             if (optionsIndex === 0) {
                 return;
             }
+
+            let userRole = "";
+
+            let user: Models.User | undefined;
+            switch (optionsIndex) {
+                case 1:
+                    user = users.find((user: Models.User) => user.Roles.QA);
+                    userRole = "QA";
+                    break;
+                case 2:
+                    user = users.find((user: Models.User) => user.Roles.Engineer);
+                    userRole = "Engineer";
+                    break;
+                case 3:
+                    user = users.find((user: Models.User) => user.Roles.Purchasing);
+                    userRole = "Purchasing";
+                    break;
+                case 4:
+                    user = users.find((user: Models.User) => user.Roles.Admin);
+                    userRole = "Admin";
+                    break;
+            }
         
-            localStorage.setItem('userRole', option.value);
+            let userid = String(user?.ID);
+            let userLogInDate = String(user?.LastLoggedIn);
+
+            localStorage.setItem("userID", userid as string);
+            localStorage.setItem("logInDate", userLogInDate as string);
+            localStorage.setItem("userRole", userRole as string);
         
             window.location.href = '/Dashboard';
         }
