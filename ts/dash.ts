@@ -58,7 +58,7 @@ $(function() {
     // Sort by DateSigned
     recentNCRs.sort((a, b) => {
         const selQA1 = db.GetQAByID(a.QualityAssuranceID);
-        const selQA2 = db.GetQAByID(a.QualityAssuranceID);
+        const selQA2 = db.GetQAByID(b.QualityAssuranceID);
 
         const date1 = new Date(selQA1.DateSigned);
         const date2 = new Date(selQA2.DateSigned);
