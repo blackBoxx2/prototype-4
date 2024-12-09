@@ -113,6 +113,7 @@
 
         /*Nav Bar From scripts section*/
         .navbar{
+            display: flex;
             padding: 0;
             width: 100%;
         }
@@ -154,13 +155,137 @@
             background-color: #555;
             color: white;
         }
+
+
+
         .hamburguer-menu{
+            margin-left: 1.25rem;
             width: 2.813rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .hamburguer-menu:hover{
+            transform: scale(1.1);
         }
         .logo{
             width: 9rem;
             margin-bottom: 0;
             margin-left: 1rem;
+            margin-right: 1.25rem;
+        }
+        .logo:hover{
+            transform: scale(1.1);
+        }
+
+        /*Side Bar*/
+        .side-bar {
+            position: fixed;
+            top: 0;
+            left: -18.75rem; 
+            width: 18.75rem;
+            height: 100%;
+            background-color: #19416d;
+            transition: left 0.3s ease-in-out; 
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            
+        }
+        .side-bar a{
+            color: #fff;
+            font-size: x-large;
+            margin-top: 0.625rem;
+            margin-left: 0.625rem;
+            text-decoration: none;
+            margin-right: 1.25rem;
+            width: 60%;
+            transition: background-color 0.2s ease;
+            font-family: var(--heading-secondary-fontFamily);
+        }
+
+       
+        
+        .side-bar .icon-img {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.625rem; 
+        }
+        .side-bar a:hover{
+            background-color: #555;
+            border-radius: 5%;
+            padding: 0.313rem;
+        }
+        .side-bar.show {
+            left: 0; 
+            box-shadow: 0.125rem 0 0.313rem rgba(0, 0, 0, 5);
+        }
+        
+        .side-bar .close-logo {
+            position: absolute; 
+            top: 0.625rem;
+            right: 0.625rem;
+            display: block;
+            width: 1.5rem;
+            height: 1.5rem;
+            cursor: pointer;
+            
+        }
+
+        .background-overlay{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+            z-index: 999; 
+            display: none; 
+        }
+
+        .background-overlay.show{
+            display: block;
+        }
+        .dropdown-link:last-child{
+            margin-top: 38rem;
+        }
+
+        .main-div{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .popup-content{
+            background-color: #fff;
+            padding: 1.25rem;
+            border-radius: 0.625rem;
+            text-align: center;
+            width: 18.75rem;
+        }
+        .main-div button {
+            margin: 0.625rem;
+            padding: 0.625rem 1.25rem;
+            border: none;
+            background-color: #05d17e;  
+            color: white;
+            cursor: pointer;
+            border-radius: 0.313rem;
+            font-size: 1rem;
+        }
+        
+        .main-div button#btnCancel {
+            background-color: #AF3939;  
+        }
+        
+        .main-div button:hover {
+            opacity: 0.8;
         }
 
         .cta-btn{
