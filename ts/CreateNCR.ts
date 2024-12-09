@@ -1,10 +1,39 @@
 import { DatabaseLib } from "./database";
 import * as $ from "jquery"
 import { Models } from "./Models.js";
+import * as Toastify from "toastify-js";
+
+//Toast notifactions
+function showToast(message: string, type: "success" | "error" | "info", redirect?: string): void{
+    if(redirect){
+        localStorage.setItem('toastMessage', message);
+        localStorage.setItem('toastType', type);
+    }
+    else{
+        Toastify({
+            text: message,
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            //if success then green, error then red, otherwise blue
+            backgroundColor: type === "success"
+            ? "green" : type === "error" ? "red"
+            : "blue",
+            close: true,
+        }).showToast();
+    }
+}
 
 $(function() { 
     var btnSubmit = document.querySelector("#btn-submit");
     var btnSave = this.documentElement.querySelector("#btn-save");
+
+    var btnCancel = document.querySelector("#btnCancel");
+    btnCancel?.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        showToast("Canceled successfully.", "error", "/NCRLog/index.html");
+    })
     //run validation
     var db = DatabaseLib.Database.get();
     //get data
@@ -123,6 +152,7 @@ $(function() {
         console.log(msg2);
         console.log(msg3);
         db.SaveChanges();
+        showToast("Successfully created new NCR!", "success");
         console.log(db.tables);
     })
 }
@@ -203,7 +233,7 @@ $(function() {
             console.log(msg2);
             console.log(msg3);
             db.SaveChanges();
-            console.log(db.tables);
+            showToast("Successfully created NCR!", "success", "/NCRLog/index.html");
         })
     }
     

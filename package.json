@@ -1,9 +1,11 @@
 {
   "devDependencies": {
     "@types/jquery": "^3.5.32",
+    "@types/toastify-js": "^1.12.3",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "jspdf": "^2.5.2"
+    "jspdf": "^2.5.2",
+    "toastify-js": "^1.12.0"
   }
 }

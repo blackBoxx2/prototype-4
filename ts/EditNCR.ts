@@ -1,10 +1,31 @@
 import { DatabaseLib } from "./database";
 import * as $ from "jquery";
 import { Models } from "./Models";
+import * as Toastify from "toastify-js";
+
+function showToast(message: string, type: "success" | "error" | "info", redirect?: string): void{
+    if(redirect){
+        localStorage.setItem('toastMessage', message);
+        localStorage.setItem('toastType', type);
+    }
+    else{
+        Toastify({
+            text: message,
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            //if success then green, error then red, otherwise blue
+            backgroundColor: type === "success"
+            ? "green" : type === "error" ? "red"
+            : "blue",
+            close: true,
+        }).showToast();
+    }
+}
 
 $(function() {
     const selected = localStorage.getItem('selectedNcrId');
-    const btnSubmit = document.querySelector("#btnSubmit");
+    var btnSubmit = document.querySelector("#btn-submit");
     //Setup dropdown lists:
     const descProductOptions = document.querySelector("descriptionProduct") as HTMLSelectElement;
     var db = DatabaseLib.Database.get();
@@ -91,7 +112,16 @@ $(function() {
                 fields.engineeringDate.value = formatDateString(String(selectedEng.DateSigned));
             }
             if(selectedPurch){
-                fields.decision.value = selectedPurch.Decision;
+                fields.carNo.style.display = "none";
+                fields.followUpType.style.display = "none";
+                fields.newNCRNumber.style.display = "none";
+                if(selectedPurch.CARRaised) //if carraised is true make car no field visibile
+                    fields.carNo.style.display = "block";
+                if(fields.followUpRequired)
+                    fields.followUpType.style.display = "block";
+                if(fields.reInspectAcceptable)
+                    fields.newNCRNumber.style.display = "block";
+                fields.decision.value = Models.Decision[selectedPurch.Decision];
                 fields.carRaised.value = String(selectedPurch.CARRaised);
                 fields.carNo.value = String(selectedPurch.CARNo);
                 fields.followUpRequired.value = String(selectedPurch.FollowUpRequired);
@@ -99,19 +129,20 @@ $(function() {
                 fields.signedBy.value = String(selectedPurch.SignedByUser);
                 fields.dateSigned.value = formatDateString(String(selectedPurch.DateSigned));
                 fields.reInspectAcceptable.value = String(selectedPurch.ReInspectAcceptable);
-                fields.newNCRNumber.value = "Update NCR Number?";
+                fields.newNCRNumber.placeholder = "Updated NCR number";
                 fields.qualityDept.value = String(selectedPurch.QualityDept);
                 fields.signedByUser.value = String(selectedPurch.SignedByUser);
             }
+            //SUBMIT NCR
             if(btnSubmit){
                 btnSubmit.addEventListener('click', function(e) {
+                    e.preventDefault();
                     //get updated fields
-
                     const updatedQA: Models.QualityAssurance = {
                         ID: selectedQA.ID,
-                        Process: Models.Process[fields.processApplicable.selectedIndex],
+                        Process: Models.Process[fields.processApplicable.value],
                         ItemDescription: fields.descriptionProduct.value,
-                        SupplierID: Number(fields.supplierName.options[fields.supplierName.selectedIndex]),
+                        SupplierID: Number(fields.supplierName.value),
                         ProductNo: String(fields.productNum.value),
                         OrderNo: fields.salesOrderNum.value,
                         QuantityReceived: Number(fields.quantityRec.value),
@@ -124,10 +155,10 @@ $(function() {
                     if(selectedEng){ //if they are editing the engineering portion (eng already exists)
                         const updatedEng: Models.Engineering = {
                             ID: selectedEng.ID,
-                            Review: Models.Review[fields.selReview.selectedIndex],
+                            Review: Models.Review[fields.selReview.value],
                             Disposition: fields.disposition.value,
-                            NotifyCustomer: fields.requireNotification.value === "True",
-                            UpdateDrawing: fields.requireUpdating.value === "True",
+                            NotifyCustomer: fields.requireNotification.checked,
+                            UpdateDrawing: fields.requireUpdating.checked,
                             OriginalRevNumber: fields.originalRevNum.value,
                             LatestRevNumber: fields.updatedRevNum.value,
                             SignedByUser: Models.User[fields.nameOfEngineer.value],
@@ -139,10 +170,10 @@ $(function() {
                     else{ //if they are editing an uncompleted ncr (eng adding their portion, purch ect)
                         const newEng: Models.Engineering = {
                             ID: (db.tables.Engineerings.length + 1),
-                            Review: Models.Review[fields.selReview.selectedIndex],
+                            Review: Models.Review[fields.selReview.value],
                             Disposition: fields.disposition.value,
-                            NotifyCustomer: fields.requireNotification.value === "True",
-                            UpdateDrawing: fields.requireUpdating.value === "True",
+                            NotifyCustomer: fields.requireNotification.checked,
+                            UpdateDrawing: fields.requireUpdating.checked,
                             OriginalRevNumber: fields.originalRevNum.value,
                             LatestRevNumber: fields.updatedRevNum.value,
                             SignedByUser: Models.User[fields.nameOfEngineer.value],
@@ -154,7 +185,7 @@ $(function() {
                     if(selectedPurch){
                         const updatedPurch: Models.Purchasing ={
                             ID: selectedPurch.ID,
-                            Decision: Models.Decision[fields.decision.selectedIndex],
+                            Decision: Models.Decision[fields.decision.value],
                             CARRaised: Boolean(fields.carRaised.checked),
                             CARNo: fields.carNo.value,
                             FollowUpRequired: fields.followUpRequired.checked,
@@ -194,8 +225,9 @@ $(function() {
                     //update qa
                     const msg = db.UpdateQA(updatedQA);
                     console.log(msg);
-                    
                     db.SaveChanges();
+                    showToast("Successfully created NCR!", "success", "/NCRLog/index.html");
+
                     
                 })
             }
@@ -204,6 +236,7 @@ $(function() {
     }
     else{
         console.log("Error: no selected ncr id")
+        showToast("Error in loading NCR", "error", "/NCRLog/index.html");
     }
 
     
