@@ -16,9 +16,12 @@
                 const link2 = document.createElement('link');
                 link2.rel = 'stylesheet';
                 link2.href = '/css/breadcrumbs.css';
-                
+                const link3 = document.createElement('link');
+                link3.rel = 'stylesheet';
+                link3.href = "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css";
                 document.head.appendChild(link);
                 document.head.appendChild(link2);
+                document.head.appendChild(link3);
               });
           </script>
         <title>Edit NCR Log</title>
@@ -312,10 +315,9 @@
 
                             <div>
                                 <div class="inner-wrapper">
-                                    <label for="carNo"><span class="text-danger">*</span> CAR Number:</label>
+                                    <label for="carNo">CAR Number:</label>
                                     <input aria-label="CAR No." type="text" name="carNo" id="carNo">
                                 </div>
-                                <div id="carNoValidation" class="text-danger"></div>
                             </div>
 
                             <div>
@@ -328,10 +330,9 @@
 
                             <div>
                                 <div class="inner-wrapper">
-                                    <label for="followUpType"><span class="text-danger">*</span> Follow-Up Type:</label>
+                                    <label for="followUpType">Follow-Up Type:</label>
                                     <input type="text" aria-label="Follow-Up Type" name="followUpType" id="followUpType">
                                 </div>
-                                <div id="followUpTypeValidation" class="text-danger"></div>
                             </div>
 
                             <div>
@@ -360,10 +361,9 @@
                             
                             <div>
                                 <div class="inner-wrapper">
-                                    <label for="newNCRNumber"><span class="text-danger">*</span> New NCR Number:</label>
+                                    <label for="newNCRNumber">New NCR Number:</label>
                                     <input type="number" aria-label="New NCR Number" name="newNCRNumber" id="newNCRNumber">
                                 </div>
-                                <div id="newNCRNumberValidation" class="text-danger"></div>
                             </div>
                             
                             <div>
@@ -396,4 +396,6 @@
 </html>
 <script src="/scripts/EditNCR.js"></script>
 <script src="/scripts/role-restrictions.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 

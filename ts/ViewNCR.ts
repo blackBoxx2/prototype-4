@@ -1,10 +1,28 @@
 import { DatabaseLib } from "./database";
 import * as $ from "jquery";
 import { Models } from "./Models";
-
+import * as Toastify from "toastify-js";
 
 
 $(function() {
+
+    //on page load check for toast notifications from previous pages
+    const msg = localStorage.getItem('toastMessage');
+    const type = localStorage.getItem('toastType') as "success" | "error" | "info" | null;
+    //if a message and type exists
+    if(msg && type != null){
+        Toastify({
+            text: msg,
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: type === "success" ? "green" : type === "error" ? "red" : "blue",
+            close: true,
+        }).showToast();
+    }
+    //clear local storage to avoid duplicate notifs
+    localStorage.removeItem('toastMessage');
+    localStorage.removeItem('toastType');
     //reset selected ncr to 0
     localStorage.setItem('selectedNcrId', "0");
     const tableBody = document.querySelector("#ncr-table tbody") as HTMLTableSectionElement;
