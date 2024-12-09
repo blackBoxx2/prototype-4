@@ -42,7 +42,6 @@ $(function() {
                 const selQA = db.GetQAByID(ncr.QualityAssuranceID);
                 const supplierName = db.GetSupplierByID(selQA.SupplierID);
                 const date = new Date(selQA.DateSigned).toLocaleDateString();
-                const status = Models.Status[ncr.Status];
                 const row = `
                 <tr>
                     <td>${ncr.NCRNumber}</td>
@@ -70,8 +69,13 @@ $(function() {
     }
     else if(loggedInRole == "Purchasing"){
         recentNCR.forEach((ncr: any) => {
-            const selEng = db.GetENGByID(ncr.EngineeringID);
-
+            var selEng: Models.Engineering | null = null;
+            //if the engineering portion was completed
+            if(ncr.EngineeringID != undefined && ncr.EngineeringID != null)
+                selEng = db.GetENGByID(ncr.EngineeringID);
+            else //else engineering is not completed therefore do not add it to the list
+                return;
+            
             const date: Date = new Date(selEng.DateSigned);
             if(logInDate.getDate() < date.getDate()){
                 //only add unseen NCRs that they have to complete
@@ -83,6 +87,62 @@ $(function() {
         })
         console.log("Ncr list: ");
         console.log(newNCRs);
+        //Same as other list, except it compares Eng date to Purch log in date instead of QA to ENG log in date
+        if(newNCRs.length > 0){
+            notifsDiv.style.display = "block";
+            numberOfNotifs.innerHTML = "You have " + newNCRs.length + " new NCRs to complete";
+            newNCRs.forEach((ncr: any) =>{
+                const selQA = db.GetQAByID(ncr.QualityAssuranceID);
+                const selEng = db.GetENGByID(ncr.EngineeringID);
+                const supplierName = db.GetSupplierByID(selQA.SupplierID);
+                const date = new Date(selEng.DateSigned).toLocaleDateString();
+                const row = `
+                <tr>
+                    <td>${ncr.NCRNumber}</td>
+                    <td>${selQA.DefectDescription}</td>
+                    <td>${date}</td>
+                    <td>${supplierName.Name}</td>
+                    <td class="action"><button data-id="${ncr.NCRNumber}" 
+                    onclick="location.href='/NCRLog/Details.html'" 
+                    class="viewNCR">
+                    Details
+                    </button>
+                    |
+                    <button 
+                        data-id="${ncr.NCRNumber}" 
+                        onclick="location.href='/NCRLog/edit.html'" 
+                        class="editNCR">
+                        Edit
+                    </button></td>
+                                <tr>`;
+                tableBody.innerHTML += row;
+            })
+            console.log("Ncr list: ");
+            console.log(newNCRs);
+        };
     }
+
+    //Click event listener for "Action" buttons
+    tableBody.addEventListener('click', function(n) {
+        //.target: gets the element where the event occured, then we can determine if they want
+        //to edit, view or delete
+        const clickedType = n.target as HTMLElement;
+        console.log("clicked event");
+        if(clickedType && (clickedType.classList.contains('viewNCR') 
+        || clickedType.classList.contains('editNCR') || clickedType.classList.contains('deleteNCR')))
+        {
+            //get the type - set in each data-id="" in the buttons
+            const ncrId = clickedType.getAttribute('data-id');
+            console.log("Clicked ID: " + ncrId);
+            //if the button isnt null
+            if(ncrId){
+                //set the local storage selected id to the current selected ncr id
+                localStorage.setItem('selectedNcrId', ncrId);
+            }
+            else{
+                console.log("Error: ncrId is false");
+            }
+        }
+    })
 });
 

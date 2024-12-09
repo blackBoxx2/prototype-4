@@ -3,20 +3,20 @@ I copied the css from dashboard.css, as we are basically changing the dashboard 
 and the ncrlog to how we had it in our other project. Feel free to delete what isn't needed and add what is needed.
 */
 .ncr-list{
-    grid-column: 1/13;
+    grid-column: 1/16;
 }
 
 .ncr-list-action-section {
     background-color: var(--light-grey-background-color);
     display: flex;
     padding: 2rem 2rem;
-    width: 100%;
     border-radius: 2.5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .btn-group{
-    margin-left: auto;
+    display: inline-flex;
+    margin: 5px;
     align-items: right;
     justify-content: right;
 }
@@ -45,13 +45,25 @@ and the ncrlog to how we had it in our other project. Feel free to delete what i
     justify-content: center;
     align-items: center;
 }
+.ncr-list-clearbutton{
+    height: 2.5rem;
+    width: 5rem;
+    margin-left:  0.2rem;
+    border: 1px solid var(--heading-secondary-color);
+    font-family: var(--body-text-normal-fontFamily);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: #fff;
+}
 
 .cta-btn{
     height: 2.5rem;
 }
 #ncr-table{
     padding: 1rem 0.5rem;
-    width: 100%;
+    width: 95%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 2.5px;
 }

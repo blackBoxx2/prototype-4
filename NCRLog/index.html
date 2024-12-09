@@ -16,8 +16,13 @@
           const link2 = document.createElement('link');
           link2.rel = 'stylesheet';
           link2.href = '/css/breadcrumbs.css';
+          const link3 = document.createElement('link');
+          link3.rel = 'stylesheet';
+          link3.href = '/css/style.css';
           document.head.appendChild(link);
           document.head.appendChild(link2);
+          document.head.appendChild(link3);
+
           
         });
     </script>
@@ -27,7 +32,9 @@
     <div class="grid-12">
       <div class="page-info">
         <h1 style="text-wrap: nowrap;">NCR Log</h1>
-        <h2>NCR Count: 10</h2>
+        <div class="btn-group">
+          <a href="/NCRLog/create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
+        </div>
       </div>
         <div class="ncr-list"> 
           <div class="ncr-list-action-section">
@@ -39,23 +46,23 @@
           
               <label for="supplier">Supplier:</label>
               <select id="supplier">
-                <option value="">-- Select Supplier --</option>
-                <option value="green-supply">Green Supply Logistics</option>
-                <option value="lumberjack">Lumberjack Supply Co.</option>
-                <option value="metalworks">Metalworks Inc.</option>
-                <option value="plastic-parts">Plastic Parts Co.</option>
-                <option value="screws-bolts">Screws and Bolts Inc.</option>
-                <option value="nails-rivets">Nails and Rivets Co.</option>
-                <option value="bolt-makers">Bolt Makers Ltd.</option>
-                <option value="john-dale">John & Dale's Warehouse</option>
-                <option value="damiens-hardware">Damien's Hardware</option>              
+                <option value="" disabled selected>--Select a Supplier--</option>
+                <option>Green Supply Logistics</option>
+                <option>Lumberjack Supply Co.</option>
+                <option>Metalworks Inc.</option>
+                <option>Plastic Parts Co.</option>
+                <option>Screws and Bolts Inc.</option>
+                <option>Nails and Rivets Co.</option>
+                <option>Bolt Makers Ltd.</option>
+                <option>John & Dale's Warehouse</option>
+                <option>Damien's Hardware</option>             
               </select>
-          
+      
               <label for="from-date">From Date:</label>
               <input type="date" id="from-date" />
               <label for="to-date">To Date:</label>
               <input type="date" id="to-date" />
-          
+              <br/>
               <label for="status">Status:</label>
               <select id="status">
                   <option value="">-- Select Status --</option>
@@ -63,14 +70,11 @@
                   <option value="Purchasing">Purchasing</option>
                   <option value="Closed">Closed</option>
               </select>
-          
-              <button id="filter-button" class="cta-btn-secondary ncr-list-searchbutton" onclick="applyFilter()">Filter</button>
-            </div>
+              <hr/>
+              <button class="btn-group" id="filter-button" class="cta-btn-secondary ncr-list-searchbutton">Filter</button>
+              <button class="btn-group" id="clear-button" class="cta-btn-secondary ncr-list-clearbutton">Clear</button>
 
-            <div class="btn-group">
-              <a href="/NCRLog/create.html" class="cta-btn cta-btn-primary ncr-list-createhbutton">Create New</a>
-            </div>
-  
+            </div>  
           </div>
           <br/>
           

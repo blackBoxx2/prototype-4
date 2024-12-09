@@ -134,8 +134,10 @@ h2 {
 
 
 #role-buttons {
-    flex-wrap: nowrap; 
+    display: flex;
     justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap; 
     gap: 1.5rem; 
     margin: 2rem 0; 
 }
@@ -148,4 +150,20 @@ h2 {
     text-align: center;
     min-width: 400px; 
     min-height: 100px; 
+}
+
+#notifAccordion {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+#notifAccordion .accordion-header .accordion-button {
+    background-color: yellow;
+    color: black;
+    text-align: left;
+}
+#notifAccordion .accordion-header .accordion-button.collapsed {
+    background-color: yellow;
+    color: black;
 }

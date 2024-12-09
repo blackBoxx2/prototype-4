@@ -30,11 +30,13 @@
       <title>Dashboard</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
-
+  <div class="page-info">
+    <h1>Dashboard</h1>
+  </div>
   <div class="accordion" id="notifAccordion">
     <div class="accordion-item">
       <h2 class="accordion-header" id="notifHeading">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#notifCollapse" aria-expanded="false" aria-controls="notifCollapse">
+        <button id="notifCollapseButton" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#notifCollapse" aria-expanded="false" aria-controls="notifCollapse">
           Notifications
         </button>
       </h2>
@@ -62,12 +64,9 @@
         </div>
       </div>
     </div>
+  </div>
+      
 
-      <div class="page-info">
-        <h1>Dashboard</h1>
-      </div>
-
-      </div>
       <div class="grid-12">
       <div id="role-buttons" class="btn-group"></div>
         <div class="ncr-list">
