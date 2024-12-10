@@ -7,7 +7,6 @@ $(function() {
     const selected = localStorage.getItem('selectedNcrId');
     if(selected){
         var db = DatabaseLib.Database.get();
-        db.ReSeed();
         console.log(db.tables.Users);
         const selectedID = Number(selected)
         //only show selected ncrlog
@@ -45,8 +44,6 @@ $(function() {
             updatedRevNum: document.getElementById("updatedRevNum") as HTMLParagraphElement,
             nameOfEngineer: document.getElementById("nameOfEngineer") as HTMLParagraphElement,
             revisionDate: document.getElementById("revisionDate") as HTMLParagraphElement,
-            engineering: document.getElementById("engineering") as HTMLParagraphElement,
-            engineeringDate: document.getElementById("engineeringDate") as HTMLParagraphElement,
                   //purchasing
             decision: document.getElementById("decision") as HTMLParagraphElement,
             carRaised: document.getElementById("carRaised") as HTMLParagraphElement,
@@ -58,47 +55,47 @@ $(function() {
             reInspectAcceptable: document.getElementById("reInspectAcceptable") as HTMLParagraphElement,
             newNCRNumber: document.getElementById("newNCRNumber") as HTMLParagraphElement,
             qualityDept: document.getElementById("qualityDept") as HTMLParagraphElement,
-            signedByUser: document.getElementById("signedByUser") as HTMLParagraphElement
         };
         //set all fields
         if(selectedNCR){
-            fields.ncrNumberField.innerHTML = "Viewing NCR #" + String(selectedNCR.NCRNumber);
-            fields.processApplicable.innerHTML = String(selectedQA.Process);
-            fields.descriptionProduct.innerHTML = String(selectedQA.ItemDescription);
-            fields.supplierName.innerHTML = supplierName.Name;
-            fields.productNum.innerHTML = String(selectedQA.ProductNo);
-            fields.salesOrderNum.innerHTML = String(selectedQA.OrderNo);
-            fields.quantityRec.innerHTML = String(selectedQA.QuantityReceived);
-            fields.quantityDef.innerHTML = String(selectedQA.QuantityDefective);
-            fields.descriptionDefect.innerHTML = String(selectedQA.DefectDescription);
-            fields.chkNonconforming.innerHTML = "True";
-            fields.qaName.innerHTML = String(selectedQA.SignedByUser);
-            fields.qaDate.innerHTML = String(selectedQA.DateSigned);
+            let qa = db.GetUserByID(selectedQA.SignedByUser);
+            fields.ncrNumberField.innerHTML = "Viewing NCR #" + String(selectedNCR.NCRNumber) || "???";
+            fields.processApplicable.innerHTML = String(selectedQA.Process) || "N/A";
+            fields.descriptionProduct.innerHTML = selectedQA.ItemDescription || "N/A";
+            fields.supplierName.innerHTML = supplierName.Name || "N/A";
+            fields.productNum.innerHTML = selectedQA.ProductNo || "N/A";
+            fields.salesOrderNum.innerHTML = selectedQA.OrderNo || "N/A";
+            fields.quantityRec.innerHTML = String(selectedQA.QuantityReceived) || "Unknown";
+            fields.quantityDef.innerHTML = String(selectedQA.QuantityDefective) || "Unknown";
+            fields.descriptionDefect.innerHTML = selectedQA.DefectDescription || "N/A";
+            fields.chkNonconforming.innerHTML = "Yes";
+            fields.qaName.innerHTML = `${qa.DigitalSignature} (emp. #${qa.ID})`;
+            fields.qaDate.innerHTML = String(selectedQA.DateSigned).slice(0, 10);
             // fields.qaPhoto?.innerHTML = String(selectedQA.);
             if(selectedEng != null){
-                fields.selReview.innerHTML = String(selectedEng.Review);
-                fields.disposition.innerHTML = String(selectedEng.Disposition);
-                fields.requireNotification.innerHTML = String(selectedEng.NotifyCustomer);
-                fields.requireUpdating.innerHTML = String(selectedEng.UpdateDrawing);
-                fields.originalRevNum.innerHTML = String(selectedEng.OriginalRevNumber);
-                fields.updatedRevNum.innerHTML = String(selectedEng.LatestRevNumber);
-                fields.nameOfEngineer.innerHTML = String(selectedEng.SignedByUser);
-                fields.revisionDate.innerHTML = String(selectedEng.DateSigned);
-                fields.engineering.innerHTML = String(selectedEng.ID); //???
-                fields.engineeringDate.innerHTML = String(selectedEng.DateSigned);
+                let eng = db.GetUserByID(selectedEng.SignedByUser);
+                fields.selReview.innerHTML = String(selectedEng.Review) || "N/A";
+                fields.disposition.innerHTML = String(selectedEng.Disposition)|| "N/A";
+                fields.requireNotification.innerHTML = selectedEng.NotifyCustomer ? "Yes" : "No";
+                fields.requireUpdating.innerHTML = selectedEng.UpdateDrawing ? "Yes" : "No";
+                fields.originalRevNum.innerHTML = String(selectedEng.OriginalRevNumber) || "1";
+                fields.updatedRevNum.innerHTML = String(selectedEng.LatestRevNumber) || "N/A";
+                fields.nameOfEngineer.innerHTML = `${eng.DigitalSignature} (emp. #${eng.ID})` || "N/A";
+                fields.revisionDate.innerHTML = String(selectedEng.DateSigned).slice(0, 10) || "N/A";
             }
             if(selectedPurch != null){
-                fields.decision.innerHTML = String(selectedPurch.Decision);
-                fields.carRaised.innerHTML = String(selectedPurch.CARRaised);
-                fields.carNo.innerHTML = String(selectedPurch.CARNo);
-                fields.followUpRequired.innerHTML = String(selectedPurch.FollowUpRequired);
-                fields.followUpType.innerHTML = String(selectedPurch.FollowUpType);
-                fields.signedBy.innerHTML = String(selectedPurch.SignedByUser);
-                fields.dateSigned.innerHTML = String(selectedPurch.DateSigned);
-                fields.reInspectAcceptable.innerHTML = String(selectedPurch.ReInspectAcceptable);
-                fields.newNCRNumber.innerHTML = String(selectedPurch.NewNCRNumber);
-                fields.qualityDept.innerHTML = String(selectedPurch.QualityDept);
-                fields.signedByUser.innerHTML = String(selectedPurch.SignedByUser);
+                let purch = db.GetUserByID(selectedPurch.SignedByUser)
+                fields.decision.innerHTML = String(selectedPurch.Decision) || "N/A";
+                let cr = selectedPurch.CARRaised;
+                fields.carRaised.innerHTML = cr == null ? "N/A" : (cr ? "Yes" : "No")
+                fields.carNo.innerHTML = selectedPurch.CARNo || "N/A";
+                fields.followUpRequired.innerHTML = selectedPurch.FollowUpRequired ? "Yes" : "No";
+                fields.followUpType.innerHTML = selectedPurch.FollowUpType || "N/A";
+                fields.signedBy.innerHTML = `${purch.DigitalSignature} (emp. #${purch.ID})` || "N/A";
+                fields.dateSigned.innerHTML = String(selectedPurch.DateSigned).slice(0, 10) || "N/A";
+                fields.reInspectAcceptable.innerHTML = selectedPurch.ReInspectAcceptable ? "Yes" : "No";
+                fields.newNCRNumber.innerHTML = selectedPurch.NewNCRNumber == null ? "N/A" : String(selectedPurch.NewNCRNumber);
+                fields.qualityDept.innerHTML = selectedPurch.QualityDept || "N/A";
                 
             }
 
@@ -106,5 +103,6 @@ $(function() {
     }
     else{
         console.log("Error: no selected ncr id")
+        this.location.href = "/NCRLog"
     }
 })
