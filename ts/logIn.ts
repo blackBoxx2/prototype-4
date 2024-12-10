@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         const selected = localStorage.getItem('selectedNcrId');
         var db = DatabaseLib.Database.get();
-        db.ReSeed();
+        // db.ReSeed();
         const users = db.tables.Users;
         //Take the vairables needed for the log in 
         const inputEmail = document.querySelector('#email') as HTMLInputElement;

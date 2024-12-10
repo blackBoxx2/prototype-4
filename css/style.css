@@ -279,7 +279,7 @@ style.css
             width: 18.75rem;
         }
         .accordion-header {
-            margin-left: auto;
+            margin: 0 auto;
         }
         .main-div button {
             margin: 0.625rem;

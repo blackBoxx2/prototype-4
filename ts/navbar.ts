@@ -152,6 +152,9 @@ function NavCreate() : void {
     const confirmBtn = document.getElementById('btnLogOut');
     if(confirmBtn){
         confirmBtn.addEventListener('click', () => {
+            localStorage.setItem('userID', '');
+            localStorage.setItem('logInDate', '');
+            localStorage.setItem('userRole', '');
             window.location.href = '/Home/index.html'
         })
     }
@@ -172,6 +175,16 @@ function NavCreate() : void {
 } 
 
 document.addEventListener('DOMContentLoaded', () =>{
+
+    // since this navbar will only be shown to logged in users, 
+    // we can add the authentication here
+    const userRole = localStorage.getItem('userRole');
+
+    if (!userRole) {
+        window.location.href = '/Accounts/Login';
+        return;
+    }
+
     NavCreate();
     createFooter();
 });

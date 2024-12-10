@@ -5,6 +5,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "jquery": "^3.7.1",
     "jspdf": "^2.5.2",
     "toastify-js": "^1.12.0"
   }

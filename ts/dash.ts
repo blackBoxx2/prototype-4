@@ -3,17 +3,17 @@ import * as $ from "jquery";
 import { Models } from "./Models";
 
 $(function() {
-
-    const db = DatabaseLib.Database.get();
-    const ncrLogs = db.tables.NCRLogs;
+    // moved to before the db load so we can potentially skip loading data if not necessary
     const userRole = localStorage.getItem('userRole');
 
     if (!userRole) {
-        alert("No user role found. Redirecting to login.");
-        window.location.href = '/login.html';
-        return;
+        return; // user will be redirected to login by navbar
     }
 
+
+    const db = DatabaseLib.Database.get();
+    const ncrLogs = db.tables.NCRLogs;
+    
     const roleActions: { [key: string]: { name: string; link: string, img: string}[] } = {
         QA: [
             { name: 'Create New', link: '/NCRLog/create.html', img: '/imgs/create-icon.png' },
@@ -85,11 +85,11 @@ $(function() {
             <td>${date}</td>
             <td>${status}</td>
             <td class="action">
-                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/Details.html'" class="viewNCR">
+                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/Details'" class="viewNCR">
                     <img src="/imgs/details-icon.png" alt="Details" class="button-icon"> Details
                 </button> 
                 <span class="separator">|</span>
-                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/edit.html'" class="editNCR">
+                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/Edit'" class="editNCR">
                     <img src="/imgs/edit-icon.png" alt="Edit" class="button-icon"> Edit
                 </button>
             </td>
