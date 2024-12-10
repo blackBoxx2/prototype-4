@@ -9,8 +9,7 @@ $(function() {
     const userRole = localStorage.getItem('userRole');
 
     if (!userRole) {
-        alert("No user role found. Redirecting to login.");
-        window.location.href = '/login.html';
+        window.location.href = '/Accounts/Login';
         return;
     }
 
@@ -85,11 +84,11 @@ $(function() {
             <td>${date}</td>
             <td>${status}</td>
             <td class="action">
-                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/Details.html'" class="viewNCR">
+                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/Details'" class="viewNCR">
                     <img src="/imgs/details-icon.png" alt="Details" class="button-icon"> Details
                 </button> 
                 <span class="separator">|</span>
-                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/edit.html'" class="editNCR">
+                <button data-id="${ncr.NCRNumber}" onclick="location.href='/NCRLog/Edit'" class="editNCR">
                     <img src="/imgs/edit-icon.png" alt="Edit" class="button-icon"> Edit
                 </button>
             </td>
