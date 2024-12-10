@@ -175,6 +175,16 @@ function NavCreate() : void {
 } 
 
 document.addEventListener('DOMContentLoaded', () =>{
+
+    // since this navbar will only be shown to logged in users, 
+    // we can add the authentication here
+    const userRole = localStorage.getItem('userRole');
+
+    if (!userRole) {
+        window.location.href = '/Accounts/Login';
+        return;
+    }
+
     NavCreate();
     createFooter();
 });

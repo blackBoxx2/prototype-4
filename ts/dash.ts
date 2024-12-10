@@ -3,16 +3,17 @@ import * as $ from "jquery";
 import { Models } from "./Models";
 
 $(function() {
-
-    const db = DatabaseLib.Database.get();
-    const ncrLogs = db.tables.NCRLogs;
+    // moved to before the db load so we can potentially skip loading data if not necessary
     const userRole = localStorage.getItem('userRole');
 
     if (!userRole) {
-        window.location.href = '/Accounts/Login';
-        return;
+        return; // user will be redirected to login by navbar
     }
 
+
+    const db = DatabaseLib.Database.get();
+    const ncrLogs = db.tables.NCRLogs;
+    
     const roleActions: { [key: string]: { name: string; link: string, img: string}[] } = {
         QA: [
             { name: 'Create New', link: '/NCRLog/create.html', img: '/imgs/create-icon.png' },
