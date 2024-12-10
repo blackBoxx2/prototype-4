@@ -100,11 +100,6 @@ input[type=checkbox]:checked
     background-color: var(--heading-secondary-color);
 }
 
-#role-buttons:first-child{
-    padding: 0;
-    width: 50;
-}
-
 .pagination{
     display: flex;
     justify-content: space-evenly;

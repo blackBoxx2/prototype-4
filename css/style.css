@@ -250,6 +250,14 @@ style.css
             margin-top: auto;
         }
 
+        .conteiner-fail{
+            background-color: #fff;
+            padding: 1.25rem;
+            border-radius: 0.625rem;
+            text-align: center;
+            width: 18.75rem;
+        }
+
         .main-div{
             display: none;
             position: fixed;

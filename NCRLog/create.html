@@ -60,7 +60,7 @@
                                 <div>
                                 <div class="inner-wrapper">
                                     <label for="ipa"><span class="text-danger">*</span> Identify Process Applicable:</label> <!-- ipa stands for Identify Process Applicable -->
-                                    <select  aria-label="Identify Process Applicable" type="text" name="ipa" id="ipa">
+                                    <select  aria-label="Identify Process Applicable" name="ipa" id="ipa">
                                         <option value="-1" disabled selected>Select a Process</option>
                                         <option value="0">Supplier / Rec. Insp.</option>
                                         <option value="1">WIP (Production Order)</option>
@@ -162,7 +162,7 @@
                                 <div class="inner-wrapper">
                                     <label for="chkNonconforming"><span class="text-danger">*</span> Item marked Nonconforming</label>
                                     <input type="checkbox" aria-label="Item makred Nonconforming" id="chkNonconforming" name="chkNonconforming"
-                                    checked="true" readonly="true">
+                                    checked disabled>
                                 </div>
                                 <div id="chkNonconformingValidation" class="text-danger"></div>
                             </div>
@@ -427,7 +427,7 @@
     <script src="/scripts/navbar.js"></script>
     <script src="/scripts/CreateNCR.js"></script>
     <script src="/scripts/role-restrictions.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </body>
 </html>

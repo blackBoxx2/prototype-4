@@ -6,13 +6,18 @@ import jsPDF from "jspdf";
 import { error } from "jquery";
 const selected = localStorage.getItem('selectedNcrId');
 
+
 document.addEventListener('DOMContentLoaded', function() {
     const btnDownload = document.querySelector('.btn-download');
     if (btnDownload) {
         //Download the pdf
         btnDownload.addEventListener('click', () => {
+            try{
             console.log('Button encontrado');
-            createPDF();      
+            createPDF();
+        }catch{
+           alert('Remember that you cannot export when the NCR is not closed')
+        }
         });
     } else {
         console.error('El botón de descarga no se encuentra');
@@ -34,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
    }
    
      //create the pdf
+
     function createPDF() {
         if (selected) {
             var db = DatabaseLib.Database.get();
@@ -171,8 +177,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // save the  pdf
             pdf.save(`ncr_report_0000${selectedNCR.ID}.pdf`);
         } else {
-            console.error('No hay un NCR seleccionado');
+            console.error('Impossible to find an NCR number')
         }
+        
 }
 });
   
