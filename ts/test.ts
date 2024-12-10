@@ -2,7 +2,7 @@ import * as $ from "jquery";
 import {DatabaseLib} from "./database";
 $(function() {
   let db = DatabaseLib.Database.get();
-  db.ReSeed();
+  
   console.log("DB:");
   console.log(db.tables);
   console.log("Users in QA:");
