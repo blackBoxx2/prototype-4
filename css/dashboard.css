@@ -202,11 +202,11 @@ h2 {
     padding-bottom: 2rem;
 }
 #notifAccordion .accordion-header .accordion-button {
-    background-color: #ffff009c;
-    color: black;
+    background-color: #2f8de4;
+    color: white;
     /* text-align: left; */
 }
 #notifAccordion .accordion-header .accordion-button.collapsed {
-    background-color: #ffff009c;
-    color: black;
+    background-color: #2f8de4;
+    color: white;
 }
