@@ -13,9 +13,9 @@
     display: flex;
     padding: 2rem 2rem;
     width: 90%;
-    margin-left: 75px;
-    border-radius: 2.5px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-left: 4.688rem;
+    border-radius: 0.156rem; 
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
 }
 
 .btn-group{
@@ -23,10 +23,10 @@
 }
 #ncr-list-searchbox
 {
-    max-width: 520px;
+    max-width: 32.5rem;
     width: 20%;
-    border-radius: 5px;
-    padding: 5px ;
+    border-radius: 0.313rem;
+    padding: 0.313rem ;
     font-family: var(--body-text-normal-fontFamily);
     font-size: 1rem;
     height: 2.5rem;
@@ -54,8 +54,9 @@
     padding: 1rem 0.5rem;
     width: 90%;
     margin: 0 auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 2.5px;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.156rem;
+    margin-bottom: 1.875rem;
 }
 #ncr-table th,td{
     padding: 1rem 0.5rem;
@@ -132,7 +133,7 @@ h2 {
     color: var(--heading-primary-color);
     background-color: var(--light-grey-background-color);
     text-align: center;
-    border-radius: 5px;
+    border-radius: 0.313rem;
     font-weight: 600;
     font-size: 1.5rem;
     width: fit-content;
@@ -141,7 +142,7 @@ h2 {
 .cta-btn {
     width: 20%;
     max-width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 #role-buttons {
     display: flex;
@@ -155,37 +156,37 @@ h2 {
 
 #role-buttons .cta-btn {
     font-size: 1.2rem; 
-    border-radius: 5px; 
+    border-radius: 0.313rem; 
     font-weight: 600; 
     text-align: center;
-    min-width: 50px; 
-    min-height: 70px; 
+    min-width: 3.125rem; 
+    min-height: 4.375rem; 
     flex: 1 1 auto;
     display: inline-block;
 }
 #role-buttons .cta-btn img.button-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.625rem;
 }
 
 #role-buttons .role-action-btn img.button-icon{
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.625rem;
 }
 
 .action{
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
     align-items: center;
     justify-content: center;
 }
 
 .action .button-icon{ /* Little smaller icons for smaller buttons*/
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
 }
 
 #notifAccordion {

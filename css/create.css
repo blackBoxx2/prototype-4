@@ -8,8 +8,8 @@ div{
 
 fieldset{
     padding: 2.5rem; 
-    border: 2px solid var(--body-text-color);
-    margin-bottom: 20px;
+    border: 0.125rem solid var(--body-text-color);
+    margin-bottom: 1.25rem;
 }
 
 
@@ -40,8 +40,8 @@ h1 {
 input[type=Text], input[type=Number], select, input[type="file"]::file-selector-button{
     font-family: var(--body-text-normal-fontFamily);
     color: var(--body-text-color);
-    border-radius: 5px;
-    border: 2px solid var(--heading-secondary-color);
+    border-radius: 0.313rem;
+    border: 0.125rem solid var(--heading-secondary-color);
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     width: 50%;
@@ -89,7 +89,7 @@ input[type="file"]:hover, input[type="file"]::file-selector-button:hover{
     grid-template-columns: 3fr 1fr;
     width: 100%;
     padding-top: 2rem;
-    gap: 10px;
+    gap: 0.625rem;
 }
 
 
@@ -99,12 +99,12 @@ input[type="file"]:hover, input[type="file"]::file-selector-button:hover{
 
 #button-group{
     display: flex;
-    gap: 15px;
+    gap: 0.938rem;
     align-items: center;
     justify-content: center;
 }
 .button-icon{
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
 }

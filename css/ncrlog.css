@@ -100,7 +100,7 @@ input#ncr-number{
 
 label[for="status"]{
     position: relative;
-    left: 220px;
+    left: 13.75rem;
 }
 
 label[for="supplier"]{
@@ -119,11 +119,11 @@ label[for="to-date"]{
 select#status {
     position: relative;
     margin-left: 0;
-    left: 260px;
+    left: 16.25rem;
 }
 select#supplier{
     position: relative;
-    right: 100px;
+    right: 6.25rem;
 }
 
 #date-div{
@@ -159,10 +159,12 @@ select#supplier{
 .viewNCR{
     position: relative;
     width: 30%;
+    height: 4.063rem;
 }
 .editNCR{
     position: relative;
     width: 30%;
+    height: 4.063rem;
 }
 
 
@@ -214,8 +216,8 @@ select#supplier{
 #ncr-table{
     padding: 1rem 0.5rem;
     width: 95%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 2.5px;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.156rem;
 }
 #ncr-table th,td{
     padding: 1rem 0.5rem;
@@ -287,7 +289,7 @@ h2 {
     color: var(--heading-primary-color);
     background-color: var(--light-grey-background-color);
     text-align: center;
-    border-radius: 5px;
+    border-radius: 0.313rem;
     font-weight: 600;
     font-size: 1.5rem;
     width: fit-content;
@@ -297,13 +299,13 @@ h2 {
     display: flex;
 }
 #createDiv .button-icon{
-    height: 24px;
-    width: 24px;
-    margin-right: 10px;
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: 0.625rem;
 }
 #buttonsDiv{
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
     align-items: center;
     justify-content: flex-end;
     margin-top: 1rem;
@@ -317,22 +319,22 @@ h2 {
 
 }
 #buttonsDiv .button-icon{
-    height: 24px;
-    width: 24px;
-    margin-right: 10px;
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: 0.625rem;
     display: inline-block;
 }
 .action{
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
     align-items: center;
     justify-content: center;
 }
 
 .action .button-icon{ /* Little smaller icons for smaller buttons*/
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
 }
 
 @media (max-width: 1024px) {
@@ -347,7 +349,7 @@ h2 {
     }
     label[for="status"]{
         position: static;
-        left: 220px;
+        left: 13.75rem;
         display: none;
     }
     
@@ -358,21 +360,21 @@ h2 {
     label[for="from-date"]{
         display: inline-block;
         position: relative;
-        right: 80px;
-        bottom: 30px;
+        right: 5rem;
+        bottom: 1.875rem;
         
     }
     label[for="to-date"]{
         display: inline-block;
         position: relative;
-        right: 80px;
-        bottom: 30px;
-        margin-left: 15px;
+        right: 5rem;
+        bottom: 1.875rem;
+        margin-left: 0.938rem;
     }
     select#status {
         position: relative;
-        left: -75px;
-        bottom: 22px;
+        left: -4.688rem;
+        bottom: 1.375rem;
         width: 124%;
     }
     select#supplier{
@@ -386,26 +388,26 @@ h2 {
     #from-date{
         position: relative;
         width: 100%;
-        left: -75px;
-        bottom: 25px;
+        left: -4.688rem;
+        bottom: 1.563rem;
     }
     #to-date{
         position: relative;
         width: 100%;
-        left: -75px;
-        bottom: 25px;
-        margin-left: 15px;
+        left: -4.688rem;
+        bottom: 1.563rem;
+        margin-left: 0.938rem;
     }
     .viewNCR{
         position: relative;
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
         width: 80%;
-        margin-left: 10px;
+        margin-left: 0.625rem;
     }
     .editNCR{
         position: relative;
         width: 80%;
-        margin-right: 10px;
+        margin-right: 0.625rem;
     }
     .a-btn-createNew{
         margin-right: 0;
@@ -413,6 +415,11 @@ h2 {
 }
 
 @media (max-width: 769px) {
+    .a-btn-createNew{
+        margin-right: 0;
+        position: relative;
+        left: 4.25rem;
+    }
     input#ncr-number{
         position: relative;
         left: 0;
@@ -424,7 +431,7 @@ h2 {
     }
     label[for="status"]{
         position: static;
-        left: 220px;
+        left: 13.75rem;
         display: none;
     }
     
@@ -435,21 +442,21 @@ h2 {
     label[for="from-date"]{
         display: inline-block;
         position: relative;
-        right: 80px;
-        bottom: 30px;
+        right: 5rem;
+        bottom: 1.875rem;
         
     }
     label[for="to-date"]{
         display: inline-block;
         position: relative;
-        right: 80px;
-        bottom: 30px;
-        margin-left: 15px;
+        right: 5rem;
+        bottom: 1.875rem;
+        margin-left: 0.938rem;
     }
     select#status {
         position: relative;
-        left: -75px;
-        bottom: 22px;
+        left: -4.688rem;
+        bottom: 1.375rem;
         width: 124%;
     }
     select#supplier{
@@ -463,26 +470,26 @@ h2 {
     #from-date{
         position: relative;
         width: 100%;
-        left: -75px;
-        bottom: 25px;
+        left: -4.688rem;
+        bottom: 1.563rem;
     }
     #to-date{
         position: relative;
         width: 100%;
-        left: -75px;
-        bottom: 25px;
-        margin-left: 15px;
+        left: -4.688rem;
+        bottom: 1.563rem;
+        margin-left: 0.938rem;
     }
     .viewNCR{
         position: relative;
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
         width: 80%;
-        margin-left: 10px;
+        margin-left: 0.625rem;
     }
     .editNCR{
         position: relative;
-        width: 80%;
-        margin-right: 10px;
+        width: 20%;
+        margin-right: 0.625rem;
     }
     .a-btn-createNew{
         margin-right: 0;
@@ -493,37 +500,42 @@ h2 {
 }
 @media (max-width: 769px) 
 {
+    .a-btn-createNew{
+        margin-right: 0;
+        position: relative;
+        left: 5.938rem;
+    }
     label[for="from-date"]{
         display: inline-block;
         position: relative;
-        right: 115px;
-        bottom: 30px;
+        right: 7.188rem;
+        bottom: 1.875rem;
     }
     label[for="to-date"]{
         display: inline-block;
         position: relative;
-        right: 130px;
-        bottom: 30px;
-        margin-left: 15px;
+        right: 8.125rem;
+        bottom: 1.875rem;
+        margin-left: 0.938rem;
     }
 
     #from-date{
         position: relative;
         width: 80%;
-        left: -110px;
-        bottom: 25px;
+        left: -6.875rem;
+        bottom: 1.563rem;
     }
     #to-date{
         position: relative;
         width: 80%;
-        left: -130px;
-        bottom: 25px;
-        margin-left: 15px;
+        left: -8.125rem;
+        bottom: 1.563rem;
+        margin-left: 0.938rem;
     }
     select#status {
         position: relative;
-        left: -110px;
-        bottom: 22px;
+        left: -6.875rem;
+        bottom: 1.375rem;
         width: 100%;
     }
     .viewNCR{
@@ -534,8 +546,8 @@ h2 {
     }
     .editNCR{
         position: relative;
-        margin-right: 10px;
-        margin-left: 5px;
+        margin-right: 0.625rem;
+        margin-left: 0.313rem;
         width: 90%;
        
     }

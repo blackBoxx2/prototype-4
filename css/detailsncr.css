@@ -7,7 +7,8 @@ div{
 
 fieldset{
     padding: 2.5rem; 
-    border: 2px solid var(--body-text-color);
+    border: 0.125rem solid var(--body-text-color);
+    margin-bottom: 1.875rem;
 }
 
 
@@ -40,8 +41,8 @@ h1 {
 p::file-selector-button{
     font-family: var(--body-text-normal-fontFamily);
     color: var(--body-text-color);
-    border-radius: 5px;
-    border: 2px solid var(--heading-secondary-color);
+    border-radius: 0.313rem;
+    border: 0.125rem solid var(--heading-secondary-color);
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     width: 50%;
@@ -59,9 +60,14 @@ p::file-selector-button{
     grid-template-columns: 3fr 1fr;
     width: 90%;
     padding-top: 2rem;
-    gap: 10px;
+    gap: 0.625rem;
 }
 .btn-download{
     margin-bottom: 0.625rem;
 }
 
+@media (max-width: 320px) {
+    fieldset{
+        padding:  0px;
+    }
+}

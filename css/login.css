@@ -8,7 +8,10 @@ body {
     margin: 0;
     font-size: 1rem;
 }
-
+.h2-recovery{
+    font-size: medium;
+    font-family: Arial, sans-serif;
+}
 .form-container {
     background-color: #ffffff;
     padding: 1.25rem 1.875rem;
@@ -173,12 +176,12 @@ body {
         flex-direction: column;
         margin-right: 0;
         width: 80%;
-        gap: 10px;
+        gap: 0.625rem;
     }
     .container-second-collumn{
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 0.625rem;
         width: 80%;
     }
     .btn-register {
@@ -205,12 +208,12 @@ body {
         flex-direction: column;
         margin-right: 0;
         width: 50%;
-        gap: 10px;
+        gap: 0.625rem;
     }
     .container-second-collumn{
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 0.625rem;
         width: 50%;
     }
     .btn-register {

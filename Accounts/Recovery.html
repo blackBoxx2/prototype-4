@@ -12,33 +12,18 @@
     <img src="/imgs/crossfire_logo.png" alt="crossfire-logo" class="main-logo"> 
    </div>
         <div class="form-container">
-        <h1>Login</h1>
+        <h1>Recover Password</h1>
         <form action="/login" method="POST" id="form">
+            <h2 class="h2-recovery">Please enter your email for the recovery password</h2>
             <div>
                 <label id="user-email">Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>    
-            <div>
-                <button  id="logIn" type="submit">Login</button>
-            </div>
-            <div class="slc-type-logIn">
-                <select id="options-log" class="options-log">
-                    <option id="default">Select a role</option>
-                    <option id="QA" value="QA">QA</option>
-                    <option  id="engineer" value="Engineer">Engineer</option>
-                    <option id="purchasing" value="Purchasing">Purchasing</option>
-                    <option id="admin" value="Admin">Admin</option>
-                </select>
+                <button  id="logIn" type="submit">Send Email</button>
             </div>
             <div class="link">
                 <a href="Register.html">Need an account? Register here</a>
-            </div>
-            <div class="link">
-                <a href="Recovery.html">Forgot your password?</a>
             </div>
         </form>
     </div>
