@@ -152,6 +152,9 @@ function NavCreate() : void {
     const confirmBtn = document.getElementById('btnLogOut');
     if(confirmBtn){
         confirmBtn.addEventListener('click', () => {
+            localStorage.setItem('userID', '');
+            localStorage.setItem('logInDate', '');
+            localStorage.setItem('userRole', '');
             window.location.href = '/Home/index.html'
         })
     }

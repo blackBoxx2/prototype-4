@@ -1,1 +1,154 @@
-document.addEventListener("DOMContentLoaded",(function(){(function(){var e=document.createElement("nav");e.classList.add("navbar");var t=document.createElement("div");t.classList.add("background-overlay"),document.body.appendChild(t);var n=document.createElement("img");n.src="/imgs/crossfire_logo.png",n.alt="Crossfire Logo",n.classList.add("logo");var d=document.createElement("a");d.href="index.html",d.appendChild(n);var a=document.createElement("img");a.src="/imgs/hamburguer_menu.png",a.classList.add("dropdown-button"),a.classList.add("hamburguer-menu");var o=document.createElement("Div");o.classList.add("side-bar");var c=document.createElement("img");c.src="/imgs/cross-circle.png",c.alt="Close X",c.classList.add("close-logo"),o.appendChild(c),[{text:"Dashboard",href:"/Dashboard/index.html",imgSrc:"/imgs/dashboard_panel.png"},{text:"NCR Log",href:"/NCRLog/index.html",imgSrc:"/imgs/ncr_log.png"},{text:"Log Out",href:"#",imgSrc:"/imgs/logout.png"}].forEach((function(e){var t=document.createElement("a");t.href=e.href,t.classList.add("dropdown-link");var n=document.createElement("img");n.src=e.imgSrc,n.alt=e.text+"icon",n.classList.add("icon-img"),t.appendChild(n),t.appendChild(document.createTextNode(e.text)),o.appendChild(t)})),document.body.appendChild(o),e.appendChild(a),e.appendChild(d),document.body.insertBefore(e,document.body.firstChild),a.addEventListener("click",(function(){o.classList.toggle("show"),t.classList.toggle("show")})),c.addEventListener("click",(function(){console.log("Botón de cierre clickeado"),o.classList.remove("show")}));var i=function(){var e=document.createElement("Div");e.classList.add("main-div");var t=document.createElement("div");t.classList.add("popup-content");var n=document.createElement("p");n.textContent="You are about to log out, are you sure you want to do it?";var d=document.createElement("button");d.textContent="Cancel",d.id="btnCancel";var a=document.createElement("button");return a.textContent="Log Out",a.id="btnLogOut",t.appendChild(n),t.appendChild(d),t.appendChild(a),e.appendChild(t),document.body.appendChild(e),e}(),r=o.querySelector('a[href="#"]');r&&r.addEventListener("click",(function(e){e.preventDefault(),i.style.display="flex",t.classList.add("show")}));var s=document.getElementById("btnCancel");s&&s.addEventListener("click",(function(){i.style.display="none",t.classList.remove("show")}));var l=document.getElementById("btnLogOut");l&&l.addEventListener("click",(function(){window.location.href="/Home/index.html"})),document.addEventListener("click",(function(e){o.contains(e.target)||e.target===a||(o.classList.remove("show"),t.classList.remove("show"))})),document.addEventListener("click",(function(e){i.contains(e.target)||(null==r?void 0:r.contains(e.target))||(i.style.display="none",t.classList.remove("show"))}))})(),function(){var e=document.createElement("footer");e.classList.add("footer");var t=document.createElement("div");t.classList.add("footer-conteiner");var n=document.createElement("p");n.textContent="© 2024 BlackBox2Inc. All rights reserved";var d=document.createElement("div");d.classList.add("links-footer"),[{text:"Policy of privacy",href:"#"},{text:"Terms of services",href:"#"},{text:"contact us",href:"#"}].forEach((function(e){var t=document.createElement("a");t.textContent=e.text,t.href=e.href,d.appendChild(t)})),t.appendChild(n),t.appendChild(d),e.appendChild(t),document.body.appendChild(e)}()}));
+//Create the footer
+function createFooter() {
+    var footer = document.createElement('footer');
+    footer.classList.add('footer');
+    var conteiner = document.createElement('div');
+    conteiner.classList.add('footer-conteiner');
+    var copyRight = document.createElement('p');
+    copyRight.textContent = '© 2024 BlackBox2Inc. All rights reserved';
+    var links = [
+        { text: 'Policy of privacy', href: '#' },
+        { text: 'Terms of services', href: '#' },
+        { text: 'contact us', href: '#' }
+    ];
+    var divLinks = document.createElement('div');
+    divLinks.classList.add('links-footer');
+    links.forEach(function (l) {
+        var a = document.createElement('a');
+        a.textContent = l.text;
+        a.href = l.href;
+        divLinks.appendChild(a);
+    });
+    conteiner.appendChild(copyRight);
+    conteiner.appendChild(divLinks);
+    footer.appendChild(conteiner);
+    document.body.appendChild(footer);
+}
+//Create log out pop up
+function LogOutCreate() {
+    var mainDiv = document.createElement('Div');
+    mainDiv.classList.add('main-div');
+    var Conteiner = document.createElement('div');
+    Conteiner.classList.add('popup-content');
+    var text = document.createElement('p');
+    text.textContent = 'You are about to log out, are you sure you want to do it?';
+    var btnCanel = document.createElement('button');
+    btnCanel.textContent = 'Cancel';
+    btnCanel.id = 'btnCancel';
+    var btnLogOut = document.createElement('button');
+    btnLogOut.textContent = 'Log Out';
+    btnLogOut.id = 'btnLogOut';
+    Conteiner.appendChild(text);
+    Conteiner.appendChild(btnCanel);
+    Conteiner.appendChild(btnLogOut);
+    mainDiv.appendChild(Conteiner);
+    document.body.appendChild(mainDiv);
+    return mainDiv;
+}
+//Create the nav
+function NavCreate() {
+    var nav = document.createElement('nav');
+    nav.classList.add('navbar');
+    var backgroundOverlay = document.createElement('div');
+    backgroundOverlay.classList.add('background-overlay');
+    document.body.appendChild(backgroundOverlay);
+    //Create the logo
+    var img = document.createElement('img');
+    img.src = '/imgs/crossfire_logo.png';
+    img.alt = 'Crossfire Logo';
+    img.classList.add('logo');
+    //Create the link for the logo
+    var imgLink = document.createElement('a');
+    imgLink.href = 'index.html';
+    imgLink.appendChild(img);
+    var imgMenu = document.createElement('img');
+    imgMenu.src = "/imgs/hamburguer_menu.png";
+    imgMenu.classList.add('dropdown-button');
+    imgMenu.classList.add('hamburguer-menu');
+    //side bar
+    var sideBar = document.createElement('Div');
+    sideBar.classList.add('side-bar');
+    //Close Logo
+    var logoClose = document.createElement('img');
+    logoClose.src = '/imgs/cross-circle.png';
+    logoClose.alt = 'Close X';
+    logoClose.classList.add('close-logo');
+    sideBar.appendChild(logoClose);
+    //create the container 
+    //Create the links container for the elements in the nav
+    var links = [
+        { text: 'Dashboard', href: '/Dashboard/index.html', imgSrc: '/imgs/dashboard_panel.png' },
+        { text: 'NCR Log', href: '/NCRLog/index.html', imgSrc: '/imgs/ncr_log.png' },
+        { text: 'Log Out', href: '#', imgSrc: '/imgs/logout.png' }
+    ];
+    //go trhougth every piece in the array to take the elements
+    links.forEach(function (l) {
+        var a = document.createElement('a');
+        //a.textContent = l.text;
+        a.href = l.href;
+        a.classList.add('dropdown-link');
+        var logos = document.createElement('img');
+        logos.src = l.imgSrc;
+        logos.alt = l.text + 'icon';
+        logos.classList.add('icon-img');
+        a.appendChild(logos);
+        a.appendChild(document.createTextNode(l.text));
+        sideBar.appendChild(a);
+    });
+    document.body.appendChild(sideBar);
+    nav.appendChild(imgMenu);
+    //nav.appendChild(ddlMenu);
+    nav.appendChild(imgLink);
+    document.body.insertBefore(nav, document.body.firstChild);
+    imgMenu.addEventListener('click', function () {
+        sideBar.classList.toggle('show');
+        backgroundOverlay.classList.toggle('show');
+    });
+    logoClose.addEventListener('click', function () {
+        console.log('Botón de cierre clickeado');
+        sideBar.classList.remove('show');
+    });
+    //Create the pop up
+    var popUp = LogOutCreate();
+    var logoutLink = sideBar.querySelector('a[href="#"]');
+    if (logoutLink) {
+        logoutLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            popUp.style.display = 'flex';
+            backgroundOverlay.classList.add('show');
+        });
+    }
+    var cancelBtn = document.getElementById('btnCancel');
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function () {
+            popUp.style.display = 'none';
+            backgroundOverlay.classList.remove('show');
+        });
+    }
+    var confirmBtn = document.getElementById('btnLogOut');
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', function () {
+            localStorage.setItem('userID', '');
+            localStorage.setItem('logInDate', '');
+            localStorage.setItem('userRole', '');
+            window.location.href = '/Home/index.html';
+        });
+    }
+    //If the user click in somewhere else close the nav 
+    document.addEventListener('click', function (e) {
+        if (!sideBar.contains(e.target) && e.target !== imgMenu) {
+            sideBar.classList.remove('show');
+            backgroundOverlay.classList.remove('show');
+        }
+    });
+    document.addEventListener('click', function (e) {
+        if (!popUp.contains(e.target) && !(logoutLink === null || logoutLink === void 0 ? void 0 : logoutLink.contains(e.target))) {
+            popUp.style.display = 'none';
+            backgroundOverlay.classList.remove('show');
+        }
+    });
+}
+document.addEventListener('DOMContentLoaded', function () {
+    NavCreate();
+    createFooter();
+});
