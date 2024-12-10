@@ -1,0 +1,5 @@
+Bruce Wayne - Purchasing with notifs
+Bobby Shmurda - Engineer with notifs
+Marty McFly - Purchasing with no notifs
+Linda Smith - QA
+Chris Griffin - Admin
